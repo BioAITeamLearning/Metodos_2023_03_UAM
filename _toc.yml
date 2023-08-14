@@ -1,0 +1,22 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: Unidad1
+  sections:
+    - file: "Modulos/Clase_1/Intro_Python/Tema 1 - TiposDeDatos Condicionales Ciclos Colecciones Funciones_10_08_2023"
+    - file: "Modulos/Clase_1/Intro_Python/Tema 2 - Arreglos_10_08_2023"
+    - file: "Modulos/Clase_1/Intro_Python/Tema 3 - Pandas_10_08_2023"
+    - file: "Modulos/Clase_1/Intro_Python/Tema 4 - Analisis numerico y Calculo simbolico con Sympy_10_08_2023"
+    - file: "Modulos/Clase_1/Intro_Python/Tema 5 - Manejo de ficheros_10_08_2023"
+    - file: "Modulos/Clase_1/Evaluemos_Unidad1_10_08_2023"
+- file: Unidad2
+- file: Unidad3
+- file: Unidad4
+- file: Unidad5
+- file: Unidad6
+- file: Unidad7
+- file: Unidad8
+- file: Unidad9
