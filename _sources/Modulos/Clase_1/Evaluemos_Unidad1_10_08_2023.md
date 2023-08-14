@@ -14,7 +14,7 @@ El taller debe tener el siguiente nombre: **Metodos_Taller1_NombreApellido_2023_
 :margin: 3
 :class-body: text-center
 :class-header: bg-light text-center
-:link: https://docs.google.com/document/d/1E3XwNxVrvfVGBhcvzEEjOs575dcuE3HWWQqL9dDDsqk/edit?usp=sharing
+:link: https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/raw/main/Modulos/Clase_1/Taller_1%20Python_para_metodos_optimizacion_10_08_2023.docx
 **💬 Taller 1**
 ^^^
 ```{image} https://gcloud.devoteam.com/wp-content/uploads/sites/32/2021/08/Google_Docs_logo_2014-2020.svg.png
@@ -49,3 +49,7 @@ Proximamente disponible...
 Explore this book {fas}`arrow-right`
 :::
 ::::
+
+```{note}
+Acá un recurso extra de la unidad: [Click Acá](https://docs.google.com/presentation/d/11FnBSrBIr6GFuoq9m2JWqjaT4-j6WWHP/edit?usp=sharing&ouid=100374191369911989354&rtpof=true&sd=true)
+```
