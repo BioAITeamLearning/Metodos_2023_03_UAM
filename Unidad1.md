@@ -5,7 +5,7 @@ title: Unidad 1
 
 ## Contenido de la unidad
 
-<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/ContenidoU1.png"/>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/contenidoU1.png?raw=true"/>
 
 ## Colaboratory – Jupyter Notebook
 
