@@ -147,12 +147,6 @@ Programación NO lineal
 
 ::::
 
-Acá podemos colocar el archivo con las cosas del curso por parte de la universidad
-
-- **Tutorials** are step-by-step introductory guides to Jupyter Book. EJEMPLOO
-- **Topic Guides** cover specific areas in more depth, and are organized as discrete "how-to" sections. EJEMPLOO
-- **Reference** sections describe the API/syntax/etc of Jupyter Book in detail. EJEMPLOO
-
 # Bibliografía
 Estas son algunas de las referencias usadas para este curso, vuelve pronto para encontrar más contenido.
 
