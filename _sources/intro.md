@@ -199,7 +199,7 @@ Explore this book {fas}`arrow-right`
 :columns: 8
 :class: sd-m-auto
 
-<img src="images/Evaluacion.png" width="600" height="400" />
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/Evaluacion.png" width="600" height="400" />
 :::
 ::::
 

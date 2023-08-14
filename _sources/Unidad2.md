@@ -5,6 +5,6 @@ title: Unidad 2
 
 ## Contenido de la unidad
 
-<img src="images/contenidoU2.png"/>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/ContenidoU2.png"/>
 
 ## Espere acá el contenido de las siguientes versiones
