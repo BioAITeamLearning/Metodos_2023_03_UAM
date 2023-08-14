@@ -3,7 +3,7 @@
 
 title: Métodos Numéricos 2023 - 03
 author: Johan S. Piña D, Reinel Tabares
-logo: logo.png
+logo: https://www.autonoma.edu.co/sites/default/files/Universidad_Autonoma_de_Manizales.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
