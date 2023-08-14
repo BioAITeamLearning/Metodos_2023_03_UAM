@@ -37,3 +37,8 @@ Google ha hecho lo más genial al proporcionar un servicio gratuito de servicio 
 <div style="text-align: center;">
   <img src="https://pbs.twimg.com/media/DRgJwpFVwAAoUTD.jpg" width="300" height="200" />
 </div>
+
+## Datos utilizados en la unidad
+```{note}
+Recurso 📂 [Data](https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/tree/main/Modulos/Clase_1/Intro_Python/Data)
+```
