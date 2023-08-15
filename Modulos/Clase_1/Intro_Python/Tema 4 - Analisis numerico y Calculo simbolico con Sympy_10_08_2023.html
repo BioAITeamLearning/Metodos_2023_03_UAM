@@ -187,7 +187,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="Tema%202%20-%20Arreglos_10_08_2023.html">Matrices y vectores</a></li>
+
 
 
 
@@ -265,7 +267,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/Modulos/Clase_1/Intro_Python/Tema 4 - Analisis numerico y Calculo simbolico con Sympy_10_08_2023.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_1/Intro_Python/Tema 4 - Analisis numerico y Calculo simbolico con Sympy_10_08_2023.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +298,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -313,7 +315,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_1/Intro_Python/Tema 4 - Analisis numerico y Calculo simbolico con Sympy_10_08_2023.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_1/Intro_Python/Tema 4 - Analisis numerico y Calculo simbolico con Sympy_10_08_2023.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -459,9 +461,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#circuito-rlc">Circuito RLC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oscilador-armonico-amortiguado">Oscilador armónico amortiguado</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-en-3d">Gráfico en 3D</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Método del gradiente</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-del-minimo-a-pedal-en-una-variable">Calculo del minimo a pedal en una variable</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-a-pedal-papi">Gradiente a pedal papi…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-del-minimo-en-una-variable-de-forma-analitica">Calculo del mínimo en una variable de forma analítica</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-dinamicas">Graficas dinámicas</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotly">Plotly</a></li>
 </ul>
@@ -2414,18 +2414,8 @@ x(t) =
 </div>
 </div>
 </section>
-<section id="metodo-del-gradiente">
-<h2>Método del gradiente<a class="headerlink" href="#metodo-del-gradiente" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vamos a hacerlo a pedal ...</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="calculo-del-minimo-a-pedal-en-una-variable">
-<h2>Calculo del minimo a pedal en una variable<a class="headerlink" href="#calculo-del-minimo-a-pedal-en-una-variable" title="Permalink to this heading">#</a></h2>
+<section id="calculo-del-minimo-en-una-variable-de-forma-analitica">
+<h2>Calculo del mínimo en una variable de forma analítica<a class="headerlink" href="#calculo-del-minimo-en-una-variable-de-forma-analitica" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x,y&quot;</span><span class="p">)</span>
@@ -2533,119 +2523,6 @@ x(t) =
 </pre></div>
 </div>
 <img alt="../../../_images/b3dfcbe623b8732e982d0b9bff8b770d87a9e6fc0944a9f628063bde7a2c1da3.png" src="../../../_images/b3dfcbe623b8732e982d0b9bff8b770d87a9e6fc0944a9f628063bde7a2c1da3.png" />
-</div>
-</div>
-</section>
-<section id="gradiente-a-pedal-papi">
-<h2>Gradiente a pedal papi…<a class="headerlink" href="#gradiente-a-pedal-papi" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importar librerias de cálculo matemático</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="c1"># Importar libreria para gráficos</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x,y&quot;</span><span class="p">)</span>
-<span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mf">2.</span><span class="o">/</span><span class="mi">10</span><span class="p">;</span>
-<span class="c1">#y=x**2+5*x+6</span>
-<span class="n">df</span><span class="o">=-</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-<span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span>
-<span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span>
-<span class="n">e</span><span class="o">=</span><span class="n">tol</span><span class="o">+</span><span class="mi">1</span>
-<span class="n">xi</span><span class="o">=</span><span class="mi">4</span>
-
-<span class="n">fy</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>   <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
-<span class="n">fdf</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span>   <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">((</span><span class="n">xs</span><span class="o">-</span><span class="mi">5</span><span class="p">),(</span><span class="n">xs</span><span class="o">+</span><span class="mi">5</span><span class="p">),</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">fy</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
-<span class="k">while</span> <span class="n">e</span><span class="o">&gt;</span><span class="n">tol</span><span class="p">:</span>
-  <span class="n">xs</span><span class="o">=</span><span class="n">xi</span><span class="o">+</span><span class="n">alpha</span><span class="o">*</span><span class="n">fdf</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
-  <span class="n">e</span><span class="o">=</span><span class="nb">abs</span><span class="p">((</span><span class="n">xs</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span><span class="o">/</span><span class="n">xs</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span><span class="n">fy</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">xs</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
-  <span class="n">xi</span><span class="o">=</span><span class="n">xs</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 4.210728724172722 5.004566619620548
-4.210728724172722 4.391119676471868 4.108085536035403
-4.391119676471868 4.542096305025062 3.323941599084199
-4.542096305025062 4.666832390764162 2.6728212049345763
-4.666832390764162 4.769277205221368 2.148015517845138
-4.769277205221368 4.853291240220927 1.7310734271066557
-4.853291240220927 4.922269767056051 1.4013560836666359
-4.922269767056051 4.979046501588328 1.1403134016556187
-4.979046501588328 5.0259257178362695 0.9327478932204363
-5.0259257178362695 5.064759257130614 0.7667400822590207
-5.064759257130614 5.097029759186873 0.6331236736080456
-5.097029759186873 5.123925116994513 0.5248975578982488
-5.123925116994513 5.14640008333447 0.4367123810046891
-5.14640008333447 5.165225406131001 0.36446275460091554
-5.165225406131001 5.181026347790517 0.30497705664543845
-5.181026347790517 5.194312677687652 0.25578610148376885
-5.194312677687652 5.205502005281921 0.2149519409062824
-5.205502005281921 5.214937979888908 0.18094126226191448
-5.214937979888908 5.222904552248999 0.15253145602021448
-5.222904552248999 5.229637214395261 0.1287405200446648
-5.229637214395261 5.235331913820523 0.10877437226527337
-5.235331913820523 5.24015216878995 0.09198692736704406
-</pre></div>
-</div>
-<img alt="../../../_images/ee4b1d8e1af401e002df6d03fa1301653dc46d1d5a2faee58bad4fe53601270e.png" src="../../../_images/ee4b1d8e1af401e002df6d03fa1301653dc46d1d5a2faee58bad4fe53601270e.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El punto optimo es: &quot;</span><span class="p">,</span><span class="n">xs</span><span class="p">,</span><span class="n">fy</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El punto optimo es:  5.24015216878995 -4.4737908631259575
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">((</span><span class="n">xs</span><span class="o">-</span><span class="mi">5</span><span class="p">),(</span><span class="n">xs</span><span class="o">+</span><span class="mi">5</span><span class="p">),</span><span class="mi">100</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">fy</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span><span class="n">fy</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span><span class="n">fy</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="s1">&#39;minimo&#39;</span><span class="p">)</span>
-<span class="c1">#plt.text(xs,fy(xs),str(xs)+&quot;,&quot;+str(fy(xs)))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gradiente&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;eje X&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;eje Y&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;eje Y&#39;)
-</pre></div>
-</div>
-<img alt="../../../_images/aa5963797281c4b375f822e96607efc69ee97f9fbe40f84a14501d6d1723060e.png" src="../../../_images/aa5963797281c4b375f822e96607efc69ee97f9fbe40f84a14501d6d1723060e.png" />
 </div>
 </div>
 </section>
@@ -3571,9 +3448,7 @@ if (outputEl) {{
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#circuito-rlc">Circuito RLC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oscilador-armonico-amortiguado">Oscilador armónico amortiguado</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-en-3d">Gráfico en 3D</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Método del gradiente</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-del-minimo-a-pedal-en-una-variable">Calculo del minimo a pedal en una variable</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-a-pedal-papi">Gradiente a pedal papi…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-del-minimo-en-una-variable-de-forma-analitica">Calculo del mínimo en una variable de forma analítica</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-dinamicas">Graficas dinámicas</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotly">Plotly</a></li>
 </ul>

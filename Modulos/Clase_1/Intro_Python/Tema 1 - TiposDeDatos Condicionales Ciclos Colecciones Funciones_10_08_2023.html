@@ -185,7 +185,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="Tema%202%20-%20Arreglos_10_08_2023.html">Matrices y vectores</a></li>
+
 
 
 
@@ -263,7 +265,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/Modulos/Clase_1/Intro_Python/Tema 1 - TiposDeDatos Condicionales Ciclos Colecciones Funciones_10_08_2023.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_1/Intro_Python/Tema 1 - TiposDeDatos Condicionales Ciclos Colecciones Funciones_10_08_2023.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -294,7 +296,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +313,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_1/Intro_Python/Tema 1 - TiposDeDatos Condicionales Ciclos Colecciones Funciones_10_08_2023.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_1/Intro_Python/Tema 1 - TiposDeDatos Condicionales Ciclos Colecciones Funciones_10_08_2023.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -479,6 +481,11 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones">Funciones</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-por-valor-y-referencia">Paso por valor y referencia</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algortimo-multipliacion-2">Algortimo multipliación 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manejo-de-excepciones-y-errores">Manejo de excepciones y errores.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catching">Catching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raising">Raising</a></li>
 </ul>
 </li>
 </ul>
@@ -751,7 +758,7 @@ Codename:	focal
 <span class="n">e</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">f</span> <span class="o">=</span> <span class="mf">1e3</span>
 <span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># La lista es mutable</span>
-<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># La tupla es inmutable </span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># La tupla es inmutable</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">5</span><span class="n">j</span>
 <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="n">j</span>
 
@@ -973,9 +980,9 @@ d= holaWorld el tamaño es= 58
 <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;reine&#39;</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int8&#39;</span><span class="p">)</span>
- 
+
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">getsizeof</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">nbytes</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">nbytes</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">getsizeof</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">nbytes</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
 </pre></div>
@@ -1220,7 +1227,7 @@ Convertir número a cadena de texto= 66
 <h1>Numeros Aleatorios<a class="headerlink" href="#numeros-aleatorios" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>  
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;imprime un numero aleatorio entero=&#39;</span><span class="p">,</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;selecciona aleatoriamente=&#39;</span><span class="p">,</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;uno&quot;</span><span class="p">,</span> <span class="s2">&quot;dos&quot;</span><span class="p">,</span> <span class="s2">&quot;tres&quot;</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;imprime un numero aleatorio decimal entre 0 y 1=&#39;</span><span class="p">,</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
@@ -1330,10 +1337,10 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Suma o concatenación</span>
-<span class="n">x</span><span class="o">=</span><span class="s2">&quot;Un divertido&quot;</span><span class="o">+</span><span class="s2">&quot;programa&quot;</span><span class="o">+</span><span class="s2">&quot;de&quot;</span><span class="o">+</span><span class="s2">&quot;radio&quot;</span> 
+<span class="n">x</span><span class="o">=</span><span class="s2">&quot;Un divertido&quot;</span><span class="o">+</span><span class="s2">&quot;programa&quot;</span><span class="o">+</span><span class="s2">&quot;de&quot;</span><span class="o">+</span><span class="s2">&quot;radio&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="c1">#Multiplicación de una cadena con un número</span>
-<span class="n">y</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="s2">&quot;programas&quot;</span> 
+<span class="n">y</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="s2">&quot;programas&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="c1">#Obtener longitud de una cadena</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;longitud de la cadena:&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
@@ -1353,7 +1360,7 @@ longitud de la cadena: 27
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Acceder  a una posición de la cadena</span>
 <span class="n">cadena</span> <span class="o">=</span> <span class="s2">&quot;programA&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;acceder a una posicion determinada:&#39;</span><span class="p">,</span><span class="n">cadena</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;acceder a la última posición:&#39;</span><span class="p">,</span><span class="n">cadena</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;acceder a la última posición:&#39;</span><span class="p">,</span><span class="n">cadena</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># Comillas simples</span>
 <span class="n">cadenaa</span> <span class="o">=</span> <span class="s1">&#39;Texto entre comillas simples&#39;</span>
@@ -2024,7 +2031,6 @@ True
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PorFuera&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PorFuera2&#39;</span><span class="p">)</span>
-    
 </pre></div>
 </div>
 </div>
@@ -2060,7 +2066,7 @@ PorFuera2
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ciclo for en un rango de datos: &quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    
+
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ciclo for en una coleccion de datos:&#39;</span><span class="p">)</span>
 <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="s2">&quot;Hola&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
@@ -2484,7 +2490,7 @@ El resultado de la multiplicacion es:  30
   <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span>
   <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">-</span><span class="n">w</span>
   <span class="nb">print</span><span class="p">(</span><span class="n">paso2</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El cociente de la división es: &#39;</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> El residuo de la división es: &#39;</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El cociente de la división es: &#39;</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> El residuo de la división es: &#39;</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2515,7 +2521,7 @@ El cociente de la división es:  4
 <span class="k">def</span> <span class="nf">funcion_1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
     <span class="k">return</span> <span class="n">r</span><span class="o">+</span><span class="n">b</span>
-    
+
 <span class="k">def</span> <span class="nf">greatest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">a</span>
@@ -2831,7 +2837,7 @@ El cociente de la división es:  4
   <span class="k">while</span> <span class="n">r</span><span class="o">&gt;=</span><span class="n">w</span><span class="p">:</span>
     <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span>
     <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">-</span><span class="n">w</span>
-  <span class="k">return</span> <span class="n">q</span> 
+  <span class="k">return</span> <span class="n">q</span>
 </pre></div>
 </div>
 </div>
@@ -2845,7 +2851,7 @@ El cociente de la división es:  4
   <span class="k">while</span> <span class="n">r</span><span class="o">&gt;=</span><span class="n">w</span><span class="p">:</span>
     <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span>
     <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">-</span><span class="n">w</span>
-  <span class="k">return</span> <span class="n">r</span> 
+  <span class="k">return</span> <span class="n">r</span>
 </pre></div>
 </div>
 </div>
@@ -2858,7 +2864,7 @@ El cociente de la división es:  4
     <span class="n">par</span><span class="o">=</span><span class="kc">True</span>
   <span class="k">else</span><span class="p">:</span>
     <span class="n">par</span><span class="o">=</span><span class="kc">False</span>
-  <span class="k">return</span> <span class="n">par</span>    
+  <span class="k">return</span> <span class="n">par</span>
 </pre></div>
 </div>
 </div>
@@ -2868,7 +2874,7 @@ El cociente de la división es:  4
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">funcionMultiplicar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">):</span>
   <span class="n">z</span><span class="o">=</span><span class="mi">0</span>
   <span class="n">u</span><span class="o">=</span><span class="n">x</span>
-  <span class="n">v</span><span class="o">=</span><span class="n">w</span> 
+  <span class="n">v</span><span class="o">=</span><span class="n">w</span>
   <span class="k">while</span> <span class="n">u</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">funcionPar</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
       <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="o">+</span><span class="n">v</span>
@@ -2891,6 +2897,222 @@ El cociente de la división es:  4
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Escribir un numero par multiplicar: 6
 Escribir otro numero para multiplicar: 5
 El resultado de la mutiplicación es:  30
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="manejo-de-excepciones-y-errores">
+<h1>Manejo de excepciones y errores.<a class="headerlink" href="#manejo-de-excepciones-y-errores" title="Permalink to this heading">#</a></h1>
+<section id="catching">
+<h2>Catching<a class="headerlink" href="#catching" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="mf">3.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;hola&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-2-62025142aa33&gt;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;hola&quot;</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: invalid literal for int() with base 10: &#39;hola&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Manejar cualquier tipo de error que pase en un bloque de código</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ejemplo_try_except</span><span class="p">(</span><span class="n">valor</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">resultado</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="n">valor</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El resultado es:&quot;</span><span class="p">,</span> <span class="n">resultado</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ha ocurrido un error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="c1"># Ejemplos de llamadas a la función</span>
+<span class="n">ejemplo_try_except</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ejemplo_try_except</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ejemplo_try_except</span><span class="p">(</span><span class="s1">&#39;cadena&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El resultado es: 5.0
+Ha ocurrido un error: division by zero
+Ha ocurrido un error: unsupported operand type(s) for /: &#39;int&#39; and &#39;str&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Manejando un tipo especifico de error</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_times_two</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">int_times_two</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">int_times_two</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">int_times_two</span><span class="p">(</span><span class="s2">&quot;hola&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Manejo de la sentencia finally para que, pase o no pase un error, siempre ejecute lo que se coloque en la sentencia finally</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">division_segura</span><span class="p">(</span><span class="n">dividendo</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">resultado</span> <span class="o">=</span> <span class="n">dividendo</span> <span class="o">/</span> <span class="n">divisor</span>
+        <span class="k">return</span> <span class="n">resultado</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;¡Error! No puedes dividir entre cero.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Operación finalizada.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dividendo</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">divisor</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">resultado_division</span> <span class="o">=</span> <span class="n">division_segura</span><span class="p">(</span><span class="n">dividendo</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">resultado_division</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El resultado de la división es:&quot;</span><span class="p">,</span> <span class="n">resultado_division</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Operación finalizada.
+El resultado de la división es: 5.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dividendo</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">divisor</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">resultado_division</span> <span class="o">=</span> <span class="n">division_segura</span><span class="p">(</span><span class="n">dividendo</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">resultado_division</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El resultado de la división es:&quot;</span><span class="p">,</span> <span class="n">resultado_division</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>¡Error! No puedes dividir entre cero.
+Operación finalizada.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="raising">
+<h2>Raising<a class="headerlink" href="#raising" title="Permalink to this heading">#</a></h2>
+<p>Este tipo de sentencias se utilizan para generar errores personalizados dentro del código</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_positive_integer_from_user</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a positive integer: &quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;That is not a positive number!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;thanks!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_positive_integer_from_user</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter a positive integer: 1
+thanks!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_positive_integer_from_user</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enter a positive integer: -1
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-13-ea5635cae962&gt;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_positive_integer_from_user</span><span class="p">()</span>
+
+<span class="nn">&lt;ipython-input-11-a7d1640efb92&gt;</span> in <span class="ni">get_positive_integer_from_user</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a positive integer: &quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">4</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;That is not a positive number!&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;thanks!&quot;</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: That is not a positive number!
 </pre></div>
 </div>
 </div>
@@ -3011,6 +3233,11 @@ El resultado de la mutiplicación es:  30
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones">Funciones</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-por-valor-y-referencia">Paso por valor y referencia</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algortimo-multipliacion-2">Algortimo multipliación 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manejo-de-excepciones-y-errores">Manejo de excepciones y errores.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catching">Catching</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raising">Raising</a></li>
 </ul>
 </li>
 </ul>
