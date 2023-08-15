@@ -37,9 +37,15 @@ para resolución de problemas en ingeniería
 
 ::::
 
+---
+
+## El equipo!! 🦾🧠
+
 - Ph.D. Reinel Tabares Soto
 - Johan Sebastian Piña Duran
 - Harold Brayan Arteaga
+
+---
 
 ::::{grid} 1 1 3 3
 :class-container: text-center
@@ -147,6 +153,8 @@ Programación NO lineal
 
 ::::
 
+---
+
 # Bibliografía
 Estas son algunas de las referencias usadas para este curso, vuelve pronto para encontrar más contenido.
 
@@ -185,6 +193,8 @@ Explore this book {fas}`arrow-right`
 :::
 ::::
 
+---
+
 # Reglas de Juego 🕹️📏
 
 ::::{grid} 1
@@ -196,6 +206,8 @@ Explore this book {fas}`arrow-right`
 <img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/Evaluacion.png?raw=true" width="600" height="400" />
 :::
 ::::
+
+---
 
 # Manos a la Obra! 📚💻🐍
 
