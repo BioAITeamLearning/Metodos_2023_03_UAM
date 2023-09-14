@@ -1,4 +1,4 @@
-# Evaluemos lo aprendido!! 
+# Evaluemos lo aprendido!!
 
 ## Taller Unidad 1: Repaso Python para métodos numéricos
 
@@ -27,7 +27,7 @@ Explore this book {fas}`arrow-right`
 :::
 ::::
 
-## Quiz!!
+## Parcial!!
 
 
 ::::{card-carousel} 1
@@ -37,14 +37,14 @@ Explore this book {fas}`arrow-right`
 :class-body: text-center
 :class-header: bg-light text-center
 :link: asa
-**💬 Quiz 1**
+**💬 Examen Parcial 1**
 ^^^
 ```{image} https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Google_Forms_logo_%282014-2020%29.svg/1489px-Google_Forms_logo_%282014-2020%29.svg.png
 :height: 100
 ```
 
-Quiz 1: Repaso de Python
-Proximamente disponible...
+Parcial Corte 1: Python para el análisis numérico.
+
 +++
 Explore this book {fas}`arrow-right`
 :::
