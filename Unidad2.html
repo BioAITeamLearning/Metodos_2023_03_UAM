@@ -61,10 +61,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad2';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Unidad 3: Ajuste de Curvas e Interpolación" href="Unidad3.html" />
+    <link rel="next" title="Método de la Bisección" href="Modulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023.html" />
     <link rel="prev" title="Primer parcial de métodos numéricos: Introducción al Python para análisis numérico." href="Modulos/Clase_1/Parcial_Corte_1_MetodosNumericos_Optimizaci%C3%B3n_14_sep_2023.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -204,7 +206,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_1/Parcial_Corte_1_MetodosNumericos_Optimizaci%C3%B3n_14_sep_2023.html">Primer parcial de métodos numéricos: Introducción al Python para análisis numérico.</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Unidad 2: Cálculo de raices</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Unidad 2: Cálculo de raices</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023.html">Método de la Bisección</a></li>
+
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad3.html">Unidad 3: Ajuste de Curvas e Interpolación</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad5.html">Unidad 5: Diferenciación e Integración</a></li>
@@ -406,7 +412,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-la-unidad">Contenido de la unidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espere-aca-el-contenido-de-las-siguientes-versiones">Espere acá el contenido de las siguientes versiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion-de-un-problema-matematico">Solución de un problema matemático.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raices-de-funciones">Raices de funciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-numericos-para-hallar-raices">Métodos numéricos para hallar raices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-grafico">Método gráfico:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-en-clase">📘 Ejercicio en clase</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -424,9 +436,61 @@ document.write(`
 <h2>Contenido de la unidad<a class="headerlink" href="#contenido-de-la-unidad" title="Permalink to this heading">#</a></h2>
 <img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/contenidoU2.png?raw=true"/>
 </section>
-<section id="espere-aca-el-contenido-de-las-siguientes-versiones">
-<h2>Espere acá el contenido de las siguientes versiones<a class="headerlink" href="#espere-aca-el-contenido-de-las-siguientes-versiones" title="Permalink to this heading">#</a></h2>
+<section id="solucion-de-un-problema-matematico">
+<h2>Solución de un problema matemático.<a class="headerlink" href="#solucion-de-un-problema-matematico" title="Permalink to this heading">#</a></h2>
+<img src="images/problema_matematico.png" />
 </section>
+<section id="raices-de-funciones">
+<h2>Raices de funciones<a class="headerlink" href="#raices-de-funciones" title="Permalink to this heading">#</a></h2>
+<p>Una raiz se define como una función igualada a cero o el intercepto de una curva con el eje X</p>
+<div class="math notranslate nohighlight">
+\[
+  f(x) = 0
+\]</div>
+<img src="https://www.dynamics.unam.edu/Preparatoria8/polinomi/fig4.gif" />
+<hr class="docutils" />
+<div class="tip admonition">
+<p class="admonition-title">Encontremos las raices de la siguiente función…</p>
+<p>Analiticamente ¿cuál es la solución?, ¿qué multiplicidad tiene la función?</p>
+<div class="math notranslate nohighlight">
+\[
+  f(x) = x^2 + 5x + 6
+\]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Encontremos las raices de la siguiente función…</p>
+<p>Analiticamente ¿cuál es la solución?, ¿qué multiplicidad tiene la función?</p>
+<div class="math notranslate nohighlight">
+\[
+  f(x) = x^2 + 2x + 1
+\]</div>
+</div>
+<hr class="docutils" />
+<section id="metodos-numericos-para-hallar-raices">
+<h3>Métodos numéricos para hallar raices<a class="headerlink" href="#metodos-numericos-para-hallar-raices" title="Permalink to this heading">#</a></h3>
+<img src="images/metodosderaices.png" />
+</section>
+<hr class="docutils" />
+<section id="metodo-grafico">
+<h3>Método gráfico:<a class="headerlink" href="#metodo-grafico" title="Permalink to this heading">#</a></h3>
+<p>El método gráfico sirve como método inicial para conocer dónde están las raices de forma aproximada.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hallar una raíz geométricamente consiste en hallar el punto de cruce con el eje X</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Encontremos las raices de la siguiente función…</p>
+<img src="https://www.fisicapractica.com/imagenes/oscilaciones/grafico-amplitud-oscilador-amortiguado.png"/>
+<p><strong>Este ejemplo tiene 8 raices de multiplicidad 1</strong></p>
+</div>
+</section>
+<section id="ejercicio-en-clase">
+<h3>📘 Ejercicio en clase<a class="headerlink" href="#ejercicio-en-clase" title="Permalink to this heading">#</a></h3>
+<img src="images/ejercicionsgraficas.png">
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -470,11 +534,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="Unidad3.html"
+       href="Modulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Unidad 3: Ajuste de Curvas e Interpolación</p>
+        <p class="prev-next-title">Método de la Bisección</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -497,7 +561,13 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-la-unidad">Contenido de la unidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espere-aca-el-contenido-de-las-siguientes-versiones">Espere acá el contenido de las siguientes versiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion-de-un-problema-matematico">Solución de un problema matemático.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raices-de-funciones">Raices de funciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-numericos-para-hallar-raices">Métodos numéricos para hallar raices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-grafico">Método gráfico:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-en-clase">📘 Ejercicio en clase</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

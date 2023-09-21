@@ -1,0 +1,1947 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Método de la Bisección &#8212; Métodos Numéricos 2023 - 03</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad 3: Ajuste de Curvas e Interpolación" href="../../Unidad3.html" />
+    <link rel="prev" title="Unidad 2: Cálculo de raices" href="../../Unidad2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Métodos Numéricos y Optimización
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1: Introducción a Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%201%20-%20TiposDeDatos%20Condicionales%20Ciclos%20Colecciones%20Funciones_10_08_2023.html"><strong>Introducción</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%202%20-%20Arreglos_10_08_2023.html">Matrices y vectores</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%203%20-%20Pandas_10_08_2023.html">Introducción a pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%205%20-%20Manejo%20de%20ficheros_10_08_2023.html">Manejo de archivos</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%204%20-%20Analisis%20numerico%20y%20Calculo%20simbolico%20con%20Sympy_10_08_2023.html">Algebra computacional con <code class="docutils literal notranslate"><span class="pre">Sympy</span></code></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Evaluemos_Unidad1_10_08_2023.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Parcial_Corte_1_MetodosNumericos_Optimizaci%C3%B3n_14_sep_2023.html">Primer parcial de métodos numéricos: Introducción al Python para análisis numérico.</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2: Cálculo de raices</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Método de la Bisección</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad3.html">Unidad 3: Ajuste de Curvas e Interpolación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad5.html">Unidad 5: Diferenciación e Integración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Ecns Diferenciales Ordinarias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad7.html">Unidad 7: Optimización Irrestricta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad8.html">Unidad 8: Programación lineal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad9.html">Unidad 9: Programación NO Lineal</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Modulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Método de la Bisección</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Método de la Bisección</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-grafico">Método gráfico</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Método de la Bisección</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-para-la-biseccion">Algoritmo para la bisección</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-del-error-relativo">Cálculo del error relativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerancia">Tolerancia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion">Solución</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculemos-ahora-la-raiz-supuesta">Calculemos ahora la raíz supuesta…</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculemos-el-error">Calculemos el error…</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#revisemos-las-condiciones">Revisemos las condiciones</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#repetimos-los-pasos-anteriores-para-calcular-el-nuevo-xr-y-el-error">Repetimos los pasos anteriores para calcular el nuevo Xr y el error</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="metodo-de-la-biseccion">
+<h1>Método de la Bisección<a class="headerlink" href="#metodo-de-la-biseccion" title="Permalink to this heading">#</a></h1>
+<section id="metodo-grafico">
+<h2>Método gráfico<a class="headerlink" href="#metodo-grafico" title="Permalink to this heading">#</a></h2>
+<p>a. $<span class="math notranslate nohighlight">\(y = sen(x)\)</span><span class="math notranslate nohighlight">\(
+b. \)</span><span class="math notranslate nohighlight">\(y = x^3 - x\)</span><span class="math notranslate nohighlight">\(
+c. \)</span><span class="math notranslate nohighlight">\(y = sen(10x) + cos(3x)\)</span><span class="math notranslate nohighlight">\(
+d. \)</span><span class="math notranslate nohighlight">\(y = \frac{667,38}{x}(1 - e^{-0,146843x}) - 40\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">label</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">720</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;sen(x)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span>
+
+<span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="n">x</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;x^3 - x&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">))</span>
+
+<span class="n">y</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;sen(10x) + cos(3x)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">y</span><span class="o">=</span> <span class="p">((</span><span class="mf">667.38</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.146843</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;(667,38/x)(1 - e^(-0,146843x)) - 40&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7bae5c6434e95da86d54354f3e1c1fa9a92ef24346cbf04ff64fd0c5aca63749.png" src="../../_images/7bae5c6434e95da86d54354f3e1c1fa9a92ef24346cbf04ff64fd0c5aca63749.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Método de la Bisección<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Método de bisección</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="n">x</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X^3 - X$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1"># Agregar texto en una ubicación específica</span>
+<span class="n">text_x</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c1"># Posición en el eje X</span>
+<span class="n">text_y</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Posición en el eje Y</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">text_x</span><span class="p">,</span> <span class="n">text_y</span><span class="o">+</span><span class="mf">0.01</span><span class="p">,</span> <span class="s1">&#39;xu&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="n">text_x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="n">text_y</span><span class="o">+</span><span class="mf">0.03</span><span class="p">),</span> <span class="s1">&#39;xl&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$X^3-X$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/89af5755c2f4b18c08633856f93063c8da44170b4a35d5f286647cdb6a6f2df1.png" src="../../_images/89af5755c2f4b18c08633856f93063c8da44170b4a35d5f286647cdb6a6f2df1.png" />
+</div>
+</div>
+<p>Consiste en hallar una raíz aproximada de una función en un intervalo dado.</p>
+<p>Tiende a ser menos eficiente por ser más lento, debido a la cantidad de iteraciones que se requieren para lograr un resultado(convergencia).</p>
+<p>Consiste en subdividir el intervalo en otros 2 iguales y evaluar la función con el objetivo de ubicar en donde se hace el cambio de signo, y se sigue repitiendo hasta encontrar la raíz.</p>
+<section id="algoritmo-para-la-biseccion">
+<h2>Algoritmo para la bisección<a class="headerlink" href="#algoritmo-para-la-biseccion" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Encontrar un intervalo en donde $<span class="math notranslate nohighlight">\(f(x1)*f(xu)&lt;0\)</span>$.</p></li>
+<li><p>Se haya una raíz aproximada:
+$<span class="math notranslate nohighlight">\(xr = \frac{xl+xu}{2}\)</span>$</p></li>
+<li><p>Encontrar el subintervalo en donde cae la raíz de la siguiente forma:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Si $<span class="math notranslate nohighlight">\(f(xl)*f(xr) &lt; 0\)</span><span class="math notranslate nohighlight">\( la raíz está entre el intervalo \)</span>xl<span class="math notranslate nohighlight">\( y \)</span>xr<span class="math notranslate nohighlight">\(. Por tal razón, \)</span>xu=xr$ y retorno al paso 2.</p></li>
+<li><p>Si $<span class="math notranslate nohighlight">\(f(xl)*f(xr) &gt; 0\)</span><span class="math notranslate nohighlight">\( la raíz está entre el intervalo \)</span>xr<span class="math notranslate nohighlight">\( y \)</span>xu<span class="math notranslate nohighlight">\(. Por tal razón, \)</span>xl=xr$ y retorno al paso 2.</p></li>
+<li><p>Si $<span class="math notranslate nohighlight">\(f(xl)*f(xr) = 0\)</span><span class="math notranslate nohighlight">\( la raíz es \)</span>xr$ y termina el cálculo</p></li>
+</ul>
+<section id="calculo-del-error-relativo">
+<h3>Cálculo del error relativo<a class="headerlink" href="#calculo-del-error-relativo" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+e_r = \lvert \frac{xr_{actual}-xr_{anterior}}{xr_{actual}}\rvert
+\]</div>
+</section>
+<section id="tolerancia">
+<h3>Tolerancia<a class="headerlink" href="#tolerancia" title="Permalink to this heading">#</a></h3>
+<p>Es qué tan aproximada será la raíz</p>
+</section>
+<section id="ejemplo">
+<h3>Ejemplo<a class="headerlink" href="#ejemplo" title="Permalink to this heading">#</a></h3>
+<p>Calcular la raíz de <span class="math notranslate nohighlight">\(f(x)=x^{3}-x\)</span> en el intervalo (0.2, 1.7) con una tolerancia de 1%</p>
+</section>
+<section id="solucion">
+<h3>Solución<a class="headerlink" href="#solucion" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tomamos el intérvalo inicial y grafiquemos la función dentro de ese valor</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La función es: &quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">xl</span><span class="p">,</span><span class="n">xu</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">1.7</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El intervalo es: (</span><span class="si">{</span><span class="n">xl</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">xu</span><span class="si">}</span><span class="s2">) &quot;</span><span class="p">)</span>
+
+<span class="n">fxl</span><span class="p">,</span> <span class="n">fxu</span> <span class="o">=</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">xl</span><span class="p">}),</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">xu</span><span class="p">}),</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;la función evaluada en xl y xu respectivamente : (f(</span><span class="si">{</span><span class="n">xl</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">fxl</span><span class="si">}</span><span class="s2">,  f(</span><span class="si">{</span><span class="n">xu</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">fxu</span><span class="si">}</span><span class="s2">) &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La función es:  x**3 - x
+El intervalo es: (0.2,1.7) 
+la función evaluada en xl y xu respectivamente : (f(0.2)=-0.1920,  f(1.7)=3.2130) 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Gráfica incial de la función en el rango especificado</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X^3 - X$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fxl</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fxu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1">## Texto de xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xl</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$x_l=</span><span class="si">{</span><span class="n">xl</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xu</span><span class="o">+</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$x_u=</span><span class="si">{</span><span class="n">xu</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$X^3-X$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/6b175a7351a20e4861be0fd6d4fce73f4fd8a9ad54241e8154d6ace345fd443b.png" src="../../_images/6b175a7351a20e4861be0fd6d4fce73f4fd8a9ad54241e8154d6ace345fd443b.png" />
+</div>
+</div>
+<section id="calculemos-ahora-la-raiz-supuesta">
+<h4>Calculemos ahora la raíz supuesta…<a class="headerlink" href="#calculemos-ahora-la-raiz-supuesta" title="Permalink to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[xr = \frac{xl+xu}{2}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span> <span class="o">=</span> <span class="p">(</span><span class="n">xl</span> <span class="o">+</span> <span class="n">xu</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">fxr</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xr</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; xr = </span><span class="si">{:.4f}</span><span class="s2">, f(xr) = </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span><span class="n">fxr</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> xr = 0.9500, f(xr) = -0.0926
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Gráfica incial con el punto de $x_r$</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X^3 - X$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fxl</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fxu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1">## Texto de xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xl</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$x_l=</span><span class="si">{</span><span class="n">xl</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xu</span><span class="o">+</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$x_u=</span><span class="si">{</span><span class="n">xu</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="c1">## Pintamos el punto intermedio</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span><span class="n">fxr</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Raíz&#39;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span><span class="n">fxr</span><span class="o">-</span><span class="mf">0.18</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$x_r=</span><span class="si">{</span><span class="n">xr</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$X^3-X$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/bafcf5c5e41e6698446ed0388adc1120615d99d6236b8a95bacb47656c6a0900.png" src="../../_images/bafcf5c5e41e6698446ed0388adc1120615d99d6236b8a95bacb47656c6a0900.png" />
+</div>
+</div>
+</section>
+<section id="calculemos-el-error">
+<h4>Calculemos el error…<a class="headerlink" href="#calculemos-el-error" title="Permalink to this heading">#</a></h4>
+<p>Como es la primer iteración, NO tendremos forma de calcular un error ya que no existe un <span class="math notranslate nohighlight">\(xr\)</span> anterior. Para las siguientes iteraciones si vamos a calcular el error tomando la siguiente formula.</p>
+<div class="math notranslate nohighlight">
+\[
+e_r = \lvert \frac{Xr_{actual}-Xr_{anterior}}{Xr_{actual}}\rvert = 0
+\]</div>
+<p>OJO: Solo para la primer iteración se define arbitrariamente</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Tabla de iteraciones</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">columnas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Xl&#39;</span><span class="p">,</span><span class="s1">&#39;Xu&#39;</span><span class="p">,</span><span class="s1">&#39;Xr&#39;</span><span class="p">,</span><span class="s1">&#39;er(%)&#39;</span><span class="p">,</span><span class="s1">&#39;f(Xl)&#39;</span><span class="p">,</span><span class="s1">&#39;f(Xu)&#39;</span><span class="p">,</span><span class="s1">&#39;f(Xr)&#39;</span><span class="p">]</span>
+
+<span class="n">primer_iter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Xl&#39;</span><span class="p">:[</span><span class="n">xl</span><span class="p">],</span><span class="s1">&#39;Xu&#39;</span><span class="p">:[</span><span class="n">xu</span><span class="p">],</span><span class="s1">&#39;Xr&#39;</span><span class="p">:[</span><span class="n">xr</span><span class="p">],</span><span class="s1">&#39;er(%)&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;f(Xl)&#39;</span><span class="p">:[</span><span class="n">fxl</span><span class="p">],</span><span class="s1">&#39;f(Xu)&#39;</span><span class="p">:[</span><span class="n">fxu</span><span class="p">],</span><span class="s1">&#39;f(Xr)&#39;</span><span class="p">:[</span><span class="n">fxr</span><span class="p">]}</span>
+
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">primer_iter</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">columnas</span><span class="p">)</span>
+<span class="n">tabla</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-75c9d425-866e-48f2-9008-234f67c0a410" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Xl</th>
+      <th>Xu</th>
+      <th>Xr</th>
+      <th>er(%)</th>
+      <th>f(Xl)</th>
+      <th>f(Xu)</th>
+      <th>f(Xr)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.2</td>
+      <td>1.7</td>
+      <td>0.95</td>
+      <td>0</td>
+      <td>-0.1920</td>
+      <td>3.2130</td>
+      <td>-0.0926</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-75c9d425-866e-48f2-9008-234f67c0a410')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-75c9d425-866e-48f2-9008-234f67c0a410 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-75c9d425-866e-48f2-9008-234f67c0a410');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section id="revisemos-las-condiciones">
+<h4>Revisemos las condiciones<a class="headerlink" href="#revisemos-las-condiciones" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Si $<span class="math notranslate nohighlight">\(f(xl)*f(xr) &lt; 0\)</span>$ la raíz está entre el intervalo xl y xr. Por tal razón, xu=xr y retorno al paso 2.</p></li>
+<li><p>Si $<span class="math notranslate nohighlight">\(f(xl)*f(xr) &gt; 0\)</span>$ la raíz está entre el intervalo xr y xu. Por tal razón, xl=xr y retorno al paso 2.</p></li>
+<li><p>Si $<span class="math notranslate nohighlight">\(f(xl)*f(xr) = 0\)</span>$ la raíz es xr y termina el cálculo</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">fxl</span> <span class="o">*</span> <span class="n">fxr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La raíz está entre el intervalo xl y xr&quot;</span><span class="p">)</span>
+  <span class="n">xu</span> <span class="o">=</span> <span class="n">xr</span>
+<span class="k">elif</span> <span class="p">(</span><span class="n">fxl</span><span class="o">*</span><span class="n">fxr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La raíz está entre el intervalo xr y xu&quot;</span><span class="p">)</span>
+  <span class="n">xl</span> <span class="o">=</span> <span class="n">xr</span>
+<span class="k">elif</span> <span class="p">(</span><span class="n">fxl</span><span class="o">*</span><span class="n">fxr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;terminé&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La raíz está entre el intervalo xr y xu
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="repetimos-los-pasos-anteriores-para-calcular-el-nuevo-xr-y-el-error">
+<h4>Repetimos los pasos anteriores para calcular el nuevo Xr y el error<a class="headerlink" href="#repetimos-los-pasos-anteriores-para-calcular-el-nuevo-xr-y-el-error" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fxl</span><span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xl</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">fxu</span><span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xu</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">xr2</span> <span class="o">=</span> <span class="p">(</span><span class="n">xl</span> <span class="o">+</span> <span class="n">xu</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">fxr2</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xr2</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; xr = </span><span class="si">{:.4f}</span><span class="s2">, f(xr) = </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">xr2</span><span class="p">,</span><span class="n">fxr2</span><span class="p">))</span>
+<span class="n">error</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xr2</span><span class="o">-</span><span class="n">xr</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xr2</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El error de este cálculo es: </span><span class="si">{:.4f}</span><span class="s2">% &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> xr = 1.3250, f(xr) = 1.0012
+El error de este cálculo es: 28.3019% 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Gráfica del método para la iteración 2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X^3 - X$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fxl</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fxu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1">## Texto de xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xl</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$x_l=</span><span class="si">{</span><span class="n">xl</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xu</span><span class="o">+</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$x_u=</span><span class="si">{</span><span class="n">xu</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="c1">## Pintamos el punto intermedio</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr2</span><span class="p">,</span><span class="n">fxr2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Raíz&#39;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xr2</span><span class="p">,</span><span class="n">fxr2</span><span class="o">-</span><span class="mf">0.18</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;$x_r=</span><span class="si">{</span><span class="n">xr2</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$X^3-X$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/c2d9109fd79f13da98b64794c93cb89fb6826019c1b3532408e5875b036d7bb5.png" src="../../_images/c2d9109fd79f13da98b64794c93cb89fb6826019c1b3532408e5875b036d7bb5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Actualizamos la tabla de iteraciones</span>
+<span class="n">nueva_fila</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Xl&#39;</span><span class="p">:</span> <span class="n">xl</span><span class="p">,</span> <span class="s1">&#39;Xu&#39;</span><span class="p">:</span> <span class="n">xu</span><span class="p">,</span> <span class="s1">&#39;Xr&#39;</span><span class="p">:</span> <span class="n">xr2</span><span class="p">,</span> <span class="s1">&#39;er(%)&#39;</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span> <span class="s1">&#39;f(Xl)&#39;</span><span class="p">:</span> <span class="n">fxl</span><span class="p">,</span> <span class="s1">&#39;f(Xu)&#39;</span><span class="p">:</span> <span class="n">fxu</span><span class="p">,</span> <span class="s1">&#39;f(Xr)&#39;</span><span class="p">:</span><span class="n">fxr2</span><span class="p">}</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">tabla</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nueva_fila</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tabla</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-260-912f58af88d4&gt;:3: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  tabla = tabla.append(nueva_fila, ignore_index=True)
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-842392a8-85e9-4544-a21b-00fc4ccf5ae4" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Xl</th>
+      <th>Xu</th>
+      <th>Xr</th>
+      <th>er(%)</th>
+      <th>f(Xl)</th>
+      <th>f(Xu)</th>
+      <th>f(Xr)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.20</td>
+      <td>1.7</td>
+      <td>0.950</td>
+      <td>0.0000</td>
+      <td>-0.1920</td>
+      <td>3.2130</td>
+      <td>-0.0926</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.95</td>
+      <td>1.7</td>
+      <td>1.325</td>
+      <td>28.3019</td>
+      <td>-0.0926</td>
+      <td>3.2130</td>
+      <td>1.0012</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-842392a8-85e9-4544-a21b-00fc4ccf5ae4')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-842392a8-85e9-4544-a21b-00fc4ccf5ae4 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-842392a8-85e9-4544-a21b-00fc4ccf5ae4');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-d3dfc45a-ae5f-4248-a624-3d1459333e24">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d3dfc45a-ae5f-4248-a624-3d1459333e24')"
+            title="Suggest charts."
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-d3dfc45a-ae5f-4248-a624-3d1459333e24 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title iteremos hasta que el error sea de 1%</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">clear_output</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+
+<span class="c1">##############</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La función es: &quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">xl</span><span class="p">,</span><span class="n">xu</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">1.7</span><span class="p">)</span>
+
+<span class="c1">##############</span>
+
+<span class="n">tol</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="n">xr</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">xr_ant</span> <span class="o">=</span> <span class="n">xu</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">tol</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">it</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">columnas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Xl&#39;</span><span class="p">,</span><span class="s1">&#39;Xu&#39;</span><span class="p">,</span><span class="s1">&#39;Xr&#39;</span><span class="p">,</span><span class="s1">&#39;er(%)&#39;</span><span class="p">,</span><span class="s1">&#39;f(Xl)&#39;</span><span class="p">,</span><span class="s1">&#39;f(Xu)&#39;</span><span class="p">,</span><span class="s1">&#39;f(Xr)&#39;</span><span class="p">]</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columnas</span><span class="p">)</span>
+
+<span class="n">ims</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">while</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span>
+  <span class="c1">#Evaluamos la función en los puntos del intervalo.</span>
+  <span class="n">fxl</span><span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xl</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">fxu</span><span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xu</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+
+  <span class="c1">##################</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+  <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+  <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X^3 - X$&quot;</span><span class="p">)</span>
+  <span class="c1">## Plano cartesiano (Ejes)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$X^3-X$&quot;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+  <span class="c1">##################</span>
+
+  <span class="c1">## Límites xl y xu</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fxl</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$x_l=$</span><span class="si">{</span><span class="n">xl</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fxu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$x_u=$</span><span class="si">{</span><span class="n">xu</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+  <span class="c1">#Calculamos la raíz</span>
+  <span class="n">xr</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">xl</span> <span class="o">+</span> <span class="n">xu</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">fxr</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xr</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+
+  <span class="c1">## Pintamos el punto intermedio</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span><span class="n">fxr</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$Raíz=$</span><span class="si">{</span><span class="n">xr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+  <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xr</span><span class="o">-</span><span class="n">xr_ant</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xr</span><span class="p">))</span>
+
+  <span class="n">nueva_fila</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Xl&#39;</span><span class="p">:</span> <span class="n">xl</span><span class="p">,</span> <span class="s1">&#39;Xu&#39;</span><span class="p">:</span> <span class="n">xu</span><span class="p">,</span> <span class="s1">&#39;Xr&#39;</span><span class="p">:</span> <span class="n">xr</span><span class="p">,</span> <span class="s1">&#39;er(%)&#39;</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span> <span class="s1">&#39;f(Xl)&#39;</span><span class="p">:</span> <span class="n">fxl</span><span class="p">,</span> <span class="s1">&#39;f(Xu)&#39;</span><span class="p">:</span> <span class="n">fxu</span><span class="p">,</span> <span class="s1">&#39;f(Xr)&#39;</span><span class="p">:</span><span class="n">fxr</span><span class="p">}</span>
+  <span class="n">nueva_fila</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">nueva_fila</span><span class="p">])</span>
+
+  <span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tabla</span><span class="p">,</span> <span class="n">nueva_fila</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+  <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">tabla</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">it</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()))</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">fxl</span> <span class="o">*</span> <span class="n">fxr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">xu</span> <span class="o">=</span> <span class="n">xr</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">fxl</span><span class="o">*</span><span class="n">fxr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">xl</span> <span class="o">=</span> <span class="n">xr</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">fxl</span><span class="o">*</span><span class="n">fxr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La raiz está en: (</span><span class="si">{</span><span class="n">xr</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">fxr</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">break</span>
+
+  <span class="n">xr_ant</span> <span class="o">=</span> <span class="n">xr</span>
+  <span class="n">it</span><span class="o">+=</span><span class="mi">1</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="nb">input</span><span class="p">()</span>
+  <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/c98d9de07b01bfa459d98d42738abf224937da8a76cc597baf3c6e922942073f.png" src="../../_images/c98d9de07b01bfa459d98d42738abf224937da8a76cc597baf3c6e922942073f.png" />
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Xl</th>
+      <th>Xu</th>
+      <th>Xr</th>
+      <th>er(%)</th>
+      <th>f(Xl)</th>
+      <th>f(Xu)</th>
+      <th>f(Xr)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.2000</td>
+      <td>1.7000</td>
+      <td>0.9500</td>
+      <td>0.789474</td>
+      <td>-0.1920</td>
+      <td>3.2130</td>
+      <td>-0.0926</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.9500</td>
+      <td>1.7000</td>
+      <td>1.3250</td>
+      <td>0.283019</td>
+      <td>-0.0926</td>
+      <td>3.2130</td>
+      <td>1.0012</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.9500</td>
+      <td>1.3250</td>
+      <td>1.1375</td>
+      <td>0.164835</td>
+      <td>-0.0926</td>
+      <td>1.0012</td>
+      <td>0.3343</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.9500</td>
+      <td>1.1375</td>
+      <td>1.0437</td>
+      <td>0.089873</td>
+      <td>-0.0926</td>
+      <td>0.3343</td>
+      <td>0.0932</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.9500</td>
+      <td>1.0437</td>
+      <td>0.9969</td>
+      <td>0.046946</td>
+      <td>-0.0926</td>
+      <td>0.0932</td>
+      <td>-0.0062</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.9969</td>
+      <td>1.0437</td>
+      <td>1.0203</td>
+      <td>0.022934</td>
+      <td>-0.0062</td>
+      <td>0.0932</td>
+      <td>0.0418</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.9969</td>
+      <td>1.0203</td>
+      <td>1.0086</td>
+      <td>0.011600</td>
+      <td>-0.0062</td>
+      <td>0.0418</td>
+      <td>0.0174</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.9969</td>
+      <td>1.0086</td>
+      <td>1.0028</td>
+      <td>0.005784</td>
+      <td>-0.0062</td>
+      <td>0.0174</td>
+      <td>0.0056</td>
+    </tr>
+  </tbody>
+</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Grafico dinámico (movie del método)</span>
+<span class="c1"># Librerias necesarias para realizar el gráfico</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">animation</span><span class="p">,</span> <span class="n">rc</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">;</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;animation&#39;</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="s1">&#39;html5&#39;</span><span class="p">);</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span>
+
+<span class="c1"># Plantilla sobre la cual se realiza el gráfico</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X^3 - X$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$X^3-X$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1"># Se definen los atributos que debe tener la linea o en este caso el punto que se va a pintar en cada iteracion</span>
+<span class="n">linea</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],[],</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Realizamos una función que grafique el punto especifico uno a uno</span>
+
+<span class="n">frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tabla</span><span class="p">);</span>
+<span class="k">def</span> <span class="nf">graficar</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+
+  <span class="n">x</span> <span class="o">=</span> <span class="n">tabla</span><span class="p">[</span><span class="s1">&#39;Xr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">tabla</span><span class="p">[</span><span class="s1">&#39;f(Xr)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+  <span class="n">linea</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="n">linea</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raíz=</span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">linea</span><span class="p">,)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ejecutamos la animación para que se genere y quede en loop mostrando su resultado.</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">graficar</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">anim</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-319-870bb3ef07f7&gt;:36: MatplotlibDeprecationWarning: Setting data with a non sequence type is deprecated since 3.7 and will be remove two minor releases later
+  linea.set_data(x[i],y[i])
+</pre></div>
+</div>
+<div class="output text_html"><video width="640" height="480" controls autoplay>
+  <source type="video/mp4" src="data:video/mp4;base64,AAAAIGZ0eXBNNFYgAAACAE00ViBpc29taXNvMmF2YzEAAAAIZnJlZQAAOw9tZGF0AAACrQYF//+p
+3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2MyByMzA2MCA1ZGI2YWE2IC0gSC4yNjQvTVBF
+Ry00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMSAtIGh0dHA6Ly93d3cudmlkZW9sYW4u
+b3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFs
+eXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVk
+X3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBk
+ZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTMg
+bG9va2FoZWFkX3RocmVhZHM9MSBzbGljZWRfdGhyZWFkcz0wIG5yPTAgZGVjaW1hdGU9MSBpbnRl
+cmxhY2VkPTAgYmx1cmF5X2NvbXBhdD0wIGNvbnN0cmFpbmVkX2ludHJhPTAgYmZyYW1lcz0zIGJf
+cHlyYW1pZD0yIGJfYWRhcHQ9MSBiX2JpYXM9MCBkaXJlY3Q9MSB3ZWlnaHRiPTEgb3Blbl9nb3A9
+MCB3ZWlnaHRwPTIga2V5aW50PTI1MCBrZXlpbnRfbWluPTEgc2NlbmVjdXQ9NDAgaW50cmFfcmVm
+cmVzaD0wIHJjX2xvb2thaGVhZD00MCByYz1jcmYgbWJ0cmVlPTEgY3JmPTIzLjAgcWNvbXA9MC42
+MCBxcG1pbj0wIHFwbWF4PTY5IHFwc3RlcD00IGlwX3JhdGlvPTEuNDAgYXE9MToxLjAwAIAAACqE
+ZYiEABf//vfUt8yy7VNvtguo96KeJl9DdSUBm5bE7TqAAAADAAADAAAevBc4Al+JCvOvAAADAMqI
+/R+rY2Za4gDcYQTIuda/jcz7VHYVNXZyQOKvxFlTpl4Xtof/gJghK75zHJHPDdMt5Q/QNYX9dSHQ
+oWWhN+3i5nULcQ5EsKwiRl4GCwkpJkwmLHjDm+MD6Lo+ciIOGQmx5zjfgh4jNummyg6adErrc1zC
+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
+">
+  Your browser does not support the video tag.
+</video></div></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Modulos/Clase_2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../Unidad2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Unidad 2: Cálculo de raices</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../Unidad3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unidad 3: Ajuste de Curvas e Interpolación</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Método de la Bisección</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-grafico">Método gráfico</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Método de la Bisección</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-para-la-biseccion">Algoritmo para la bisección</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-del-error-relativo">Cálculo del error relativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerancia">Tolerancia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion">Solución</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculemos-ahora-la-raiz-supuesta">Calculemos ahora la raíz supuesta…</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculemos-el-error">Calculemos el error…</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#revisemos-las-condiciones">Revisemos las condiciones</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#repetimos-los-pasos-anteriores-para-calcular-el-nuevo-xr-y-el-error">Repetimos los pasos anteriores para calcular el nuevo Xr y el error</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johan S. Piña D, Reinel Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
