@@ -14,6 +14,8 @@ chapters:
     - file: "Modulos/Clase_1/Evaluemos_Unidad1_10_08_2023"
     - file: "Modulos/Clase_1/Parcial_Corte_1_MetodosNumericos_Optimización_14_sep_2023"
 - file: Unidad2
+  sections:
+    - file: "Modulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023"
 - file: Unidad3
 - file: Unidad4
 - file: Unidad5
