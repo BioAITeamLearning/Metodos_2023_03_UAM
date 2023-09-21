@@ -1273,7 +1273,7 @@ El error de este cálculo es: 28.3019%
 
 <span class="c1">##############</span>
 
-<span class="n">tol</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">tol</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="n">xr</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">xr_ant</span> <span class="o">=</span> <span class="n">xu</span>
@@ -1320,7 +1320,7 @@ El error de este cálculo es: 28.3019%
   <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
   <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-  <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xr</span><span class="o">-</span><span class="n">xr_ant</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xr</span><span class="p">))</span>
+  <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xr</span><span class="o">-</span><span class="n">xr_ant</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xr</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span>
 
   <span class="n">nueva_fila</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Xl&#39;</span><span class="p">:</span> <span class="n">xl</span><span class="p">,</span> <span class="s1">&#39;Xu&#39;</span><span class="p">:</span> <span class="n">xu</span><span class="p">,</span> <span class="s1">&#39;Xr&#39;</span><span class="p">:</span> <span class="n">xr</span><span class="p">,</span> <span class="s1">&#39;er(%)&#39;</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span> <span class="s1">&#39;f(Xl)&#39;</span><span class="p">:</span> <span class="n">fxl</span><span class="p">,</span> <span class="s1">&#39;f(Xu)&#39;</span><span class="p">:</span> <span class="n">fxu</span><span class="p">,</span> <span class="s1">&#39;f(Xr)&#39;</span><span class="p">:</span><span class="n">fxr</span><span class="p">}</span>
   <span class="n">nueva_fila</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">nueva_fila</span><span class="p">])</span>
