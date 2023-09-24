@@ -16,6 +16,7 @@ chapters:
 - file: Unidad2
   sections:
     - file: "Modulos/Clase_2/ClaseMetodoCalculoRaices21_09_2023"
+    - file: "Modulos/Clase_3/ClaseMetodoFalsaPosicion21_09_2023"
 - file: Unidad3
 - file: Unidad4
 - file: Unidad5
