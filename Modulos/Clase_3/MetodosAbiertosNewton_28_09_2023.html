@@ -1,0 +1,2084 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Método de newton-raphson &#8212; Métodos Numéricos 2023 - 03</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_3/MetodosAbiertosNewton_28_09_2023';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad 3: Ajuste de Curvas e Interpolación" href="../../Unidad3.html" />
+    <link rel="prev" title="Métodos abiertos" href="metodosAbiertos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Métodos Numéricos y Optimización
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1: Introducción a Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%201%20-%20TiposDeDatos%20Condicionales%20Ciclos%20Colecciones%20Funciones_10_08_2023.html"><strong>Introducción</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%202%20-%20Arreglos_10_08_2023.html">Matrices y vectores</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%203%20-%20Pandas_10_08_2023.html">Introducción a pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%205%20-%20Manejo%20de%20ficheros_10_08_2023.html">Manejo de archivos</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%204%20-%20Analisis%20numerico%20y%20Calculo%20simbolico%20con%20Sympy_10_08_2023.html">Algebra computacional con <code class="docutils literal notranslate"><span class="pre">Sympy</span></code></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Evaluemos_Unidad1_10_08_2023.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Parcial_Corte_1_MetodosNumericos_Optimizaci%C3%B3n_14_sep_2023.html">Primer parcial de métodos numéricos: Introducción al Python para análisis numérico.</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2: Cálculo de raices</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Clase_2/ClaseMetodoCalculoRaices21_09_2023.html">Método de la Bisección</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="ClaseMetodoFalsaPosicion21_09_2023.html">Método de la Falsa Posición</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="metodosAbiertos.html">Métodos abiertos</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Método de newton-raphson</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad3.html">Unidad 3: Ajuste de Curvas e Interpolación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad5.html">Unidad 5: Diferenciación e Integración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Ecns Diferenciales Ordinarias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad7.html">Unidad 7: Optimización Irrestricta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad8.html">Unidad 8: Programación lineal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad9.html">Unidad 9: Programación NO Lineal</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_3/MetodosAbiertosNewton_28_09_2023.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_3/MetodosAbiertosNewton_28_09_2023.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Modulos/Clase_3/MetodosAbiertosNewton_28_09_2023.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Método de newton-raphson</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-newton-raphson">Algoritmo de Newton Raphson</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-relativo">Error relativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerancia">Tolerancia</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#veamos-un-ejemplo-practico">Veamos un ejemplo práctico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion">Solución</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formula-para-el-calculo-del-x-i-1-en-el-ejercicio-dado">Formula para el cálculo del <span class="math notranslate nohighlight">\(x_{i+1}\)</span> en el ejercicio dado</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sigamos-iterando">Sigamos iterando…</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-veamos-el-algoritmo-completo">Ahora veamos el algoritmo completo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio:</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="metodo-de-newton-raphson">
+<h1>Método de newton-raphson<a class="headerlink" href="#metodo-de-newton-raphson" title="Permalink to this heading">#</a></h1>
+<p>Es el método más usado  y trabaja como referencia la pendiente (<span class="math notranslate nohighlight">\(m\)</span>) de la recta tangente en una raíz <span class="math notranslate nohighlight">\(x_i\)</span> incial para hallar el <span class="math notranslate nohighlight">\(x_i+1\)</span>.</p>
+<p>Este método tiende a cercarse muy rápido a la raíz. Pero también puede tender a la divergencia rápidamente.</p>
+<p align="center">
+<img src="https://www.neurochispas.com/wp-content/uploads/2022/12/Diagrama-para-provar-el-metodo-de-Newton-Raphson.png" width=500/><div class="math notranslate nohighlight">
+\[f'(x_i)= \frac{f(xi)-0}{x_i - x_{i+1}}\]</div>
+<div class="math notranslate nohighlight">
+\[f'(x_i)[x_i - x_{i+1}] = f(x_i)\]</div>
+<div class="math notranslate nohighlight">
+\[f'(x_i)(x_i) - f'(x_i)(x_{i+1}) = f(x_i)\]</div>
+<div class="math notranslate nohighlight">
+\[f'(x_i)(x_{i+1}) = f'(x_i)(x_i) - f(x_i)\]</div>
+<div class="math notranslate nohighlight">
+\[x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)} \]</div>
+<section id="algoritmo-de-newton-raphson">
+<h2>Algoritmo de Newton Raphson<a class="headerlink" href="#algoritmo-de-newton-raphson" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Se calcula el siguiente <span class="math notranslate nohighlight">\(x_{i+1}\)</span> con la formula.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)} \]</div>
+<ol class="arabic simple" start="2">
+<li><p>Se repite el paso <strong>1</strong> hasta convergencia.</p></li>
+</ol>
+<section id="error-relativo">
+<h3>Error relativo<a class="headerlink" href="#error-relativo" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+e_r = \lvert \frac{x_{i+1}-x_{i}}{x_{i+1}}\rvert
+\]</div>
+</section>
+<section id="tolerancia">
+<h3>Tolerancia<a class="headerlink" href="#tolerancia" title="Permalink to this heading">#</a></h3>
+<p>Precisión que se requiere en el método!!</p>
+</section>
+</section>
+<section id="veamos-un-ejemplo-practico">
+<h2>Veamos un ejemplo práctico<a class="headerlink" href="#veamos-un-ejemplo-practico" title="Permalink to this heading">#</a></h2>
+<p>Hallar la raíz de <span class="math notranslate nohighlight">\(f(x)= e^{-x} - x\)</span> con el método de Newton Raphson y una condición inicial <span class="math notranslate nohighlight">\(x_i=0\)</span> y <span class="math notranslate nohighlight">\(tol = 1\%\)</span></p>
+<section id="solucion">
+<h3>Solución<a class="headerlink" href="#solucion" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tomamos el intérvalo inicial y grafiquemos la función dentro de ese valor</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">E</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La función es: &quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El punto inicial es: </span><span class="si">{</span><span class="n">xi</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+
+<span class="n">fxi</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">xi</span><span class="p">}),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;la función evaluada en xi : f(</span><span class="si">{</span><span class="n">xi</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">fxi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La función es:  -x + exp(-x)
+El punto inicial es: 0 
+la función evaluada en xi : f(0)=1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Gráfica incial de la función y $x_i$ dado</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x_i</span><span class="p">})</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Punto inicial</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xi</span><span class="p">],[</span><span class="n">fxi</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$(x_0,f(x_0))$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/528cddbd919e8ce7158832ef974953cb0b03eb81fc14125d274055b9e19abc81.png" src="../../_images/528cddbd919e8ce7158832ef974953cb0b03eb81fc14125d274055b9e19abc81.png" />
+</div>
+</div>
+<section id="formula-para-el-calculo-del-x-i-1-en-el-ejercicio-dado">
+<h4>Formula para el cálculo del <span class="math notranslate nohighlight">\(x_{i+1}\)</span> en el ejercicio dado<a class="headerlink" href="#formula-para-el-calculo-del-x-i-1-en-el-ejercicio-dado" title="Permalink to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)} = x_i - \frac{e^{-x} - x}{-e^{-x} - 1}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculamos la derivada de la función</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La derivada de la función f(x)=</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="se">\t</span><span class="s2"> f&#39;(x)= </span><span class="si">{</span><span class="n">dy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Evaluemos la derivada en x_i</span>
+
+<span class="n">dfxi</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">dy</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La derivada evaluada en xi f&#39;(xi)= </span><span class="si">{</span><span class="n">dfxi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La derivada de la función f(x)=-x + exp(-x) -&gt; 	 f&#39;(x)= -1 - exp(-x)
+La derivada evaluada en xi f&#39;(xi)= -2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculemos el x_i+1 (siguiente)</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">xi</span> <span class="o">-</span> <span class="p">((</span><span class="n">fxi</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">dfxi</span><span class="p">)),</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La raíz supuesta está en x=</span><span class="si">{</span><span class="n">xs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La raíz supuesta está en x=0.5000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Gráfica función con el $x_i$ y $x_{i+1}$ calculado</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x_i</span><span class="p">})</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+
+<span class="n">h</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">dfx</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="o">+</span><span class="n">h</span><span class="p">})</span><span class="o">-</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">}))</span><span class="o">/</span><span class="n">h</span> <span class="c1"># derivative</span>
+<span class="n">tan</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span><span class="o">+</span><span class="n">dfx</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span>  <span class="c1"># tangent</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">tan</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Punto inicial</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xi</span><span class="p">],[</span><span class="n">fxi</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$(x_0,f(x_0))$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xs</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$(x_{0+1},0)$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/ce586369deb6cbf2c5e634a5b8ae56a4adaa7db7b108478cd2b419b8a08294da.png" src="../../_images/ce586369deb6cbf2c5e634a5b8ae56a4adaa7db7b108478cd2b419b8a08294da.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculemos el error</span>
+<span class="n">er</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xs</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El error del cálculo es: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">er</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El error del cálculo es: 100.0%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generemos la tabla de iteraciones</span>
+<span class="c1"># @title Tabla de iteraciones</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">columnas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;xi&#39;</span><span class="p">,</span><span class="s1">&#39;Xi+1&#39;</span><span class="p">,</span><span class="s1">&#39;f(xi)&#39;</span><span class="p">,</span><span class="s2">&quot;f&#39;(Xi)&quot;</span><span class="p">,</span><span class="s1">&#39;er(%)&#39;</span><span class="p">]</span>
+
+<span class="n">primer_iter</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xi&#39;</span><span class="p">:[</span><span class="n">xi</span><span class="p">],</span><span class="s1">&#39;Xi+1&#39;</span><span class="p">:[</span><span class="n">xs</span><span class="p">],</span><span class="s1">&#39;f(xi)&#39;</span><span class="p">:[</span><span class="n">fxi</span><span class="p">],</span><span class="s2">&quot;f&#39;(Xi)&quot;</span><span class="p">:[</span><span class="n">dfxi</span><span class="p">],</span><span class="s1">&#39;er(%)&#39;</span><span class="p">:[</span><span class="nb">round</span><span class="p">(</span><span class="n">er</span><span class="p">,</span><span class="mi">4</span><span class="p">)]}</span>
+
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">primer_iter</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">columnas</span><span class="p">)</span>
+<span class="n">tabla</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-b5e1a5cf-bfda-4c47-8e68-b0e8e920ed51" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>xi</th>
+      <th>Xi+1</th>
+      <th>f(xi)</th>
+      <th>f'(Xi)</th>
+      <th>er(%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.5000</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>100.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-b5e1a5cf-bfda-4c47-8e68-b0e8e920ed51')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-b5e1a5cf-bfda-4c47-8e68-b0e8e920ed51 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-b5e1a5cf-bfda-4c47-8e68-b0e8e920ed51');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section id="sigamos-iterando">
+<h4>Sigamos iterando…<a class="headerlink" href="#sigamos-iterando" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nuestro x_i+1 ahora se convierte en nuestro x_i</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="n">xs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El punto inicial ahora es: </span><span class="si">{</span><span class="n">xi</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+
+<span class="n">fxi</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">xi</span><span class="p">}),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;la función evaluada en xi ahora es: f(</span><span class="si">{</span><span class="n">xi</span><span class="si">}</span><span class="s2">)=</span><span class="si">{</span><span class="n">fxi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El punto inicial ahora es: 0.5000 
+la función evaluada en xi ahora es: f(0.5000)=0.1065
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Gráfica incial de la función y $x_i$ para la iteración 2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x_i</span><span class="p">})</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+
+<span class="n">h</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">dfx</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="o">+</span><span class="n">h</span><span class="p">})</span><span class="o">-</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">}))</span><span class="o">/</span><span class="n">h</span> <span class="c1"># derivative</span>
+<span class="n">tan</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span><span class="o">+</span><span class="n">dfx</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span>  <span class="c1"># tangent</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">tan</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Punto inicial</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xi</span><span class="p">],[</span><span class="n">fxi</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$(x_1,f(x_1))$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/5e1160fe9eec6320ac78746a4a3adfaa0f1c3dff8d65f4a01b0eb7d76fec4452.png" src="../../_images/5e1160fe9eec6320ac78746a4a3adfaa0f1c3dff8d65f4a01b0eb7d76fec4452.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculamos la derivada de la función</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La derivada de la función f(x)=</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="se">\t</span><span class="s2"> f&#39;(x)= </span><span class="si">{</span><span class="n">dy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Evaluemos la derivada en x_i</span>
+
+<span class="n">dfxi</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">dy</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La derivada evaluada en xi f&#39;(xi)= </span><span class="si">{</span><span class="n">dfxi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La derivada de la función f(x)=-x + exp(-x) -&gt; 	 f&#39;(x)= -1 - exp(-x)
+La derivada evaluada en xi f&#39;(xi)= -1.605
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculemos el x_i+1 (siguiente)</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">xi</span> <span class="o">-</span> <span class="p">((</span><span class="n">fxi</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">dfxi</span><span class="p">)),</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La raíz supuesta está en x=</span><span class="si">{</span><span class="n">xs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La raíz supuesta está en x=0.5664
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Gráfica función con el $x_i$ y $x_{i+1}$ calculado</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x_i</span><span class="p">})</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+
+<span class="n">h</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">dfx</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="o">+</span><span class="n">h</span><span class="p">})</span><span class="o">-</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">}))</span><span class="o">/</span><span class="n">h</span> <span class="c1"># derivative</span>
+<span class="n">tan</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span><span class="o">+</span><span class="n">dfx</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span>  <span class="c1"># tangent</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">tan</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Punto inicial</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xi</span><span class="p">],[</span><span class="n">fxi</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$(x_1,f(x_1))$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xs</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$(x_</span><span class="si">{2}</span><span class="s1">,0)$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/5dd05178f9a242a1ebb675ca4b545ed14510b869706bcf54aa88a51f11435e74.png" src="../../_images/5dd05178f9a242a1ebb675ca4b545ed14510b869706bcf54aa88a51f11435e74.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculemos el error</span>
+<span class="n">er</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xs</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El error del cálculo es: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">er</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El error del cálculo es: 11.7%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Actualizamos la tabla de iteraciones</span>
+<span class="n">nueva_fila</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xi&#39;</span><span class="p">:</span><span class="n">xi</span><span class="p">,</span><span class="s1">&#39;Xi+1&#39;</span><span class="p">:</span><span class="n">xs</span><span class="p">,</span><span class="s1">&#39;f(xi)&#39;</span><span class="p">:</span><span class="n">fxi</span><span class="p">,</span><span class="s2">&quot;f&#39;(Xi)&quot;</span><span class="p">:</span><span class="n">dfxi</span><span class="p">,</span><span class="s1">&#39;er(%)&#39;</span><span class="p">:</span><span class="nb">round</span><span class="p">(</span><span class="n">er</span><span class="p">,</span><span class="mi">4</span><span class="p">)}</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">tabla</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nueva_fila</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tabla</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-141-30e46d477870&gt;:3: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  tabla = tabla.append(nueva_fila, ignore_index=True)
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-bac263c7-3f43-429c-9760-452ccb50768d" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>xi</th>
+      <th>Xi+1</th>
+      <th>f(xi)</th>
+      <th>f'(Xi)</th>
+      <th>er(%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.5000</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.5000</td>
+      <td>0.5664</td>
+      <td>0.1065</td>
+      <td>-1.605</td>
+      <td>11.72</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-bac263c7-3f43-429c-9760-452ccb50768d')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-bac263c7-3f43-429c-9760-452ccb50768d button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-bac263c7-3f43-429c-9760-452ccb50768d');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-48dae25a-d367-45c0-aa52-1fb0e29aeec5">
+  <button class="colab-df-quickchart" onclick="quickchart('df-48dae25a-d367-45c0-aa52-1fb0e29aeec5')"
+            title="Suggest charts."
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-48dae25a-d367-45c0-aa52-1fb0e29aeec5 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section id="ahora-veamos-el-algoritmo-completo">
+<h4>Ahora veamos el algoritmo completo<a class="headerlink" href="#ahora-veamos-el-algoritmo-completo" title="Permalink to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title iteremos hasta que el error sea de 1%</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">clear_output</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">E</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">x</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La función es: &quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">columnas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;xi&#39;</span><span class="p">,</span><span class="s1">&#39;Xi+1&#39;</span><span class="p">,</span><span class="s1">&#39;f(xi)&#39;</span><span class="p">,</span><span class="s2">&quot;f&#39;(Xi)&quot;</span><span class="p">,</span><span class="s1">&#39;er(%)&#39;</span><span class="p">]</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columnas</span><span class="p">)</span>
+
+<span class="n">tol</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">er</span> <span class="o">=</span> <span class="n">tol</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">it</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">ims</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">while</span> <span class="n">er</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span>
+  <span class="n">fxi</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">xi</span><span class="p">}),</span> <span class="mi">4</span><span class="p">)</span>
+
+  <span class="c1">##################</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+  <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+  <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x_i</span><span class="p">})</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+
+  <span class="c1">## Plano cartesiano (Ejes)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+  <span class="c1">## Punto inicial</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xi</span><span class="p">],[</span><span class="n">fxi</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$(x_</span><span class="si">{</span><span class="n">it</span><span class="si">}</span><span class="s1">,f(x_</span><span class="si">{</span><span class="n">it</span><span class="si">}</span><span class="s1">))= (</span><span class="si">{</span><span class="n">xi</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">fxi</span><span class="si">}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+
+  <span class="c1">## Calculemos la derivada</span>
+  <span class="n">dy</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+  <span class="c1">## Evaluemos la derivada en x_i</span>
+  <span class="n">dfxi</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">dy</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">}),</span><span class="mi">4</span><span class="p">)</span>
+
+  <span class="c1">## Calculemos el x_i+1 (siguiente)</span>
+  <span class="n">xs</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">xi</span> <span class="o">-</span> <span class="p">((</span><span class="n">fxi</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">dfxi</span><span class="p">)),</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xs</span><span class="p">],[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$(x_</span><span class="si">{</span><span class="n">it</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">,0) = (</span><span class="si">{</span><span class="n">xs</span><span class="si">}</span><span class="s1">,0)$&#39;</span><span class="p">)</span>
+
+  <span class="c1">## Pintar la recta tangente</span>
+  <span class="n">h</span><span class="o">=</span><span class="mf">0.1</span>
+  <span class="n">dfx</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="o">+</span><span class="n">h</span><span class="p">})</span><span class="o">-</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">}))</span><span class="o">/</span><span class="n">h</span> <span class="c1"># derivative</span>
+  <span class="n">tan</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xi</span><span class="p">})</span><span class="o">+</span><span class="n">dfx</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span>  <span class="c1"># tangent</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">tan</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+  <span class="c1">## Calculo del error</span>
+  <span class="n">er</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xs</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+
+  <span class="c1">## Actualicemos la tabla de iteraciones</span>
+  <span class="n">nueva_fila</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xi&#39;</span><span class="p">:</span><span class="n">xi</span><span class="p">,</span><span class="s1">&#39;Xi+1&#39;</span><span class="p">:</span><span class="n">xs</span><span class="p">,</span><span class="s1">&#39;f(xi)&#39;</span><span class="p">:</span><span class="n">fxi</span><span class="p">,</span><span class="s2">&quot;f&#39;(Xi)&quot;</span><span class="p">:</span><span class="n">dfxi</span><span class="p">,</span><span class="s1">&#39;er(%)&#39;</span><span class="p">:</span><span class="nb">round</span><span class="p">(</span><span class="n">er</span><span class="p">,</span><span class="mi">4</span><span class="p">)}</span>
+  <span class="n">nueva_fila</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">nueva_fila</span><span class="p">])</span>
+  <span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tabla</span><span class="p">,</span> <span class="n">nueva_fila</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+  <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">tabla</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">it</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()))</span>
+
+  <span class="c1">#Actualizamos la iteración y el valor de x actual (xi)</span>
+  <span class="n">it</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="n">xi</span> <span class="o">=</span> <span class="n">xs</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="nb">input</span><span class="p">()</span>
+  <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/27d62a00212a99417a022f30435ebe2db982c4facd76100a4ff30a3a42ee07f4.png" src="../../_images/27d62a00212a99417a022f30435ebe2db982c4facd76100a4ff30a3a42ee07f4.png" />
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>xi</th>
+      <th>Xi+1</th>
+      <th>f(xi)</th>
+      <th>f'(Xi)</th>
+      <th>er(%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.5000</td>
+      <td>1</td>
+      <td>-2</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.5000</td>
+      <td>0.5664</td>
+      <td>0.1065</td>
+      <td>-1.605</td>
+      <td>11.72</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.5664</td>
+      <td>0.5672</td>
+      <td>0.0012</td>
+      <td>-1.568</td>
+      <td>0.1412</td>
+    </tr>
+  </tbody>
+</table></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Grafico dinámico (movie del método)</span>
+<span class="c1"># Librerias necesarias para realizar el gráfico</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">animation</span><span class="p">,</span> <span class="n">rc</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;animation&#39;</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="s1">&#39;html5&#39;</span><span class="p">);</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">E</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">x</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x_i</span><span class="p">})</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">fx</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$e^{-x} - x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Se definen los atributos que debe tener la linea o en este caso el punto que se va a pintar en cada iteracion</span>
+<span class="n">linea1</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],[],</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">linea2</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],[],</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">linea3</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],[],</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tabla</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">graficar</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+
+  <span class="n">xg</span> <span class="o">=</span> <span class="n">tabla</span><span class="p">[</span><span class="s1">&#39;xi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+  <span class="n">yg</span> <span class="o">=</span> <span class="n">tabla</span><span class="p">[</span><span class="s1">&#39;f(xi)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+  <span class="n">xs</span> <span class="o">=</span> <span class="n">tabla</span><span class="p">[</span><span class="s1">&#39;Xi+1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+  <span class="n">ys</span> <span class="o">=</span> <span class="n">tabla</span><span class="p">[</span><span class="s2">&quot;f&#39;(Xi)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+  <span class="n">linea1</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">xg</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">yg</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="n">linea1</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;$(x_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">,f(x_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">))= (</span><span class="si">{</span><span class="n">xg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">yg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+
+
+  <span class="n">linea1</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">linea2</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;$(x_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">,0) = (</span><span class="si">{</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">,0)$&#39;</span><span class="p">)</span>
+
+  <span class="c1">## Pintar la recta tangente</span>
+  <span class="n">h</span><span class="o">=</span><span class="mf">0.1</span>
+  <span class="n">dfx</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">h</span><span class="p">})</span><span class="o">-</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xg</span><span class="p">[</span><span class="n">i</span><span class="p">]}))</span><span class="o">/</span><span class="n">h</span> <span class="c1"># derivative</span>
+  <span class="n">tan</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xg</span><span class="p">[</span><span class="n">i</span><span class="p">]})</span><span class="o">+</span><span class="n">dfx</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">xg</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># tangent</span>
+  <span class="n">linea3</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">tan</span><span class="p">)</span>
+  <span class="n">linea3</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+
+  <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">linea1</span><span class="p">,</span><span class="n">linea2</span><span class="p">,</span><span class="n">linea3</span><span class="p">,)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ejecutamos la animación para que se genere y quede en loop mostrando su resultado.</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">graficar</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">anim</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-150-276efacf074c&gt;:40: MatplotlibDeprecationWarning: Setting data with a non sequence type is deprecated since 3.7 and will be remove two minor releases later
+  linea1.set_data(xg[i],yg[i])
+&lt;ipython-input-150-276efacf074c&gt;:44: MatplotlibDeprecationWarning: Setting data with a non sequence type is deprecated since 3.7 and will be remove two minor releases later
+  linea1.set_data(xs[i],0)
+</pre></div>
+</div>
+<div class="output text_html"><video width="640" height="480" controls autoplay>
+  <source type="video/mp4" src="data:video/mp4;base64,AAAAIGZ0eXBNNFYgAAACAE00ViBpc29taXNvMmF2YzEAAAAIZnJlZQAAZN9tZGF0AAACrQYF//+p
+3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2MyByMzA2MCA1ZGI2YWE2IC0gSC4yNjQvTVBF
+Ry00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMSAtIGh0dHA6Ly93d3cudmlkZW9sYW4u
+b3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFs
+eXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVk
+X3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBk
+ZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTMg
+bG9va2FoZWFkX3RocmVhZHM9MSBzbGljZWRfdGhyZWFkcz0wIG5yPTAgZGVjaW1hdGU9MSBpbnRl
+cmxhY2VkPTAgYmx1cmF5X2NvbXBhdD0wIGNvbnN0cmFpbmVkX2ludHJhPTAgYmZyYW1lcz0zIGJf
+cHlyYW1pZD0yIGJfYWRhcHQ9MSBiX2JpYXM9MCBkaXJlY3Q9MSB3ZWlnaHRiPTEgb3Blbl9nb3A9
+MCB3ZWlnaHRwPTIga2V5aW50PTI1MCBrZXlpbnRfbWluPTEgc2NlbmVjdXQ9NDAgaW50cmFfcmVm
+cmVzaD0wIHJjX2xvb2thaGVhZD00MCByYz1jcmYgbWJ0cmVlPTEgY3JmPTIzLjAgcWNvbXA9MC42
+MCBxcG1pbj0wIHFwbWF4PTY5IHFwc3RlcD00IGlwX3JhdGlvPTEuNDAgYXE9MToxLjAwAIAAADlT
+ZYiEABf//vfUt8yy7VNvtguo96KeJl9DdSUBm5bE7TqAAAADAAADAAAevBc4Al+JCvOvAAADAMqI
+/R/5Rwq4gBbgsl+foP2j/PCpVf+IoUG9YNAWSZguv8QI1vkHI/Y//B//X0ObzQFARqE72GRpL8c9
+hywFWlLAUOVXBU/rZmUnzov7dDa9JhLK/b/yCxrh3srxFGj1Z/rXQCwNorMg6k9pBjKSCQ0xjb+K
+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
+">
+  Your browser does not support the video tag.
+</video></div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="ejercicio">
+<h2>Ejercicio:<a class="headerlink" href="#ejercicio" title="Permalink to this heading">#</a></h2>
+<p>Calcular la raíz  de <span class="math notranslate nohighlight">\(f(x) = sin(x) -x \)</span> en el punto <span class="math notranslate nohighlight">\(x_i = 0.1\)</span> con una <span class="math notranslate nohighlight">\(tol &lt;=1\%\)</span></p>
+<p>Implementar una función que me permita dinámicamente modificar la función (pedirla por consola), la tolerancia y el punto inicial, además de la gráfica y que retorne la raíz, el error, la tabla de iteraciones y la gráfica dinámica de como itera el método.</p>
+<p>TIP: Indagar sobre los formularios con entradas en COLAB.</p>
+<p>NOTA: Modificar el código del método para que se pase por consola la ecuación y se realice el método con esta entrada, mostrando la ecuación en el titulo y en los legend de forma dinámica.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Modulos/Clase_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="metodosAbiertos.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Métodos abiertos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../Unidad3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unidad 3: Ajuste de Curvas e Interpolación</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-newton-raphson">Algoritmo de Newton Raphson</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-relativo">Error relativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerancia">Tolerancia</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#veamos-un-ejemplo-practico">Veamos un ejemplo práctico</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion">Solución</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formula-para-el-calculo-del-x-i-1-en-el-ejercicio-dado">Formula para el cálculo del <span class="math notranslate nohighlight">\(x_{i+1}\)</span> en el ejercicio dado</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sigamos-iterando">Sigamos iterando…</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-veamos-el-algoritmo-completo">Ahora veamos el algoritmo completo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johan S. Piña D, Reinel Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
