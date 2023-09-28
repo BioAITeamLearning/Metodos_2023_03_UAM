@@ -1,0 +1,704 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Método de la secante &#8212; Métodos Numéricos 2023 - 03</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_3/Metodo_abierto_secante_28_09_2023';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad 3: Ajuste de Curvas e Interpolación" href="../../Unidad3.html" />
+    <link rel="prev" title="Método de newton-raphson" href="MetodosAbiertosNewton_28_09_2023.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Métodos Numéricos y Optimización
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1: Introducción a Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%201%20-%20TiposDeDatos%20Condicionales%20Ciclos%20Colecciones%20Funciones_10_08_2023.html"><strong>Introducción</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%202%20-%20Arreglos_10_08_2023.html">Matrices y vectores</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%203%20-%20Pandas_10_08_2023.html">Introducción a pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%205%20-%20Manejo%20de%20ficheros_10_08_2023.html">Manejo de archivos</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%204%20-%20Analisis%20numerico%20y%20Calculo%20simbolico%20con%20Sympy_10_08_2023.html">Algebra computacional con <code class="docutils literal notranslate"><span class="pre">Sympy</span></code></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Evaluemos_Unidad1_10_08_2023.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Parcial_Corte_1_MetodosNumericos_Optimizaci%C3%B3n_14_sep_2023.html">Primer parcial de métodos numéricos: Introducción al Python para análisis numérico.</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2: Cálculo de raices</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Clase_2/ClaseMetodoCalculoRaices21_09_2023.html">Método de la Bisección</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="ClaseMetodoFalsaPosicion21_09_2023.html">Método de la Falsa Posición</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="metodosAbiertos.html">Métodos abiertos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MetodosAbiertosNewton_28_09_2023.html">Método de newton-raphson</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Método de la secante</a></li>
+
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad3.html">Unidad 3: Ajuste de Curvas e Interpolación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad5.html">Unidad 5: Diferenciación e Integración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Ecns Diferenciales Ordinarias</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad7.html">Unidad 7: Optimización Irrestricta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad8.html">Unidad 8: Programación lineal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad9.html">Unidad 9: Programación NO Lineal</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_3/Metodo_abierto_secante_28_09_2023.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_3/Metodo_abierto_secante_28_09_2023.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Modulos/Clase_3/Metodo_abierto_secante_28_09_2023.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Método de la secante</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Método de la secante</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion-del-metodo">Demostración del método</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recordemos-de-newton-raphson">Recordemos de newton Raphson</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-la-secante">Algoritmo de la secante</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-relativo">Error relativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerancia">Tolerancia</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-iteremos-hasta-que-el-error-sea-de-1">Actividad en clase: Iteremos hasta que el error sea de 1%</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implemente-el-algoritmo-usted-mismo">Implemente el algoritmo usted mismo.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">TAREA:</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="metodo-de-la-secante">
+<h1>Método de la secante<a class="headerlink" href="#metodo-de-la-secante" title="Permalink to this heading">#</a></h1>
+<p>Este método es muy parecido a Newton Raphson,pero con la diferencia que no necesita evaluar en la derivada. Hay problemas en los que la derivada es dificil de calcular, el método de la secante permite resolver el problema ya que aproxima la raíz mediante rectas secantes.</p>
+<p align='center'>
+<img src="data:image/png;base64,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" width=300 height=300/>
+<p>Este método requiere dos puntos para poder empezar a iterar</p>
+<section id="demostracion-del-metodo">
+<h2>Demostración del método<a class="headerlink" href="#demostracion-del-metodo" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[f'(x) = \frac{f(x_i)-f(x_{i-1})}{x_i - x_{i-1}}\]</div>
+<section id="recordemos-de-newton-raphson">
+<h3>Recordemos de newton Raphson<a class="headerlink" href="#recordemos-de-newton-raphson" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)} \]</div>
+<p>Reemplacemos la aproximación de la derivada por la secante en la de newton raphson</p>
+<div class="math notranslate nohighlight">
+\[x_{i+1} = x_i - \frac{f(x_i)}{\frac{f(x_i)-f(x_{i-1})}{x_i - x_{i-1}}}\]</div>
+<p>despejando tenemos</p>
+<div class="math notranslate nohighlight">
+\[x_{i+1} = x_i - \frac{f(x_i)[x_i - x_{i-1}]}{f(x_i)-f(x_{i-1})}\]</div>
+</section>
+</section>
+<section id="algoritmo-de-la-secante">
+<h2>Algoritmo de la secante<a class="headerlink" href="#algoritmo-de-la-secante" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Se calcula el siguiente <span class="math notranslate nohighlight">\(x_{i+1}\)</span> con la formula.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[x_{i+1} = x_i - \frac{f(x_i)[x_i - x_{i-1}]}{f(x_i)-f(x_{i-1})}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Se repite el paso <strong>1</strong> hasta convergencia.</p></li>
+</ol>
+<section id="error-relativo">
+<h3>Error relativo<a class="headerlink" href="#error-relativo" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+e_r = \lvert \frac{x_{i+1}-x_{i}}{x_{i+1}}\rvert
+\]</div>
+</section>
+<section id="tolerancia">
+<h3>Tolerancia<a class="headerlink" href="#tolerancia" title="Permalink to this heading">#</a></h3>
+<p>Precisión que se requiere en el método!!</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="actividad-en-clase-iteremos-hasta-que-el-error-sea-de-1">
+<h1>Actividad en clase: Iteremos hasta que el error sea de 1%<a class="headerlink" href="#actividad-en-clase-iteremos-hasta-que-el-error-sea-de-1" title="Permalink to this heading">#</a></h1>
+<p>Hallar la raíz de <span class="math notranslate nohighlight">\(f(x)= e^{-x}-x\)</span> usando el método de la secante con valores iniciales de <span class="math notranslate nohighlight">\(x_{i-1}=0\)</span> y <span class="math notranslate nohighlight">\(x_i=1\)</span>; <span class="math notranslate nohighlight">\(tol=1\%\)</span></p>
+<section id="implemente-el-algoritmo-usted-mismo">
+<h2>Implemente el algoritmo usted mismo.<a class="headerlink" href="#implemente-el-algoritmo-usted-mismo" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Tu código va acá</span>
+
+<span class="c1">## Tu código termina acá</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tarea">
+<h1>TAREA:<a class="headerlink" href="#tarea" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>El método de la secante tiene una variación, llamada la secante modificada. Esta versión NO usa dos valores, sino un <span class="math notranslate nohighlight">\(Δ\)</span> muy pequeño para estimar la derivada.</p></li>
+</ol>
+<p align='center'>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Derivative.svg/250px-Derivative.svg.png"/>
+<div class="math notranslate nohighlight">
+\[f'(x) = \frac{f(x_i+Δx_i)-f(x_{i})}{Δx_i}\]</div>
+<p>Reemplace y despeje el cálculo de <span class="math notranslate nohighlight">\(x_{i+1}\)</span> a partir de la ecuación anterior para implementar en un notebook el método de la secante modificada. Realice un ejemplo del método con gráficas, tabla de iteración y cálculo del error. Mencione las diferencias entre las dos versiones del método de la secante.</p>
+<ol class="arabic simple" start="2">
+<li><p>Investigar el funcionamiento del método de iteración de punto fijo. Documentarlo en un notebook como lo ha visto para cada uno de los métodos vistos en clase. Debe tener en cuenta:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Funcionamiento gráfico</p></li>
+<li><p>Demostración del método</p></li>
+<li><p>Descripción del algoritmo (pasos)</p></li>
+<li><p>Implementación paso a paso y completa del método</p></li>
+<li><p>Ejemplo de funcionamiento del método. (gráficas, tabla de iteración, gráfico dinámico, etc)</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Modulos/Clase_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="MetodosAbiertosNewton_28_09_2023.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Método de newton-raphson</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../Unidad3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unidad 3: Ajuste de Curvas e Interpolación</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Método de la secante</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion-del-metodo">Demostración del método</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recordemos-de-newton-raphson">Recordemos de newton Raphson</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-la-secante">Algoritmo de la secante</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-relativo">Error relativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerancia">Tolerancia</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-iteremos-hasta-que-el-error-sea-de-1">Actividad en clase: Iteremos hasta que el error sea de 1%</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implemente-el-algoritmo-usted-mismo">Implemente el algoritmo usted mismo.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">TAREA:</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johan S. Piña D, Reinel Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
