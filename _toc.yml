@@ -21,6 +21,8 @@ chapters:
     - file: "Modulos/Clase_3/MetodosAbiertosNewton_28_09_2023"
     - file: "Modulos/Clase_3/Metodo_abierto_secante_28_09_2023"
 - file: Unidad3
+  #sections:
+  #  - file: "Modulos/Clase_4/..."
 - file: Unidad4
 - file: Unidad5
 - file: Unidad6
