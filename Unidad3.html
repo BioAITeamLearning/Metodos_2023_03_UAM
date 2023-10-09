@@ -419,7 +419,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-la-unidad">Contenido de la unidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espere-aca-el-contenido-de-las-siguientes-versiones">Espere acá el contenido de las siguientes versiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-de-curvas-e-interpolacion">Ajuste de curvas e interpolación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-de-curvas">Ajuste de curvas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion">Interpolación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-vs-interpolacion">Ajuste Vs Interpolación</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -437,8 +442,28 @@ document.write(`
 <h2>Contenido de la unidad<a class="headerlink" href="#contenido-de-la-unidad" title="Permalink to this heading">#</a></h2>
 <img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/contenidoU3.png?raw=true"/>
 </section>
-<section id="espere-aca-el-contenido-de-las-siguientes-versiones">
-<h2>Espere acá el contenido de las siguientes versiones<a class="headerlink" href="#espere-aca-el-contenido-de-las-siguientes-versiones" title="Permalink to this heading">#</a></h2>
+<section id="ajuste-de-curvas-e-interpolacion">
+<h2>Ajuste de curvas e interpolación<a class="headerlink" href="#ajuste-de-curvas-e-interpolacion" title="Permalink to this heading">#</a></h2>
+<p>El ajuste de curvas y la interpolación son herramientas fundamentales en el análisis numérico y tienen amplias aplicaciones en la ciencia, la ingeniería y las finanzas. Estos métodos permiten modelar datos experimentales, estimar valores dentro o fuera de un conjunto de datos y representar funciones complicadas de manera simplificada.</p>
+<img src="_static/images/interpolacion.png"/>
+<hr class="docutils" />
+<section id="ajuste-de-curvas">
+<h3>Ajuste de curvas<a class="headerlink" href="#ajuste-de-curvas" title="Permalink to this heading">#</a></h3>
+<img src="https://www.researchgate.net/publication/361586279/figure/fig1/AS:1171915255365632@1656417778815/b-Ajuste-lineal-por-el-metodo-de-los-minimos-cuadrados-del-modelo-de-la-ecuacion-2.jpg"/>
+<p>El ajuste de curvas tiene como <strong>objetivo</strong> encontrar una función (por lo general una curva) que se aproxime lo mejor posible a un conjunto de datos. Dentro de las aplicaciones tenemos: <strong>Estimar tendencias de datos, modelar relaciones entre variables y predecir valores futuros.</strong></p>
+<p>El método <strong>más común</strong> es el de mínimos cuadrados, que minimiza la suma de los cuadrados de las diferencias entre los valores observados y los valores estimados por la curva.</p>
+</section>
+<hr class="docutils" />
+<section id="interpolacion">
+<h3>Interpolación<a class="headerlink" href="#interpolacion" title="Permalink to this heading">#</a></h3>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNsg18amplKZuZhmTAraUASPtoYjcBBlp4we2Ka6dPqu5DKQW7fYm4vk7iZqVg80_a55Y&usqp=CAU"/>
+<p>La interpolación tiene como <strong>objetivo</strong> estimar valores dentro de un intervalo a partir de un conjunto de puntos conocidos. Dentro de las aplicaciones tenemos: <strong>Estimar valores no conocidos en tablas, mejorar la resolución de imágenes y resolver ecuaciones diferenciales numéricamente.</strong></p>
+<p>El método <strong>más común</strong> es el de interpolación polinomial, que consiste en encontrar un polinomio que pase por todos los puntos conocidos. (por ejemplo interpolación de Lagrange).</p>
+</section>
+<section id="ajuste-vs-interpolacion">
+<h3>Ajuste Vs Interpolación<a class="headerlink" href="#ajuste-vs-interpolacion" title="Permalink to this heading">#</a></h3>
+<p>Mientras que la <strong>interpolación busca una función que pase exactamente por todos los puntos dados</strong>, el <strong>ajuste de curvas busca una función que se aproxime a los puntos</strong> pero no necesariamente los atraviese todos. Esto es especialmente útil cuando los datos tienen algún <strong>grado de error o ruido</strong>.</p>
+</section>
 </section>
 </section>
 
@@ -510,7 +535,12 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-la-unidad">Contenido de la unidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espere-aca-el-contenido-de-las-siguientes-versiones">Espere acá el contenido de las siguientes versiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-de-curvas-e-interpolacion">Ajuste de curvas e interpolación</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-de-curvas">Ajuste de curvas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion">Interpolación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-vs-interpolacion">Ajuste Vs Interpolación</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
