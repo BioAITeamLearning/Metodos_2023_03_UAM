@@ -530,7 +530,7 @@ $<span class="math notranslate nohighlight">\(∑_X\)</span><span class="math no
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-50b3c53f-16df-4dfd-be78-4031dceaf129" class="colab-df-container">
+  <div id="df-ad5b5149-4063-42c3-8d05-7165cc3e93e2" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -600,7 +600,7 @@ $<span class="math notranslate nohighlight">\(∑_X\)</span><span class="math no
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-50b3c53f-16df-4dfd-be78-4031dceaf129')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-ad5b5149-4063-42c3-8d05-7165cc3e93e2')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -652,12 +652,12 @@ $<span class="math notranslate nohighlight">\(∑_X\)</span><span class="math no
 
     <script>
       const buttonEl =
-        document.querySelector('#df-50b3c53f-16df-4dfd-be78-4031dceaf129 button.colab-df-convert');
+        document.querySelector('#df-ad5b5149-4063-42c3-8d05-7165cc3e93e2 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-50b3c53f-16df-4dfd-be78-4031dceaf129');
+        const element = document.querySelector('#df-ad5b5149-4063-42c3-8d05-7165cc3e93e2');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -677,8 +677,8 @@ $<span class="math notranslate nohighlight">\(∑_X\)</span><span class="math no
   </div>
 
 
-<div id="df-23977304-b56f-4298-a043-b4637b0a5ec9">
-  <button class="colab-df-quickchart" onclick="quickchart('df-23977304-b56f-4298-a043-b4637b0a5ec9')"
+<div id="df-96ad5524-b79c-4a8a-907a-60949bc29039">
+  <button class="colab-df-quickchart" onclick="quickchart('df-96ad5524-b79c-4a8a-907a-60949bc29039')"
             title="Suggest charts."
             style="display:none;">
 
@@ -797,7 +797,7 @@ $<span class="math notranslate nohighlight">\(∑_X\)</span><span class="math no
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-23977304-b56f-4298-a043-b4637b0a5ec9 button');
+        document.querySelector('#df-96ad5524-b79c-4a8a-907a-60949bc29039 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -879,21 +879,21 @@ $<span class="math notranslate nohighlight">\(∑_X\)</span><span class="math no
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## vamos a calcular las métricas de error.</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_squared_error</span>
 
 <span class="c1"># Calcular R^2</span>
 <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">recta</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R^2: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Calcular MAE</span>
-<span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">recta</span><span class="p">)</span>
+<span class="n">mae</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">recta</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2: 0.9582796744745935
-MAE: 2.684523809523811
+MAE: 10.340773809523807
 </pre></div>
 </div>
 </div>
