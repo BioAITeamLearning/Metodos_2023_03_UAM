@@ -61,10 +61,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad5';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Unidad 6: Ecns Diferenciales Ordinarias" href="Unidad6.html" />
+    <link rel="next" title="Método de euler para integración numérica" href="Modulos/Clase_5/Metodo_Euler_19_10_2023.html" />
     <link rel="prev" title="Unidad 4: Sistemas de Ecns Lineales" href="Unidad4.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -224,7 +226,25 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Unidad 5: Diferenciación e Integración</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Unidad 5: Diferenciación e Integración</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_5/Metodo_Euler_19_10_2023.html">Método de euler para integración numérica</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_5/ReglaTrapezoidal_19_10_2023.html">Regla trapezoidal para integración numérica</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_5/ReglaTrapezoidalMultiple_19_10_2023.html">Regla trapezoidal multiple</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_5/ReglaSimpson1_3_19_10_2023.html">Regla trapezoidal multiple</a></li>
+
+
+
+
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad6.html">Unidad 6: Ecns Diferenciales Ordinarias</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad7.html">Unidad 7: Optimización Irrestricta</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad8.html">Unidad 8: Programación lineal</a></li>
@@ -423,7 +443,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-la-unidad">Contenido de la unidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espere-aca-el-contenido-de-las-siguientes-versiones">Espere acá el contenido de las siguientes versiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulas-de-diferenciacion-recordemos">Formulas de diferenciación: Recordemos</a></li>
 </ul>
             </nav>
         </div>
@@ -441,9 +461,23 @@ document.write(`
 <h2>Contenido de la unidad<a class="headerlink" href="#contenido-de-la-unidad" title="Permalink to this heading">#</a></h2>
 <img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/contenidoU5.png?raw=true"/>
 </section>
-<section id="espere-aca-el-contenido-de-las-siguientes-versiones">
-<h2>Espere acá el contenido de las siguientes versiones<a class="headerlink" href="#espere-aca-el-contenido-de-las-siguientes-versiones" title="Permalink to this heading">#</a></h2>
+<section id="formulas-de-diferenciacion-recordemos">
+<h2>Formulas de diferenciación: Recordemos<a class="headerlink" href="#formulas-de-diferenciacion-recordemos" title="Permalink to this heading">#</a></h2>
+<p>La derivada de una función <span class="math notranslate nohighlight">\(f(t)\)</span> en un punto <span class="math notranslate nohighlight">\(t\)</span> se define como:</p>
+<div class="math notranslate nohighlight">
+\[ f'(t) = \frac{f(t+\Delta t)-f(t)}{\Delta t} \]</div>
+<p>Donde <span class="math notranslate nohighlight">\(\Delta t\)</span> es un número pequeño. Este numero lo llamaremos h y debe ser muy pequeño sin ser explicitamente cero.</p>
+<div class="math notranslate nohighlight">
+\[ f'(t) = \frac{f(t+h)-f(t)}{h} \]</div>
+<p>Se puede ver como una ecuación iterativa</p>
+<div class="math notranslate nohighlight">
+\[ f'(t_i) = \frac{f(t_{i+1})-f(t_i)}{h} \]</div>
+<p>h es el incremento (normalmente pequeño)</p>
+<div class="math notranslate nohighlight">
+\[h = \frac{[max(t) - min(t)]}{lenght(t)}\]</div>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -487,11 +521,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="Unidad6.html"
+       href="Modulos/Clase_5/Metodo_Euler_19_10_2023.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Unidad 6: Ecns Diferenciales Ordinarias</p>
+        <p class="prev-next-title">Método de euler para integración numérica</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -514,7 +548,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-la-unidad">Contenido de la unidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espere-aca-el-contenido-de-las-siguientes-versiones">Espere acá el contenido de las siguientes versiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulas-de-diferenciacion-recordemos">Formulas de diferenciación: Recordemos</a></li>
 </ul>
   </nav></div>
 
