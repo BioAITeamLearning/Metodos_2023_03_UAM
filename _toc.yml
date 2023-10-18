@@ -26,6 +26,11 @@ chapters:
     - file: "Modulos/Clase_4/Interpolacion_lagrange_12_10_2023"
 - file: Unidad4
 - file: Unidad5
+  sections:
+    - file: "Modulos/Clase_5/Metodo_Euler_19_10_2023"
+    - file: "Modulos/Clase_5/ReglaTrapezoidal_19_10_2023"
+    - file: "Modulos/Clase_5/ReglaTrapezoidalMultiple_19_10_2023"
+    - file: "Modulos/Clase_5/ReglaSimpson1_3_19_10_2023"
 - file: Unidad6
 - file: Unidad7
 - file: Unidad8
