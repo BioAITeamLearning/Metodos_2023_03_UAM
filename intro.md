@@ -115,7 +115,7 @@ Diferenciación e integración numérica
 **Unidad 6 ⚡**
 ^^^
 
-Ecuaciones diferenciales ordinarias
+Optimización sin restricciones 1 y N variables
 :::
 
 :::{grid-item-card}
@@ -126,7 +126,7 @@ Ecuaciones diferenciales ordinarias
 **Unidad 7 🔋**
 ^^^
 
-Optimización sin restricciones 1 y N variables
+Ecuaciones diferenciales ordinarias
 :::
 
 :::{grid-item-card}
