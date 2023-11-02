@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Interpolación cuadrática &#8212; Métodos Numéricos 2023 - 03</title>
+    <title>Forma analítica de hallar los óptimos: en Sympy &#8212; Métodos Numéricos 2023 - 03</title>
   
   
   
@@ -63,11 +63,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_6/InterpolacionCuadratica_2_11_2023';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_6/OptimizacionAnalitica_2_11_2023';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Algoritmo de newton-Raphson para óptimización" href="NewtonRaphsonOptimizacion_2_11_2023.html" />
-    <link rel="prev" title="Métodos cerrados de optimización" href="SeccionDorada_2_11_2023.html" />
+    <link rel="next" title="Métodos cerrados de optimización" href="SeccionDorada_2_11_2023.html" />
+    <link rel="prev" title="Unidad 6: Optimización Irrestricta" href="../../Unidad6.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -247,9 +247,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Optimización Irrestricta</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="OptimizacionAnalitica_2_11_2023.html">Forma analítica de hallar los óptimos: en Sympy</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Forma analítica de hallar los óptimos: en Sympy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="SeccionDorada_2_11_2023.html">Métodos cerrados de optimización</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Interpolación cuadrática</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InterpolacionCuadratica_2_11_2023.html">Interpolación cuadrática</a></li>
 <li class="toctree-l2"><a class="reference internal" href="NewtonRaphsonOptimizacion_2_11_2023.html">Algoritmo de newton-Raphson para óptimización</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MetodoGradiente_2_11_2023.html">Método del gradiente</a></li>
 </ul>
@@ -311,7 +311,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_6/InterpolacionCuadratica_2_11_2023.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_6/OptimizacionAnalitica_2_11_2023.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -359,7 +359,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_6/InterpolacionCuadratica_2_11_2023.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_6/OptimizacionAnalitica_2_11_2023.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -389,7 +389,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/Modulos/Clase_6/InterpolacionCuadratica_2_11_2023.ipynb" target="_blank"
+      <li><a href="../../_sources/Modulos/Clase_6/OptimizacionAnalitica_2_11_2023.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -471,7 +471,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Interpolación cuadrática</h1>
+    <h1>Forma analítica de hallar los óptimos: en Sympy</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -481,12 +481,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-del-metodo">Algoritmo del método</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-relativo">Error relativo</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad">Actividad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-para-encontrar-optimos-de-una-funcion-univariada-f-x">Pasos para encontrar óptimos de una función univariada <span class="math notranslate nohighlight">\(f(x)\)</span>:</a></li>
 </ul>
             </nav>
         </div>
@@ -498,62 +493,129 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="interpolacion-cuadratica">
-<h1>Interpolación cuadrática<a class="headerlink" href="#interpolacion-cuadratica" title="Permalink to this heading">#</a></h1>
-<p>Consiste en aproximar un máximo o un mínimo de cualquier curva a una parabola, el óptimo de esta parabola es el aproximado de la curva de interés.</p>
-<img src="https://static.filadd.com/files/f%2317954/html/external_resources/bgf.png" />
-<p>Es un método cerrado o de intervalo que necesita inicialmente 3 puntos para aproximar a una única parabola, y el máximo de esa parábola es el otro punto</p>
-<p>Para que el método funcione entre los 3 puntos debe existir un óptimo.</p>
-<p>En la imagen anterior <span class="math notranslate nohighlight">\(x_3\)</span> se calcula como las raices de la derivada de la parábola.</p>
-<div class="math notranslate nohighlight">
-\[
-x_3 = \frac{f(x_0)[{x_1}^2 - {x_2}^2] + f(x_1)[{x_2}^2 - {x_0}^2] + f(x_2)[{x_0}^2 - {x_1}^2]}{2f(x_0)[x_1 - x_2] + 2f(x_1)[x_2 - x_0] + 2f(x_2)[x_0 - x_1]}
-\]</div>
-<section id="algoritmo-del-metodo">
-<h2>Algoritmo del método<a class="headerlink" href="#algoritmo-del-metodo" title="Permalink to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="forma-analitica-de-hallar-los-optimos-en-sympy">
+<h1>Forma analítica de hallar los óptimos: en Sympy<a class="headerlink" href="#forma-analitica-de-hallar-los-optimos-en-sympy" title="Permalink to this heading">#</a></h1>
+<p>De forma analítica, los óptimos de una función se pueden encontrar usando cálculo diferencial. Veamos como:</p>
+<section id="pasos-para-encontrar-optimos-de-una-funcion-univariada-f-x">
+<h2>Pasos para encontrar óptimos de una función univariada <span class="math notranslate nohighlight">\(f(x)\)</span>:<a class="headerlink" href="#pasos-para-encontrar-optimos-de-una-funcion-univariada-f-x" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Se calcula <span class="math notranslate nohighlight">\(x_3\)</span></p></li>
-<li><p>Si <span class="math notranslate nohighlight">\(x_3 ≥ x_1 \Rightarrow\)</span> Si <span class="math notranslate nohighlight">\(f(x_3) &gt; f(x_1) ⇒ x_0 = x_1 , x_1 = x_3\)</span>. Se recalcula <span class="math notranslate nohighlight">\(x_3\)</span></p></li>
-<li><p>Si <span class="math notranslate nohighlight">\(x_3 ≥ x_1 \Rightarrow\)</span> Si <span class="math notranslate nohighlight">\(f(x_3) &lt; f(x_1) ⇒ x_2 = x_3\)</span>. Se recalcula <span class="math notranslate nohighlight">\(x_3\)</span></p></li>
-<li><p>Si <span class="math notranslate nohighlight">\(x_3 &lt; x_1 \Rightarrow\)</span> Si <span class="math notranslate nohighlight">\(f(x_3) &lt; f(x_1) ⇒ x_0 = x_3\)</span>. Se recalcula <span class="math notranslate nohighlight">\(x_3\)</span></p></li>
-<li><p>Si <span class="math notranslate nohighlight">\(x_3 &lt; x_1 \Rightarrow\)</span> Si <span class="math notranslate nohighlight">\(f(x_3) &gt; f(x_1) ⇒ x_2 = x_1, x_1 = x_3\)</span>. Se recalcula <span class="math notranslate nohighlight">\(x_3\)</span></p></li>
+<li><p><strong>Primera Derivada:</strong> Calcula la <span class="math notranslate nohighlight">\(f'(x)\)</span> de la función.</p></li>
 </ol>
-<section id="error-relativo">
-<h3>Error relativo<a class="headerlink" href="#error-relativo" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[
-er = |\frac{x_{3-actual} - x_{3-ant}}{x_{3-actual}}|* 100\%
-\]</div>
-</section>
-</section>
-<section id="actividad">
-<h2>Actividad<a class="headerlink" href="#actividad" title="Permalink to this heading">#</a></h2>
-<p>Implemente el algoritmo de interpolación cuadrática para el siguiente ejercicio y halle su valor óptimo máximo.</p>
-<div class="math notranslate nohighlight">
-\[
-f(x) = 2\sin(x) - \frac{x^2}{10}
-\]</div>
-<p>En el intervalo <span class="math notranslate nohighlight">\(x_0=0\)</span>, <span class="math notranslate nohighlight">\(x_1=1\)</span> y <span class="math notranslate nohighlight">\(x_2=4\)</span>  con una tolerancia del 1%</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## TU CÓDIGO VA ACÁ</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="c1">## HASTA ACÁ</span>
+<span class="c1"># Definimos la variable y la función</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">12</span>
+
+<span class="c1"># Calculamos la primera derivada</span>
+<span class="n">f_prime</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">f_prime</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 3 x^{2} - 12 x + 4\]</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Puntos Criticos:</strong> Encuentra los puntos críticos de la función resolviendo la ecuación <span class="math notranslate nohighlight">\(f'(x)=0\)</span>. Estos puntos son candidatos a ser máximos o mínimos locales.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Encuentra los puntos críticos resolviendo f&#39;(x) = 0</span>
+<span class="n">critical_points</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">f_prime</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">critical_points</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2 - 2*sqrt(6)/3, 2*sqrt(6)/3 + 2]
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="tarea">
-<h2>Tarea<a class="headerlink" href="#tarea" title="Permalink to this heading">#</a></h2>
-<p>Ajuste el algoritmo para también determinar los mínimos locales de una función.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Segunda derivada (opcional pero útil):</strong> Calcula la segunda derivada <span class="math notranslate nohighlight">\(f''(x)\)</span>. Esta derivada te puede ayudar a determinar la naturaleza de los puntos críticos:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Si <span class="math notranslate nohighlight">\(f''(x) &gt; 0\)</span> en un punto crítico <span class="math notranslate nohighlight">\(x=c\)</span>, entonces <span class="math notranslate nohighlight">\(f\)</span> tiene un mínimo local en <span class="math notranslate nohighlight">\(c\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(f''(x) &lt; 0\)</span> en un punto crítico <span class="math notranslate nohighlight">\(x=c\)</span>, entonces <span class="math notranslate nohighlight">\(f\)</span> tiene un máximo local en <span class="math notranslate nohighlight">\(c\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(f''(x) = 0\)</span>, la segunda derivada no es concluyente y se necesita otro método para determinar la naturaleza del punto.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## TU CÓDIGO VA ACÁ</span>
-
-<span class="c1">## HASTA ACÁ</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculamos la segunda derivada</span>
+<span class="n">f_double_prime</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f_prime</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">f_double_prime</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 6 x - 12\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determinamos la naturaleza de los puntos críticos</span>
+<span class="n">nature_of_critical_points</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">critical_points</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">f_double_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">nature</span> <span class="o">=</span> <span class="s2">&quot;mínimo&quot;</span>
+    <span class="k">elif</span> <span class="n">f_double_prime</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">nature</span> <span class="o">=</span> <span class="s2">&quot;máximo&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nature</span> <span class="o">=</span> <span class="s2">&quot;inconclusivo&quot;</span>
+    <span class="n">nature_of_critical_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">critical_points</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nature_of_critical_points</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2 - 2*sqrt(6)/3, 2*sqrt(6)/3 + 2]
+[&#39;máximo&#39;, &#39;mínimo&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graficamos la función y los puntos críticos</span>
+<span class="n">f_lambda</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">critical_points</span><span class="p">))</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">critical_points</span><span class="p">))</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">y_vals</span> <span class="o">=</span> <span class="n">f_lambda</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">point</span><span class="p">,</span> <span class="n">nature</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">critical_points</span><span class="p">,</span> <span class="n">nature_of_critical_points</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">point</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">nature</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Función y sus puntos críticos&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8a17e1df525eea5b045b4443c00640624f9f150dd18df18fd1ddbb0c13c76390.png" src="../../_images/8a17e1df525eea5b045b4443c00640624f9f150dd18df18fd1ddbb0c13c76390.png" />
 </div>
 </div>
 </section>
@@ -591,20 +653,20 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="SeccionDorada_2_11_2023.html"
+       href="../../Unidad6.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Métodos cerrados de optimización</p>
+        <p class="prev-next-title">Unidad 6: Optimización Irrestricta</p>
       </div>
     </a>
     <a class="right-next"
-       href="NewtonRaphsonOptimizacion_2_11_2023.html"
+       href="SeccionDorada_2_11_2023.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Algoritmo de newton-Raphson para óptimización</p>
+        <p class="prev-next-title">Métodos cerrados de optimización</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -626,12 +688,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-del-metodo">Algoritmo del método</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-relativo">Error relativo</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad">Actividad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-para-encontrar-optimos-de-una-funcion-univariada-f-x">Pasos para encontrar óptimos de una función univariada <span class="math notranslate nohighlight">\(f(x)\)</span>:</a></li>
 </ul>
   </nav></div>
 
