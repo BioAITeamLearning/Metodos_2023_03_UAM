@@ -34,6 +34,7 @@ chapters:
     - file: "Modulos/Clase_5/Parcial2_26_10_2023"
 - file: Unidad6
   sections:
+    - file: "Modulos/Clase_6/OptimizacionAnalitica_2_11_2023"
     - file: "Modulos/Clase_6/SeccionDorada_2_11_2023"
     - file: "Modulos/Clase_6/InterpolacionCuadratica_2_11_2023"
     - file: "Modulos/Clase_6/NewtonRaphsonOptimizacion_2_11_2023"
