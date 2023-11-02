@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Métodos numéricos y Optimización: Segundo exámen parcial &#8212; Métodos Numéricos 2023 - 03</title>
+    <title>Algoritmo de newton-Raphson para óptimización &#8212; Métodos Numéricos 2023 - 03</title>
   
   
   
@@ -63,11 +63,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_5/Parcial2_26_10_2023';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_6/NewtonRaphsonOptimizacion_2_11_2023';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Unidad 6: Optimización Irrestricta" href="../../Unidad6.html" />
-    <link rel="prev" title="Regla de Simpson \(1/3\)" href="ReglaSimpson1_3_19_10_2023.html" />
+    <link rel="next" title="Método del gradiente" href="MetodoGradiente_2_11_2023.html" />
+    <link rel="prev" title="Interpolación cuadrática" href="InterpolacionCuadratica_2_11_2023.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -226,31 +226,31 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad5.html">Unidad 5: Diferenciación e Integración</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Metodo_Euler_19_10_2023.html">Método de euler para integración numérica</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad5.html">Unidad 5: Diferenciación e Integración</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/Metodo_Euler_19_10_2023.html">Método de euler para integración numérica</a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="ReglaTrapezoidal_19_10_2023.html">Regla trapezoidal para integración numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaTrapezoidal_19_10_2023.html">Regla trapezoidal para integración numérica</a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="ReglaTrapezoidalMultiple_19_10_2023.html">Regla trapezoidal multiple</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaTrapezoidalMultiple_19_10_2023.html">Regla trapezoidal multiple</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="ReglaSimpson1_3_19_10_2023.html">Regla de Simpson <span class="math notranslate nohighlight">\(1/3\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaSimpson1_3_19_10_2023.html">Regla de Simpson <span class="math notranslate nohighlight">\(1/3\)</span></a></li>
 
 
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Métodos numéricos y Optimización: Segundo exámen parcial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/Parcial2_26_10_2023.html">Métodos numéricos y Optimización: Segundo exámen parcial</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Optimización Irrestricta</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Clase_6/SeccionDorada_2_11_2023.html">Métodos cerrados de optimización</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Clase_6/InterpolacionCuadratica_2_11_2023.html">Interpolación cuadrática</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Clase_6/NewtonRaphsonOptimizacion_2_11_2023.html">Algoritmo de newton-Raphson para óptimización</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Clase_6/MetodoGradiente_2_11_2023.html">Método del gradiente</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Optimización Irrestricta</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SeccionDorada_2_11_2023.html">Métodos cerrados de optimización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InterpolacionCuadratica_2_11_2023.html">Interpolación cuadrática</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Algoritmo de newton-Raphson para óptimización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MetodoGradiente_2_11_2023.html">Método del gradiente</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Unidad7.html">Unidad 7: Ecns Diferenciales Ordinarias</a></li>
@@ -310,7 +310,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_5/Parcial2_26_10_2023.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_6/NewtonRaphsonOptimizacion_2_11_2023.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +358,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_5/Parcial2_26_10_2023.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_6/NewtonRaphsonOptimizacion_2_11_2023.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -388,7 +388,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/Modulos/Clase_5/Parcial2_26_10_2023.ipynb" target="_blank"
+      <li><a href="../../_sources/Modulos/Clase_6/NewtonRaphsonOptimizacion_2_11_2023.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -470,7 +470,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Métodos numéricos y Optimización: Segundo exámen parcial</h1>
+    <h1>Algoritmo de newton-Raphson para óptimización</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -480,10 +480,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-1-1-punto">Ejercicio 1 (1 Punto)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-2-1-punto">Ejercicio 2 (1 Punto)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-3-1-5-puntos">Ejercicio 3 (1.5 Puntos)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-4-1-5-puntos">Ejercicio 4 (1.5 Puntos)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-newton-raphson-paso-a-paso">Algoritmo de newton-raphson paso a paso</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-absoluto">Error absoluto</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad">Actividad</a></li>
 </ul>
             </nav>
         </div>
@@ -495,52 +496,53 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="metodos-numericos-y-optimizacion-segundo-examen-parcial">
-<h1>Métodos numéricos y Optimización: Segundo exámen parcial<a class="headerlink" href="#metodos-numericos-y-optimizacion-segundo-examen-parcial" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="algoritmo-de-newton-raphson-para-optimizacion">
+<h1>Algoritmo de newton-Raphson para óptimización<a class="headerlink" href="#algoritmo-de-newton-raphson-para-optimizacion" title="Permalink to this heading">#</a></h1>
+<p>Recordemos que para hallar raices:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)}
+\]</div>
+<p>Es un método abierto que parte de un valor arbitrario para llegar al óptimo, pero tiene la desventaja de que puede ser divergente.</p>
+<p>Entonces para hallar óptimos:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{i+1} = x_i - \frac{f'(x_i)}{f''(x_i)}
+\]</div>
+<section id="algoritmo-de-newton-raphson-paso-a-paso">
+<h2>Algoritmo de newton-raphson paso a paso<a class="headerlink" href="#algoritmo-de-newton-raphson-paso-a-paso" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Métodos para cálculo de raices (abiertos y cerrados)</p></li>
-<li><p>Métodos de Ajuste de curvas e interpolación</p></li>
-<li><p>Métodos de integración</p></li>
+<li><p>Se haya el “siguiente” <span class="math notranslate nohighlight">\(x_{i+1}\)</span></p></li>
+<li><p>La raíz es <span class="math notranslate nohighlight">\(x_{i+1}\)</span></p></li>
+<li><p>Calcular el error.</p></li>
+<li><p>Iterar hasta convergencia.</p></li>
 </ol>
-<section id="ejercicio-1-1-punto">
-<h2>Ejercicio 1 (1 Punto)<a class="headerlink" href="#ejercicio-1-1-punto" title="Permalink to this heading">#</a></h2>
-<p>Halle la raíz de la siguiente función con límites entre -4 y 2, con una tolerancia del 0.5% de error usando los métodos de bisección y falsa posición.</p>
-<p>Finalmente, establezca el mejor de los métodos cerrados y por qué de su respuesta.</p>
-<p>Función:</p>
+<section id="error-absoluto">
+<h3>Error absoluto<a class="headerlink" href="#error-absoluto" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
-f(x) = ℯ^{(x)}-x cos(x)-2
+er = |\frac{x_{i+1} - x_{i}}{x_{i+1}}| * 100 \%
 \]</div>
 </section>
-<section id="ejercicio-2-1-punto">
-<h2>Ejercicio 2 (1 Punto)<a class="headerlink" href="#ejercicio-2-1-punto" title="Permalink to this heading">#</a></h2>
-<p>Halle la raíz de la siguiente función con un valor inicial de -0.6, y con una tolerancia de 0.001 de error usando los métodos de Newton-Raphson, el método de la secante modificada y el de iteración de punto fijo.</p>
-<p>Finalmente, establezca el mejor de los métodos, justifique el por qué de su apreciación.</p>
-<p>Función:</p>
-<div class="math notranslate nohighlight">
-\[
-p(x)=x ℯ^{(-x^2)}
-\]</div>
 </section>
-<section id="ejercicio-3-1-5-puntos">
-<h2>Ejercicio 3 (1.5 Puntos)<a class="headerlink" href="#ejercicio-3-1-5-puntos" title="Permalink to this heading">#</a></h2>
-<p>Tome la siguiente función y calcule su integral a partir del método de euler:</p>
+<section id="actividad">
+<h2>Actividad<a class="headerlink" href="#actividad" title="Permalink to this heading">#</a></h2>
+<p>Realizar el algoritmo para el método de newton y resolver el siguiente ejercicio:</p>
+<p>Encontrar el máximo de</p>
 <div class="math notranslate nohighlight">
 \[
-y' = 2 x^{2} +3 x-5
+f(x) = 2*\sin(x) - \frac{x^2}{10}
 \]</div>
-<p>Tome como condición inicial <span class="math notranslate nohighlight">\(y(0)=0\)</span> con un tiempo de integración desde <span class="math notranslate nohighlight">\(x=0\)</span> hasta <span class="math notranslate nohighlight">\(x=1\)</span> con paso de 0.3</p>
-<p>Luego tome los puntos que le entrega el método de euler y aproxime estos mediante una interpolación polinomial. Imprima el resultado(polinomio).</p>
-<p>Compare el resultado de la interpolación respecto al resultado analítico de la integral. Analice los resultados y describa sus conclusiones.</p>
-</section>
-<section id="ejercicio-4-1-5-puntos">
-<h2>Ejercicio 4 (1.5 Puntos)<a class="headerlink" href="#ejercicio-4-1-5-puntos" title="Permalink to this heading">#</a></h2>
-<p>Aplique el método de regla de simpson 1/3 multiple y la regla trapezoidal múltiple con n=6 segmentos para integrar la siguiente función:</p>
-<div class="math notranslate nohighlight">
-\[
-F(x) = \int_{1}^{6} x sen(x)+3 x-1
-\]</div>
-<p>Calcule el error para cada una de las integrales, especifique cuál de los métodos es mejor para este caso y justifique su respuesta.</p>
+<p>Con <span class="math notranslate nohighlight">\(x_i = 2.5\)</span> y una tolerancia del <span class="math notranslate nohighlight">\(1\%\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## TU CÓDIGO VA ACÁ</span>
+
+<span class="c1">## HASTA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -557,7 +559,7 @@ F(x) = \int_{1}^{6} x sen(x)+3 x-1
         },
         kernelOptions: {
             name: "python3",
-            path: "./Modulos/Clase_5"
+            path: "./Modulos/Clase_6"
         },
         predefinedOutput: true
     }
@@ -576,20 +578,20 @@ F(x) = \int_{1}^{6} x sen(x)+3 x-1
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ReglaSimpson1_3_19_10_2023.html"
+       href="InterpolacionCuadratica_2_11_2023.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Regla de Simpson <span class="math notranslate nohighlight">\(1/3\)</span></p>
+        <p class="prev-next-title">Interpolación cuadrática</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../Unidad6.html"
+       href="MetodoGradiente_2_11_2023.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Unidad 6: Optimización Irrestricta</p>
+        <p class="prev-next-title">Método del gradiente</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -611,10 +613,11 @@ F(x) = \int_{1}^{6} x sen(x)+3 x-1
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-1-1-punto">Ejercicio 1 (1 Punto)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-2-1-punto">Ejercicio 2 (1 Punto)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-3-1-5-puntos">Ejercicio 3 (1.5 Puntos)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-4-1-5-puntos">Ejercicio 4 (1.5 Puntos)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-newton-raphson-paso-a-paso">Algoritmo de newton-raphson paso a paso</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-absoluto">Error absoluto</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad">Actividad</a></li>
 </ul>
   </nav></div>
 
