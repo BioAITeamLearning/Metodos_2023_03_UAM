@@ -41,9 +41,50 @@ para resolución de problemas en ingeniería
 
 ## El equipo!! 🦾🧠
 
-- Ph.D. Reinel Tabares Soto
-- Johan Sebastian Piña Duran
-- Harold Brayan Arteaga
+::::{grid}
+:gutter: 3
+
+:::{grid-item-card} Ph.D. Reinel Tabares
+:class-body: text-center
+:class-header: bg-light text-center
+
+```{image} _static/images/rts.png
+:height: 100
+:class: rounded
+```
+^^^
+```{only} html
+[<img src="https://seeklogo.com/images/G/gmail-new-2020-logo-32DBE11BB4-seeklogo.com.png" width="25" height="20">](mailto:reinel.tabares@ucaldas.edu.co)
+```
+:::
+
+:::{grid-item-card} Johan 🍍
+:class-body: text-center
+:class-header: bg-light text-center
+```{image} _static/images/jpd.png
+:height: 100
+:class: rounded
+```
+^^^
+```{only} html
+[<img src="https://seeklogo.com/images/G/gmail-new-2020-logo-32DBE11BB4-seeklogo.com.png" width="25" height="20">](mailto:johan.pinad@autonoma.edu.co)
+```
+:::
+
+:::{grid-item-card} Simón Orozco Arias
+:class-body: text-center
+:class-header: bg-light text-center
+```{image} _static/images/soa.png
+:height: 100
+:class: rounded
+```
+^^^
+```{only} html
+[<img src="https://seeklogo.com/images/G/gmail-new-2020-logo-32DBE11BB4-seeklogo.com.png" width="25" height="20">](mailto:simon.orozcoa@autonoma.edu.co)
+```
+:::
+::::
+
 
 ---
 

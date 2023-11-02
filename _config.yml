@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Métodos Numéricos 2023 - 03
-author: Johan S. Piña D, Reinel Tabares
+author: Johan S. Piña D, Reinel Tabares, Simón Orozco Arias.
 logo: https://avatars.githubusercontent.com/u/142033488?s=200&v=4
 
 # Force re-execution of notebooks on each build.
