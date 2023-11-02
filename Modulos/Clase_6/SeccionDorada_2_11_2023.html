@@ -489,6 +489,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad">Actividad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
 </ul>
             </nav>
         </div>
@@ -638,14 +639,25 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Método de la sección dorada&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xl</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">xu</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xl</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_l$ = </span><span class="si">{</span><span class="n">xl</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xu</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_u$ = </span><span class="si">{</span><span class="n">xu</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$2 sin(x) - (x^2)/10$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1.0, 5.0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7eef5700e6b0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/d020ab8253afe90bf9f44d25bc8b57d41b3fbc0a8bdb3730819098592a11afca.png" src="../../_images/d020ab8253afe90bf9f44d25bc8b57d41b3fbc0a8bdb3730819098592a11afca.png" />
+<img alt="../../_images/57dd8fbb25e4353cd03dd54815f84f5c7ef6f5da045808fbe096d65920e6763e.png" src="../../_images/57dd8fbb25e4353cd03dd54815f84f5c7ef6f5da045808fbe096d65920e6763e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -684,8 +696,43 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xu</span><span class="o">-</span><span class="n">xl</span><span class="p">)</span><span class="o">/</span><span class="n">x0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Gráfica con los valores calculados</span>
 
+<span class="c1"># Veamos como queda la gráfica en esta iteración</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Método de la sección dorada&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xl</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">xu</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xl</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_l$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xu</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_u$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">xu</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$2 sin(x) - (x^2)/10$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x1</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fx1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_1$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x2</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fx2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_2$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7eef57048220&gt;
+</pre></div>
+</div>
+<img alt="../../_images/841e8747edb6f45e47c3cd25aa344d1e806945cb6356bbcaf78c311378cb5e85.png" src="../../_images/841e8747edb6f45e47c3cd25aa344d1e806945cb6356bbcaf78c311378cb5e85.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xu</span><span class="o">-</span><span class="n">xl</span><span class="p">)</span><span class="o">/</span><span class="n">x0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
 
 <span class="k">if</span> <span class="n">fx1</span> <span class="o">&gt;</span> <span class="n">fx2</span><span class="p">:</span>
   <span class="n">xl</span> <span class="o">=</span> <span class="n">x2</span>
@@ -711,7 +758,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-ef9d08c1-ee7e-4a03-84a7-a1edbcbb73e7" class="colab-df-container">
+  <div id="df-fb06f6ca-f6dd-439e-9cc3-e8b711e40a79" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -758,7 +805,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-ef9d08c1-ee7e-4a03-84a7-a1edbcbb73e7')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-fb06f6ca-f6dd-439e-9cc3-e8b711e40a79')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -810,12 +857,12 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 
     <script>
       const buttonEl =
-        document.querySelector('#df-ef9d08c1-ee7e-4a03-84a7-a1edbcbb73e7 button.colab-df-convert');
+        document.querySelector('#df-fb06f6ca-f6dd-439e-9cc3-e8b711e40a79 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-ef9d08c1-ee7e-4a03-84a7-a1edbcbb73e7');
+        const element = document.querySelector('#df-fb06f6ca-f6dd-439e-9cc3-e8b711e40a79');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -852,6 +899,34 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xl&#39;</span><span class="p">:[</span><span class="n">xl</span><span class="p">],</span> <span class="s1">&#39;xu&#39;</span><span class="p">:[</span><span class="n">xu</span><span class="p">],</span> <span class="s1">&#39;x1&#39;</span><span class="p">:[</span><span class="n">x1</span><span class="p">],</span> <span class="s1">&#39;x2&#39;</span><span class="p">:[</span><span class="n">x2</span><span class="p">],</span> <span class="s1">&#39;f(x1)&#39;</span><span class="p">:[</span><span class="n">fx1</span><span class="p">],</span> <span class="s1">&#39;f(x2)&#39;</span><span class="p">:[</span><span class="n">fx2</span><span class="p">],</span> <span class="s1">&#39;x0&#39;</span><span class="p">:[</span><span class="n">x0</span><span class="p">],</span> <span class="s1">&#39;error(%)&#39;</span><span class="p">:[</span><span class="nb">round</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="mi">2</span><span class="p">)]}</span>
 <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xu</span><span class="o">-</span><span class="n">xl</span><span class="p">)</span><span class="o">/</span><span class="n">x0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
 
+<span class="c1">### Grafica</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Método de la sección dorada&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xl</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">xu</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xl</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_l$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xu</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_u$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">xu</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$2 sin(x) - (x^2)/10$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x0</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x1</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fx1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_1$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x2</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fx2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_2$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">],[</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x0</span><span class="p">})],</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_0 = $</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1">### Final Grafica</span>
+
 
 <span class="k">if</span> <span class="n">fx1</span> <span class="o">&gt;</span> <span class="n">fx2</span><span class="p">:</span>
   <span class="n">xl</span> <span class="o">=</span> <span class="n">x2</span>
@@ -877,7 +952,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-30af26e0-6f21-489f-bdd5-d9ccbc71f35b" class="colab-df-container">
+  <div id="df-4702f70c-f97d-4302-b20c-73734ff88e30" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -935,7 +1010,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-30af26e0-6f21-489f-bdd5-d9ccbc71f35b')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-4702f70c-f97d-4302-b20c-73734ff88e30')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -987,12 +1062,12 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 
     <script>
       const buttonEl =
-        document.querySelector('#df-30af26e0-6f21-489f-bdd5-d9ccbc71f35b button.colab-df-convert');
+        document.querySelector('#df-4702f70c-f97d-4302-b20c-73734ff88e30 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-30af26e0-6f21-489f-bdd5-d9ccbc71f35b');
+        const element = document.querySelector('#df-4702f70c-f97d-4302-b20c-73734ff88e30');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1012,8 +1087,8 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
   </div>
 
 
-<div id="df-2796b380-3326-4eb8-9680-503412e62b6a">
-  <button class="colab-df-quickchart" onclick="quickchart('df-2796b380-3326-4eb8-9680-503412e62b6a')"
+<div id="df-20194c32-b62b-489d-b972-14551ba45b60">
+  <button class="colab-df-quickchart" onclick="quickchart('df-20194c32-b62b-489d-b972-14551ba45b60')"
             title="Suggest charts."
             style="display:none;">
 
@@ -1132,7 +1207,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-2796b380-3326-4eb8-9680-503412e62b6a button');
+        document.querySelector('#df-20194c32-b62b-489d-b972-14551ba45b60 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1140,7 +1215,8 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </div>
     </div>
   </div>
-</div></div>
+</div><img alt="../../_images/497cc8ba9097f3f277ae0430f8d3b4186d737e7e666922d17b86009868a24fed.png" src="../../_images/497cc8ba9097f3f277ae0430f8d3b4186d737e7e666922d17b86009868a24fed.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1155,6 +1231,34 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xl&#39;</span><span class="p">:[</span><span class="n">xl</span><span class="p">],</span> <span class="s1">&#39;xu&#39;</span><span class="p">:[</span><span class="n">xu</span><span class="p">],</span> <span class="s1">&#39;x1&#39;</span><span class="p">:[</span><span class="n">x1</span><span class="p">],</span> <span class="s1">&#39;x2&#39;</span><span class="p">:[</span><span class="n">x2</span><span class="p">],</span> <span class="s1">&#39;f(x1)&#39;</span><span class="p">:[</span><span class="n">fx1</span><span class="p">],</span> <span class="s1">&#39;f(x2)&#39;</span><span class="p">:[</span><span class="n">fx2</span><span class="p">],</span> <span class="s1">&#39;x0&#39;</span><span class="p">:[</span><span class="n">x0</span><span class="p">],</span> <span class="s1">&#39;error(%)&#39;</span><span class="p">:[</span><span class="nb">round</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="mi">2</span><span class="p">)]}</span>
 <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xu</span><span class="o">-</span><span class="n">xl</span><span class="p">)</span><span class="o">/</span><span class="n">x0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+
+<span class="c1">### Grafica</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Método de la sección dorada&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xl</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">xu</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xl</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_l$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xu</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_u$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">xu</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$2 sin(x) - (x^2)/10$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x0</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x1</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fx1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_1$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x2</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fx2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_2$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">],[</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x0</span><span class="p">})],</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_0 = $</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1">### Final Grafica</span>
 
 
 <span class="k">if</span> <span class="n">fx1</span> <span class="o">&gt;</span> <span class="n">fx2</span><span class="p">:</span>
@@ -1181,7 +1285,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-55736e35-c8e0-4f34-bfd2-44b09cccbf0a" class="colab-df-container">
+  <div id="df-f3ec7ec3-6354-483b-ac4c-2ed9ce4c807e" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1250,7 +1354,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-55736e35-c8e0-4f34-bfd2-44b09cccbf0a')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-f3ec7ec3-6354-483b-ac4c-2ed9ce4c807e')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1302,12 +1406,12 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 
     <script>
       const buttonEl =
-        document.querySelector('#df-55736e35-c8e0-4f34-bfd2-44b09cccbf0a button.colab-df-convert');
+        document.querySelector('#df-f3ec7ec3-6354-483b-ac4c-2ed9ce4c807e button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-55736e35-c8e0-4f34-bfd2-44b09cccbf0a');
+        const element = document.querySelector('#df-f3ec7ec3-6354-483b-ac4c-2ed9ce4c807e');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1327,8 +1431,8 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
   </div>
 
 
-<div id="df-c906c406-b407-4f52-8910-bdfc135afc9a">
-  <button class="colab-df-quickchart" onclick="quickchart('df-c906c406-b407-4f52-8910-bdfc135afc9a')"
+<div id="df-a0d3565a-d2cd-46cc-a476-d91db6be1dda">
+  <button class="colab-df-quickchart" onclick="quickchart('df-a0d3565a-d2cd-46cc-a476-d91db6be1dda')"
             title="Suggest charts."
             style="display:none;">
 
@@ -1447,7 +1551,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-c906c406-b407-4f52-8910-bdfc135afc9a button');
+        document.querySelector('#df-a0d3565a-d2cd-46cc-a476-d91db6be1dda button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1455,7 +1559,8 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </div>
     </div>
   </div>
-</div></div>
+</div><img alt="../../_images/21b0d801970c4ee6a96dfbeb7273d94e4a7c5600ee67cd0a7f3d60a23ab43240.png" src="../../_images/21b0d801970c4ee6a96dfbeb7273d94e4a7c5600ee67cd0a7f3d60a23ab43240.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1470,6 +1575,34 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xl&#39;</span><span class="p">:[</span><span class="n">xl</span><span class="p">],</span> <span class="s1">&#39;xu&#39;</span><span class="p">:[</span><span class="n">xu</span><span class="p">],</span> <span class="s1">&#39;x1&#39;</span><span class="p">:[</span><span class="n">x1</span><span class="p">],</span> <span class="s1">&#39;x2&#39;</span><span class="p">:[</span><span class="n">x2</span><span class="p">],</span> <span class="s1">&#39;f(x1)&#39;</span><span class="p">:[</span><span class="n">fx1</span><span class="p">],</span> <span class="s1">&#39;f(x2)&#39;</span><span class="p">:[</span><span class="n">fx2</span><span class="p">],</span> <span class="s1">&#39;x0&#39;</span><span class="p">:[</span><span class="n">x0</span><span class="p">],</span> <span class="s1">&#39;error(%)&#39;</span><span class="p">:[</span><span class="nb">round</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="mi">2</span><span class="p">)]}</span>
 <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">xu</span><span class="o">-</span><span class="n">xl</span><span class="p">)</span><span class="o">/</span><span class="n">x0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+
+<span class="c1">### Grafica</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Método de la sección dorada&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xl</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">xu</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## Plano cartesiano (Ejes)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">## Límites xl y xu</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xl</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xl</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_l$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xu</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">xu</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_u$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">xu</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$2 sin(x) - (x^2)/10$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x0</span><span class="p">}),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x1</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fx1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_1$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x2</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">fx2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_2$ = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">],[</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="n">x0</span><span class="p">})],</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$x_0 = $</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1">### Final Grafica</span>
 
 
 <span class="k">if</span> <span class="n">fx1</span> <span class="o">&gt;</span> <span class="n">fx2</span><span class="p">:</span>
@@ -1496,7 +1629,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-145c6aff-9550-4d4d-aa74-cd12c5a624a7" class="colab-df-container">
+  <div id="df-c05fb2e7-31e0-4a7e-8f0e-98898a689691" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1576,7 +1709,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-145c6aff-9550-4d4d-aa74-cd12c5a624a7')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c05fb2e7-31e0-4a7e-8f0e-98898a689691')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1628,12 +1761,12 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 
     <script>
       const buttonEl =
-        document.querySelector('#df-145c6aff-9550-4d4d-aa74-cd12c5a624a7 button.colab-df-convert');
+        document.querySelector('#df-c05fb2e7-31e0-4a7e-8f0e-98898a689691 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-145c6aff-9550-4d4d-aa74-cd12c5a624a7');
+        const element = document.querySelector('#df-c05fb2e7-31e0-4a7e-8f0e-98898a689691');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1653,8 +1786,8 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
   </div>
 
 
-<div id="df-4f17d887-c3d7-4158-b876-ea62e2be410a">
-  <button class="colab-df-quickchart" onclick="quickchart('df-4f17d887-c3d7-4158-b876-ea62e2be410a')"
+<div id="df-b9d038ca-861c-4649-a86e-cbd6d23045a0">
+  <button class="colab-df-quickchart" onclick="quickchart('df-b9d038ca-861c-4649-a86e-cbd6d23045a0')"
             title="Suggest charts."
             style="display:none;">
 
@@ -1773,7 +1906,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-4f17d887-c3d7-4158-b876-ea62e2be410a button');
+        document.querySelector('#df-b9d038ca-861c-4649-a86e-cbd6d23045a0 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1781,14 +1914,41 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </div>
     </div>
   </div>
-</div></div>
+</div><img alt="../../_images/71b4adbc2efce12d3f8cea3759f9936e5a2d68d082396557b421c554875b58e0.png" src="../../_images/71b4adbc2efce12d3f8cea3759f9936e5a2d68d082396557b421c554875b58e0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imprimimos el valor final</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El óptimo está en: &quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El óptimo está en:  1.53
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
 <section id="actividad">
 <h2>Actividad<a class="headerlink" href="#actividad" title="Permalink to this heading">#</a></h2>
-<p>Realizar el ajuste del algoritmo para que corra con cualquier tipo de función y para modificar sus límites y tolerancia.</p>
-<p>Finalmente, realice la versión del algoritmo que sea capaz de determinar el valor mínimo de una función ya que en este ejemplo solo hallamos el máximo de las funciones.</p>
+<p>Realizar el ajuste del algoritmo para que corra con cualquier tipo de función y para modificar sus límites y tolerancia hasta convergencia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## TU CÓDIGO VA ACÁ</span>
+
+<span class="c1">## HASTA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tarea">
+<h2>Tarea<a class="headerlink" href="#tarea" title="Permalink to this heading">#</a></h2>
+<p>Realice la versión del algoritmo que sea capaz de determinar el valor mínimo de una función ya que en estos ejercicios solo hallamos el máximo de las funciones.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## TU CÓDIGO VA ACÁ</span>
@@ -1877,6 +2037,7 @@ f(x) = 2\sin(x) - \frac{x^2}{10}
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad">Actividad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
 </ul>
   </nav></div>
 

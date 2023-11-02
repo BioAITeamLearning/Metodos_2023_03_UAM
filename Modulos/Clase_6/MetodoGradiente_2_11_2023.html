@@ -480,7 +480,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-del-gradiente-descendente">Algoritmo del gradiente descendente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-del-gradiente-descendente">Algoritmo del gradiente descendente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enlace-extra">Enlace extra</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
 </ul>
             </nav>
@@ -644,17 +647,21 @@ er = |\frac{x_{i+1} - x_i}{x_{i+1}}| * 100\%
 <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span>
 <span class="n">points</span> <span class="o">=</span> <span class="n">gradient_descent_univariate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solución&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solución: &quot;</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="../../_images/556bc6f92fa7c05b116c3651ea6cb18eb46aed54496e782ed78472899d36bf21.png" src="../../_images/556bc6f92fa7c05b116c3651ea6cb18eb46aed54496e782ed78472899d36bf21.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solución
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solución:  -1.99999967089909
 </pre></div>
 </div>
 </div>
 </div>
+<section id="enlace-extra">
+<h3>Enlace extra<a class="headerlink" href="#enlace-extra" title="Permalink to this heading">#</a></h3>
+<p><a class="github reference external" href="https://github.com/MoraRubio/ai-learning-resources/blob/main/supervised-learning-ml/gradient-descent.ipynb">MoraRubio/ai-learning-resources</a></p>
+</section>
 </section>
 <section id="tarea">
 <h2>Tarea<a class="headerlink" href="#tarea" title="Permalink to this heading">#</a></h2>
@@ -739,7 +746,10 @@ er = |\frac{x_{i+1} - x_i}{x_{i+1}}| * 100\%
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-del-gradiente-descendente">Algoritmo del gradiente descendente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-del-gradiente-descendente">Algoritmo del gradiente descendente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enlace-extra">Enlace extra</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
 </ul>
   </nav></div>
