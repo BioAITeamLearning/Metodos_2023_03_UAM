@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Unidad7';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Unidad 8: Programación lineal" href="Unidad8.html" />
+    <link rel="next" title="Método de euler para ecuaciones diferenciales." href="Modulos/Clase_7/MetodoEuler_09_11_2023.html" />
     <link rel="prev" title="Método del gradiente" href="Modulos/Clase_6/MetodoGradiente_2_11_2023.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -252,7 +252,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_6/MetodoGradiente_2_11_2023.html">Método del gradiente</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Unidad 7: Ecns Diferenciales Ordinarias</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Unidad 7: Ecns Diferenciales Ordinarias</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_7/MetodoEuler_09_11_2023.html">Método de euler para ecuaciones diferenciales.</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="Modulos/Clase_7/MetodoRungeKutta_09_11_2023.html">Método de Runge Kutta para solución de ecuaciones diferenciales</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad8.html">Unidad 8: Programación lineal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Unidad9.html">Unidad 9: Programación NO Lineal</a></li>
 </ul>
@@ -449,7 +454,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-la-unidad">Contenido de la unidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espere-aca-el-contenido-de-las-siguientes-versiones">Espere acá el contenido de las siguientes versiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-para-solucion-de-ecuaciones-diferenciales">Métodos para solución de ecuaciones diferenciales.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-de-los-metodos-numericos-en-ecuaciones-diferenciales">Aplicaciones de los Métodos Numéricos en Ecuaciones Diferenciales</a></li>
 </ul>
             </nav>
         </div>
@@ -467,9 +473,26 @@ document.write(`
 <h2>Contenido de la unidad<a class="headerlink" href="#contenido-de-la-unidad" title="Permalink to this heading">#</a></h2>
 <img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/images/contenidoU6.png?raw=true"/>
 </section>
-<section id="espere-aca-el-contenido-de-las-siguientes-versiones">
-<h2>Espere acá el contenido de las siguientes versiones<a class="headerlink" href="#espere-aca-el-contenido-de-las-siguientes-versiones" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="metodos-para-solucion-de-ecuaciones-diferenciales">
+<h2>Métodos para solución de ecuaciones diferenciales.<a class="headerlink" href="#metodos-para-solucion-de-ecuaciones-diferenciales" title="Permalink to this heading">#</a></h2>
+<p>Las ecuaciones diferenciales son una parte fundamental de las matemáticas aplicadas y la ingeniería, proporcionando una poderosa herramienta para modelar y entender fenómenos que varían con el tiempo o el espacio. Desde el movimiento de los planetas hasta el flujo de corriente en circuitos eléctricos, las ecuaciones diferenciales juegan un papel crucial en describir cómo cambian las cosas en el mundo real.</p>
+<img src="https://lambdai.files.wordpress.com/2011/12/lorenz1.jpg" width="400" height="300" />
+<p>Sin embargo, la mayoría de las ecuaciones diferenciales no pueden resolverse con métodos analíticos, especialmente cuando se trata de modelos complejos o sistemas no lineales. Aquí es donde los métodos numéricos entran en juego. Estos métodos proporcionan aproximaciones prácticas para resolver ecuaciones diferenciales, permitiendo a los científicos e ingenieros obtener soluciones útiles donde las técnicas analíticas fallan o son demasiado complicadas para aplicarse.</p>
 </section>
+<hr class="docutils" />
+<section id="aplicaciones-de-los-metodos-numericos-en-ecuaciones-diferenciales">
+<h2>Aplicaciones de los Métodos Numéricos en Ecuaciones Diferenciales<a class="headerlink" href="#aplicaciones-de-los-metodos-numericos-en-ecuaciones-diferenciales" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Ingeniería y Física:</strong> En el diseño de sistemas mecánicos, electrónicos y de control, las ecuaciones diferenciales modelan el comportamiento de componentes y sistemas. Por ejemplo, en la ingeniería eléctrica, los circuitos RLC, que combinan resistencias, inductancias y capacitancias, se analizan mediante ecuaciones diferenciales.</p></li>
+<li><p><strong>Meteorología y Modelado Climático:</strong> Los modelos climáticos y meteorológicos utilizan ecuaciones diferenciales para predecir el clima y entender los patrones climáticos. Estos modelos son intrincadamente complejos y requieren el uso de métodos numéricos para su resolución.</p></li>
+<li><p><strong>Biología y Medicina:</strong> En la farmacocinética, las ecuaciones diferenciales describen cómo los medicamentos se distribuyen y metabolizan en el cuerpo. También son fundamentales en la modelización de la dinámica de las poblaciones y la propagación de enfermedades.</p></li>
+<li><p><strong>Economía y Finanzas:</strong> En la modelización financiera, las ecuaciones diferenciales se utilizan para entender la dinámica de los mercados y para la valoración de opciones y otros instrumentos financieros.</p></li>
+<li><p><strong>Ciencias de la Computación y la Inteligencia Artificial:</strong> Los algoritmos de aprendizaje automático y redes neuronales a menudo implican resolver ecuaciones diferenciales para optimizar y entrenar modelos.</p></li>
+</ol>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -513,11 +536,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="Unidad8.html"
+       href="Modulos/Clase_7/MetodoEuler_09_11_2023.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Unidad 8: Programación lineal</p>
+        <p class="prev-next-title">Método de euler para ecuaciones diferenciales.</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -540,7 +563,8 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-de-la-unidad">Contenido de la unidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espere-aca-el-contenido-de-las-siguientes-versiones">Espere acá el contenido de las siguientes versiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-para-solucion-de-ecuaciones-diferenciales">Métodos para solución de ecuaciones diferenciales.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-de-los-metodos-numericos-en-ecuaciones-diferenciales">Aplicaciones de los Métodos Numéricos en Ecuaciones Diferenciales</a></li>
 </ul>
   </nav></div>
 

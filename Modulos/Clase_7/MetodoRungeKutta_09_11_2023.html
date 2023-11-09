@@ -1,0 +1,880 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Método de Runge Kutta para solución de ecuaciones diferenciales &#8212; Métodos Numéricos 2023 - 03</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_7/MetodoRungeKutta_09_11_2023';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad 8: Programación lineal" href="../../Unidad8.html" />
+    <link rel="prev" title="Método de euler para ecuaciones diferenciales." href="MetodoEuler_09_11_2023.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Métodos Numéricos y Optimización
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1: Introducción a Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%201%20-%20TiposDeDatos%20Condicionales%20Ciclos%20Colecciones%20Funciones_10_08_2023.html"><strong>Introducción</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%202%20-%20Arreglos_10_08_2023.html">Matrices y vectores</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%203%20-%20Pandas_10_08_2023.html">Introducción a pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%205%20-%20Manejo%20de%20ficheros_10_08_2023.html">Manejo de archivos</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%204%20-%20Analisis%20numerico%20y%20Calculo%20simbolico%20con%20Sympy_10_08_2023.html">Algebra computacional con <code class="docutils literal notranslate"><span class="pre">Sympy</span></code></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Evaluemos_Unidad1_10_08_2023.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Parcial_Corte_1_MetodosNumericos_Optimizaci%C3%B3n_14_sep_2023.html">Primer parcial de métodos numéricos: Introducción al Python para análisis numérico.</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2: Cálculo de raices</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_2/ClaseMetodoCalculoRaices21_09_2023.html">Método de la Bisección</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/ClaseMetodoFalsaPosicion21_09_2023.html">Método de la Falsa Posición</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/metodosAbiertos.html">Métodos abiertos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/MetodosAbiertosNewton_28_09_2023.html">Método de newton-raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/Metodo_abierto_secante_28_09_2023.html">Método de la secante</a></li>
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad3.html">Unidad 3: Ajuste de Curvas e Interpolación</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_4/Ajuste_Curvas_12_10_2023.html">Método de regresión por Mínimos cuadrados.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_4/Interpolacion_lagrange_12_10_2023.html">Interpolación de lagrange</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad5.html">Unidad 5: Diferenciación e Integración</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/Metodo_Euler_19_10_2023.html">Método de euler para integración numérica</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaTrapezoidal_19_10_2023.html">Regla trapezoidal para integración numérica</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaTrapezoidalMultiple_19_10_2023.html">Regla trapezoidal multiple</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaSimpson1_3_19_10_2023.html">Regla de Simpson <span class="math notranslate nohighlight">\(1/3\)</span></a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/Parcial2_26_10_2023.html">Métodos numéricos y Optimización: Segundo exámen parcial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Optimización Irrestricta</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/OptimizacionAnalitica_2_11_2023.html">Forma analítica de hallar los óptimos: en Sympy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/SeccionDorada_2_11_2023.html">Métodos cerrados de optimización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/InterpolacionCuadratica_2_11_2023.html">Interpolación cuadrática</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/NewtonRaphsonOptimizacion_2_11_2023.html">Algoritmo de newton-Raphson para óptimización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/MetodoGradiente_2_11_2023.html">Método del gradiente</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad7.html">Unidad 7: Ecns Diferenciales Ordinarias</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="MetodoEuler_09_11_2023.html">Método de euler para ecuaciones diferenciales.</a></li>
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Método de Runge Kutta para solución de ecuaciones diferenciales</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad8.html">Unidad 8: Programación lineal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad9.html">Unidad 9: Programación NO Lineal</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_7/MetodoRungeKutta_09_11_2023.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_7/MetodoRungeKutta_09_11_2023.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Modulos/Clase_7/MetodoRungeKutta_09_11_2023.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Método de Runge Kutta para solución de ecuaciones diferenciales</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-metodo-de-runge-kutta-de-orden-2">El método de runge kutta de orden 2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-heun-con-un-solo-corrector-a-2-1-2">Método de Heun con un solo corrector (<span class="math notranslate nohighlight">\(a_2 = 1/2)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retomando-el-ejercicio-del-circuito-rlc">Retomando el ejercicio del circuito RLC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="metodo-de-runge-kutta-para-solucion-de-ecuaciones-diferenciales">
+<h1>Método de Runge Kutta para solución de ecuaciones diferenciales<a class="headerlink" href="#metodo-de-runge-kutta-para-solucion-de-ecuaciones-diferenciales" title="Permalink to this heading">#</a></h1>
+<p>El método de Runge-Kutta de segundo orden, a menudo denominado método RK, es una técnica numérica utilizada para resolver ecuaciones diferenciales ordinarias (EDOs). Es una mejora respecto al método de Euler, ofreciendo mayor precisión. En general, los métodos de Runge-Kutta son muy populares debido a su balance entre precisión y eficiencia computacional, pero todos tienen la forma generalizada de la ecuación:</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i+1} = y_i + ϕ(x_i,y_i,h)h
+\]</div>
+<p>Donde <span class="math notranslate nohighlight">\(ϕ(x_i,y_i,h)\)</span> se conoce como <strong>funcion incremento</strong>, la cual puede interpretarse como una pendiente representativa en el intervalo. La función incremento se escribe de la forma general como:</p>
+<div class="math notranslate nohighlight">
+\[
+ϕ = a_1k_1 + a_2k_2 + a_3k_3 + ... + a_nk_n
+\]</div>
+<p>Donde a son constantes y las <span class="math notranslate nohighlight">\(k\)</span> son:</p>
+<div class="math notranslate nohighlight">
+\[
+k_1 = f(x_i,y_i)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_2 = f(x_i + p_1h,y_i +q_{11}k_1h)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_3 = f(x_i + p_2h,y_i +q_{21}k_1h + q_{22}k_2h)
+\]</div>
+<p>Donde las <span class="math notranslate nohighlight">\(p\)</span> y las <span class="math notranslate nohighlight">\(q\)</span> son constantes. Observe que las <span class="math notranslate nohighlight">\(k\)</span> son relaciones de recurrencia. Es decir, <span class="math notranslate nohighlight">\(k_1\)</span> aparece en la ecuación <span class="math notranslate nohighlight">\(k_2\)</span>, la cual aparece en la ecuación <span class="math notranslate nohighlight">\(k_3\)</span>, etcétera. Como cada k es una evaluación funcional, esta recurrencia vuelve eficientes a los métodos RK para cálculos en computadora.</p>
+<p>Es posible tener varios tipos de métodos de Runge-Kutta empleando diferentes números de términos en la función incremento especificada por n. Observe que el método de Runge-Kutta (RK) de primer orden con n = 1 es, de hecho, el método de Euler.</p>
+<section id="el-metodo-de-runge-kutta-de-orden-2">
+<h2>El método de runge kutta de orden 2<a class="headerlink" href="#el-metodo-de-runge-kutta-de-orden-2" title="Permalink to this heading">#</a></h2>
+<p>La versión de segundo orden del método es</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i+1} = y_i + (a_1k_1 + a_2k_2)h
+\]</div>
+<p>donde:</p>
+<div class="math notranslate nohighlight">
+\[
+k_1 = f(x_i,y_i)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_2 = f(x_i+p_1h, y_i + q_{11}k_1h)
+\]</div>
+<p>En este punto por igualación y semenjanza con la relación de series de taylor podemos decir que:</p>
+<div class="math notranslate nohighlight">
+\[
+a_1 = 1 - a_2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+p_1 = q_{11} = \frac{1}{2a_2}
+\]</div>
+<p>Debido a que podemos elegir un número infinito de valores para a2, hay un número
+infinito de métodos RK de segundo orden. Cada versión daría exactamente los mismos resultados si la solución de la EDO fuera cuadrática, lineal o una constante. Sin embargo, se obtienen diferentes resultados cuando (como típicamente es el caso) la solución es más complicada.</p>
+<section id="metodo-de-heun-con-un-solo-corrector-a-2-1-2">
+<h3>Método de Heun con un solo corrector (<span class="math notranslate nohighlight">\(a_2 = 1/2)\)</span><a class="headerlink" href="#metodo-de-heun-con-un-solo-corrector-a-2-1-2" title="Permalink to this heading">#</a></h3>
+<p>La fórmula para calcular el siguiente queda:</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i+1} = y_i + (\frac{1}{2}k_1 + \frac{1}{2}k_2)h
+\]</div>
+<p>Donde:</p>
+<div class="math notranslate nohighlight">
+\[
+k_1 = f(x_i,y_i)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_2 = f(x_i+h, y_i +k_1h)
+\]</div>
+</section>
+</section>
+<section id="retomando-el-ejercicio-del-circuito-rlc">
+<h2>Retomando el ejercicio del circuito RLC<a class="headerlink" href="#retomando-el-ejercicio-del-circuito-rlc" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">init_printing</span><span class="p">(</span><span class="n">use_latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">t</span><span class="p">,</span> <span class="n">vi</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t vi L R C&quot;</span><span class="p">)</span>
+<span class="n">C1</span><span class="p">,</span><span class="n">C2</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;C1 C2&quot;</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">didt</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">dvdt</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">expr1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">didt</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">*</span><span class="n">vi</span><span class="o">-</span><span class="p">(</span><span class="n">R</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">*</span><span class="n">i</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="p">)</span>
+
+<span class="n">expr1</span><span class="o">=</span><span class="n">expr1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vi</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">expr2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">dvdt</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">C</span><span class="p">)</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+<span class="n">expr2</span><span class="o">=</span><span class="n">expr2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vi</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">s</span><span class="o">=</span><span class="n">dsolve</span><span class="p">([</span><span class="n">expr1</span><span class="p">,</span><span class="n">expr2</span><span class="p">])</span>
+<span class="n">eq1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">t</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span><span class="o">.</span><span class="n">evalf</span><span class="p">(),</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">t</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span><span class="o">.</span><span class="n">evalf</span><span class="p">(),</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span><span class="n">eq2</span><span class="p">],</span> <span class="p">[</span><span class="n">C1</span><span class="p">,</span><span class="n">C2</span><span class="p">])</span>
+<span class="n">e1</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">),</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">),</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="n">t_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Graficando soluciones analíticas y aproximadas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">e1</span><span class="p">(</span><span class="n">t_vals</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analítico i(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Corriente (i(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Corriente en función del tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">e2</span><span class="p">(</span><span class="n">t_vals</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analítico v(t)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Voltaje (v(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Voltaje en función del tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/eaefdee41b297ebe9fe67a5133ab07001134b5cc8fcdb2b0b048dca3091a2ff9.png" src="../../_images/eaefdee41b297ebe9fe67a5133ab07001134b5cc8fcdb2b0b048dca3091a2ff9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Definición de las funciones para el sistema de ecuaciones diferenciales</span>
+<span class="k">def</span> <span class="nf">func_i</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="n">v</span>
+
+<span class="k">def</span> <span class="nf">func_v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">i</span>
+
+<span class="k">def</span> <span class="nf">runge_kutta_2_system</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_range</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Método de Runge-Kutta de orden 2 para un sistema de ecuaciones diferenciales.</span>
+
+<span class="sd">    :param funcs: Lista de funciones que representan el sistema de ecuaciones diferenciales.</span>
+<span class="sd">    :param y0: Condiciones iniciales para cada variable en el sistema.</span>
+<span class="sd">    :param t_range: Rango de tiempo como una tupla (inicio, fin).</span>
+<span class="sd">    :param dt: Paso de tiempo.</span>
+<span class="sd">    :return: Tupla de listas (tiempos, valores de cada variable).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">y_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_values</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">y_current</span> <span class="o">=</span> <span class="n">y_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">k1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">y_current</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">])</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">y_current</span> <span class="o">+</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">dt</span><span class="p">),</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">])</span>
+
+        <span class="n">y_next</span> <span class="o">=</span> <span class="n">y_current</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">k1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">k2</span><span class="p">)</span>
+        <span class="n">y_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_next</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">t_values</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_values</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+
+
+<span class="c1"># Paso de tiempo para el método RK2</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># Condiciones iniciales y rango de tiempo</span>
+<span class="n">initial_i</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">initial_v</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">time_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Condiciones iniciales para i y v</span>
+<span class="n">initial_conditions</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_i</span><span class="p">,</span> <span class="n">initial_v</span><span class="p">]</span>
+
+
+<span class="c1"># Solución aproximada para i(t) y v(t) usando el Método de Runge-Kutta de orden 2</span>
+<span class="n">t_values_rk2</span><span class="p">,</span> <span class="p">[</span><span class="n">i_values_rk2_system</span><span class="p">,</span> <span class="n">v_values_rk2_system</span><span class="p">]</span> <span class="o">=</span> <span class="n">runge_kutta_2_system</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">func_i</span><span class="p">,</span> <span class="n">func_v</span><span class="p">],</span> <span class="n">initial_conditions</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">dt</span>
+<span class="p">)</span>
+
+<span class="c1"># Graficando soluciones analíticas y aproximadas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">e1</span><span class="p">(</span><span class="n">t_vals</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analítico i(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values_rk2</span><span class="p">,</span> <span class="n">i_values_rk2_system</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RK2 Aproximado i(t)&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Corriente (i(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Corriente en función del tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">e2</span><span class="p">(</span><span class="n">t_vals</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analítico v(t)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values_rk2</span><span class="p">,</span> <span class="n">v_values_rk2_system</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RK2 Aproximado v(t)&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Voltaje (v(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Voltaje en función del tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a6201bb089077664aa9f3bf5a140b02f68e90007b8d25c07b7f2198d05d4ec5f.png" src="../../_images/a6201bb089077664aa9f3bf5a140b02f68e90007b8d25c07b7f2198d05d4ec5f.png" />
+</div>
+</div>
+</section>
+<section id="tarea">
+<h2>Tarea<a class="headerlink" href="#tarea" title="Permalink to this heading">#</a></h2>
+<p>A.</p>
+<ol class="arabic simple">
+<li><p>Implementar el método de runge kutta de orden 3.</p></li>
+<li><p>Implementar el método de runge kutta de orden 4.</p></li>
+</ol>
+<p>Los métodos deben ser implementados para resolver cualquier sistema de ecuaciones diferenciales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## TU CODIGO VA ACÁ</span>
+
+<span class="c1">## HASTA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>B.
+Investigar sobre el modelo depredador-presa de Lotka-Volterra. Solucionar el sistema y graficar su solución de forma analítica y usando el método de runge kutta de orden 2 para solucionarlo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## TU CODIGO VA ACÁ</span>
+
+<span class="c1">## HASTA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Modulos/Clase_7"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="MetodoEuler_09_11_2023.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Método de euler para ecuaciones diferenciales.</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../Unidad8.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unidad 8: Programación lineal</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-metodo-de-runge-kutta-de-orden-2">El método de runge kutta de orden 2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-heun-con-un-solo-corrector-a-2-1-2">Método de Heun con un solo corrector (<span class="math notranslate nohighlight">\(a_2 = 1/2)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retomando-el-ejercicio-del-circuito-rlc">Retomando el ejercicio del circuito RLC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johan S. Piña D, Reinel Tabares, Simón Orozco Arias.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

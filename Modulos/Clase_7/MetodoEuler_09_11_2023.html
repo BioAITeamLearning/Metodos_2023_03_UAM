@@ -1,0 +1,1257 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Método de euler para ecuaciones diferenciales. &#8212; Métodos Numéricos 2023 - 03</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_7/MetodoEuler_09_11_2023';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Método de Runge Kutta para solución de ecuaciones diferenciales" href="MetodoRungeKutta_09_11_2023.html" />
+    <link rel="prev" title="Unidad 7: Ecns Diferenciales Ordinarias" href="../../Unidad7.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Métodos Numéricos y Optimización
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1: Introducción a Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%201%20-%20TiposDeDatos%20Condicionales%20Ciclos%20Colecciones%20Funciones_10_08_2023.html"><strong>Introducción</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%202%20-%20Arreglos_10_08_2023.html">Matrices y vectores</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%203%20-%20Pandas_10_08_2023.html">Introducción a pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%205%20-%20Manejo%20de%20ficheros_10_08_2023.html">Manejo de archivos</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%204%20-%20Analisis%20numerico%20y%20Calculo%20simbolico%20con%20Sympy_10_08_2023.html">Algebra computacional con <code class="docutils literal notranslate"><span class="pre">Sympy</span></code></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Evaluemos_Unidad1_10_08_2023.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Parcial_Corte_1_MetodosNumericos_Optimizaci%C3%B3n_14_sep_2023.html">Primer parcial de métodos numéricos: Introducción al Python para análisis numérico.</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2: Cálculo de raices</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_2/ClaseMetodoCalculoRaices21_09_2023.html">Método de la Bisección</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/ClaseMetodoFalsaPosicion21_09_2023.html">Método de la Falsa Posición</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/metodosAbiertos.html">Métodos abiertos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/MetodosAbiertosNewton_28_09_2023.html">Método de newton-raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/Metodo_abierto_secante_28_09_2023.html">Método de la secante</a></li>
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad3.html">Unidad 3: Ajuste de Curvas e Interpolación</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_4/Ajuste_Curvas_12_10_2023.html">Método de regresión por Mínimos cuadrados.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_4/Interpolacion_lagrange_12_10_2023.html">Interpolación de lagrange</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad5.html">Unidad 5: Diferenciación e Integración</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/Metodo_Euler_19_10_2023.html">Método de euler para integración numérica</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaTrapezoidal_19_10_2023.html">Regla trapezoidal para integración numérica</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaTrapezoidalMultiple_19_10_2023.html">Regla trapezoidal multiple</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaSimpson1_3_19_10_2023.html">Regla de Simpson <span class="math notranslate nohighlight">\(1/3\)</span></a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/Parcial2_26_10_2023.html">Métodos numéricos y Optimización: Segundo exámen parcial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Optimización Irrestricta</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/OptimizacionAnalitica_2_11_2023.html">Forma analítica de hallar los óptimos: en Sympy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/SeccionDorada_2_11_2023.html">Métodos cerrados de optimización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/InterpolacionCuadratica_2_11_2023.html">Interpolación cuadrática</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/NewtonRaphsonOptimizacion_2_11_2023.html">Algoritmo de newton-Raphson para óptimización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/MetodoGradiente_2_11_2023.html">Método del gradiente</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad7.html">Unidad 7: Ecns Diferenciales Ordinarias</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Método de euler para ecuaciones diferenciales.</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="MetodoRungeKutta_09_11_2023.html">Método de Runge Kutta para solución de ecuaciones diferenciales</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad8.html">Unidad 8: Programación lineal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad9.html">Unidad 9: Programación NO Lineal</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_7/MetodoEuler_09_11_2023.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_7/MetodoEuler_09_11_2023.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Modulos/Clase_7/MetodoEuler_09_11_2023.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Método de euler para ecuaciones diferenciales.</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Método de euler para ecuaciones diferenciales.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-euler-para-la-integracion">Algoritmo de Euler para la integración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#circuito-rlc-analisis-analitico">Circuito RLC: Análisis analítico.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad">Actividad:</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="metodo-de-euler-para-ecuaciones-diferenciales">
+<h1>Método de euler para ecuaciones diferenciales.<a class="headerlink" href="#metodo-de-euler-para-ecuaciones-diferenciales" title="Permalink to this heading">#</a></h1>
+<p>El método de Euler es un procedimiento numérico simple para resolver ecuaciones diferenciales ordinarias (EDOs) con un valor inicial dado. Es un método iterativo que comienza en un punto conocido y avanza paso a paso hasta llegar al punto deseado, utilizando la pendiente de la solución (es decir, la derivada) para avanzar en cada paso.</p>
+<p>En este capítulo se enfoca la solución de ecuaciones diferenciales ordinarias de la forma:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{dx} = f(x,y)
+\]</div>
+<p>en términos matemáticos calculabamos el siguiente de la forma:</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i+1} = y_i + mh
+\]</div>
+<p>Donde m es la pendiente estimada que se usa para extrapolar desde un valor anterior <span class="math notranslate nohighlight">\(y_i\)</span> a un nuevo valor <span class="math notranslate nohighlight">\(y_{i+1}\)</span> en una distancia <span class="math notranslate nohighlight">\(h\)</span>. Este valor se usa paso a paso para calcular un valor posterior y trazar la trayectoria de la solución. Normalmente, la pendiente representa la derivada de la función en el punto <span class="math notranslate nohighlight">\(y_i\)</span></p>
+<img src="euler"/>
+<img src="euler2"/><section id="algoritmo-de-euler-para-la-integracion">
+<h2>Algoritmo de Euler para la integración<a class="headerlink" href="#algoritmo-de-euler-para-la-integracion" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Hacer <span class="math notranslate nohighlight">\(y_{i+1} = y_i + hf'(x_i,y_i)\)</span></p></li>
+<li><p>Hacer <span class="math notranslate nohighlight">\(x_{i} = x_{i+1}\)</span></p></li>
+</ol>
+</section>
+<section id="ejercicio">
+<h2>Ejercicio:<a class="headerlink" href="#ejercicio" title="Permalink to this heading">#</a></h2>
+<p>Hallar la integral geométrica de la función <span class="math notranslate nohighlight">\(y' = 2t\)</span> con una condicion incial y(0)=0 y un tiempo de integración de <span class="math notranslate nohighlight">\(0\)</span> hasta <span class="math notranslate nohighlight">\(0.6\)</span> y un paso de integración de <span class="math notranslate nohighlight">\(0.1\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definimos la función</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span>
+
+<span class="n">y0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Condicion inicial</span>
+<span class="n">ti</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Tiempo inicial</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># paso de integración</span>
+<span class="n">tf</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="c1"># Tiempo final</span>
+
+
+<span class="c1"># Definimos los vectores donde almacenaremos el resultado.</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ti</span><span class="p">,</span> <span class="n">tf</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.  0.1 0.2 0.3 0.4 0.5 0.6]
+[0.00000000e+000 0.00000000e+000 6.85067826e-310 6.85067825e-310
+ 6.85067826e-310 6.85067826e-310 3.16202013e-322]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">columnas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;it&#39;</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;yi&#39;</span><span class="p">,</span><span class="s1">&#39;yi+1&#39;</span><span class="p">]</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columnas</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+  <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">dy</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">t</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]})</span>
+  <span class="n">nueva_fila</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;it&#39;</span><span class="p">:[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;t&#39;</span><span class="p">:[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">2</span><span class="p">)],</span><span class="s1">&#39;yi&#39;</span><span class="p">:[</span><span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">2</span><span class="p">)],</span><span class="s2">&quot;yi+1&quot;</span><span class="p">:[</span><span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">)]})</span>
+  <span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tabla</span><span class="p">,</span><span class="n">nueva_fila</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">tabla</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-b344cb86-4e91-40a2-a091-46cdf2b86497" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>it</th>
+      <th>t</th>
+      <th>yi</th>
+      <th>yi+1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.1</td>
+      <td>0.00</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0.2</td>
+      <td>0.02</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>0.3</td>
+      <td>0.06</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.4</td>
+      <td>0.12</td>
+      <td>0.20</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-b344cb86-4e91-40a2-a091-46cdf2b86497')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-b344cb86-4e91-40a2-a091-46cdf2b86497 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-b344cb86-4e91-40a2-a091-46cdf2b86497');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-9978a243-afaf-4531-a0b1-9837bd66dd00">
+  <button class="colab-df-quickchart" onclick="quickchart('df-9978a243-afaf-4531-a0b1-9837bd66dd00')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-9978a243-afaf-4531-a0b1-9837bd66dd00 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span><span class="s2">&quot;Metodo Euler&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Real&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7e1c4f385e40&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/045e640fe6b118c72375982fc7703977c91daa2d72e96096ad084dbbd344d6d4.png" src="../../_images/045e640fe6b118c72375982fc7703977c91daa2d72e96096ad084dbbd344d6d4.png" />
+</div>
+</div>
+<section id="circuito-rlc-analisis-analitico">
+<h3>Circuito RLC: Análisis analítico.<a class="headerlink" href="#circuito-rlc-analisis-analitico" title="Permalink to this heading">#</a></h3>
+<p>Vamos a deducir el modelo del siguiente circuito:</p>
+<p><span class="math notranslate nohighlight">\(\begin{array}{l}
+\frac{{di}}{{dt}} =  - \frac{R}{L}i(t) - \frac{1}{L}v(t) + \frac{1}{L}vi\\
+\frac{{dv}}{{dt}} = \frac{1}{C}i(t)
+\end{array}\)</span></p>
+<p><img alt="image.png" src="data:image/png;base64,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" /></p>
+<p>Definamos las ecuaciones del sistema en <code class="docutils literal notranslate"><span class="pre">sympy</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">t</span><span class="p">,</span> <span class="n">vi</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t vi L R C&quot;</span><span class="p">)</span>
+<span class="n">C1</span><span class="p">,</span><span class="n">C2</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;C1 C2&quot;</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">didt</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">dvdt</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">expr1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">didt</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">*</span><span class="n">vi</span><span class="o">-</span><span class="p">(</span><span class="n">R</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">*</span><span class="n">i</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="p">)</span>
+<span class="n">expr1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{d}{d t} i{\left(t \right)} = - \frac{R i{\left(t \right)}}{L} + \frac{vi}{L} - \frac{v{\left(t \right)}}{L}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asumimos valores de R,L y C = 1</span>
+
+<span class="n">expr1</span><span class="o">=</span><span class="n">expr1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vi</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">expr1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{d}{d t} i{\left(t \right)} = - i{\left(t \right)} - v{\left(t \right)} + 1\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">expr2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">dvdt</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">C</span><span class="p">)</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
+<span class="n">expr2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{d}{d t} v{\left(t \right)} = \frac{i{\left(t \right)}}{C}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asumimos valores de R,L y C = 1</span>
+
+<span class="n">expr2</span><span class="o">=</span><span class="n">expr2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vi</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">expr2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{d}{d t} v{\left(t \right)} = i{\left(t \right)}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">s</span><span class="o">=</span><span class="n">dsolve</span><span class="p">([</span><span class="n">expr1</span><span class="p">,</span><span class="n">expr2</span><span class="p">])</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left[ i{\left(t \right)} = - \left(\frac{C_{1}}{2} + \frac{\sqrt{3} C_{2}}{2}\right) e^{- \frac{t}{2}} \cos{\left(\frac{\sqrt{3} t}{2} \right)} - \left(\frac{\sqrt{3} C_{1}}{2} - \frac{C_{2}}{2}\right) e^{- \frac{t}{2}} \sin{\left(\frac{\sqrt{3} t}{2} \right)}, \  v{\left(t \right)} = C_{1} e^{- \frac{t}{2}} \cos{\left(\frac{\sqrt{3} t}{2} \right)} - C_{2} e^{- \frac{t}{2}} \sin{\left(\frac{\sqrt{3} t}{2} \right)} + \sin^{2}{\left(\frac{\sqrt{3} t}{2} \right)} + \cos^{2}{\left(\frac{\sqrt{3} t}{2} \right)}\right]\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vamos a hallar los valores de las ctes C1 y C2</span>
+<span class="n">eq1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">t</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span><span class="o">.</span><span class="n">evalf</span><span class="p">(),</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">t</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span><span class="o">.</span><span class="n">evalf</span><span class="p">(),</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span><span class="n">eq2</span><span class="p">],</span> <span class="p">[</span><span class="n">C1</span><span class="p">,</span><span class="n">C2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{C1: -0.900000000000000, C2: 0.404145188432738}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eq1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - 0.5 C_{1} - 0.866025403784439 C_{2} = 0.1\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \left(\frac{C_{1}}{2} + \frac{\sqrt{3} C_{2}}{2}\right) e^{- \frac{t}{2}} \cos{\left(\frac{\sqrt{3} t}{2} \right)} - \left(\frac{\sqrt{3} C_{1}}{2} - \frac{C_{2}}{2}\right) e^{- \frac{t}{2}} \sin{\left(\frac{\sqrt{3} t}{2} \right)}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Generemos dos funciones que permitan reemplazar los valores de t dados para graficar las soluciones.</span>
+
+<span class="n">e1</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">),</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">sol</span><span class="p">),</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">e1</span><span class="p">(</span><span class="n">t_vals</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;i(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/79d348bc6717d778f6b1cf6befa9fe0821455d35d3b3cc6f00a63129438948e6.png" src="../../_images/79d348bc6717d778f6b1cf6befa9fe0821455d35d3b3cc6f00a63129438948e6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">e2</span><span class="p">(</span><span class="n">t_vals</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;v(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/131505edb294610bc47e34111e7f1e8248ac7c5440dded63690e3e9073eb6a74.png" src="../../_images/131505edb294610bc47e34111e7f1e8248ac7c5440dded63690e3e9073eb6a74.png" />
+</div>
+</div>
+<p>las gráficas para la corriente <span class="math notranslate nohighlight">\(i(t)\)</span> y el voltaje <span class="math notranslate nohighlight">\(v(t)\)</span> en función del tiempo para el circuito RLC analizado. Como puedes ver, ambas funciones muestran un comportamiento oscilatorio amortiguado, que es típico en este tipo de circuitos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">euler_method_system</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_range</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Método de Euler para un sistema de ecuaciones diferenciales.</span>
+
+<span class="sd">    :param funcs: Lista de funciones que representan el sistema de ecuaciones diferenciales.</span>
+<span class="sd">    :param y0: Condiciones iniciales para cada variable en el sistema.</span>
+<span class="sd">    :param t_range: Rango de tiempo como una tupla (inicio, fin).</span>
+<span class="sd">    :param dt: Paso de tiempo.</span>
+<span class="sd">    :return: Tupla de listas (tiempos, valores de cada variable).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">y_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_values</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">y_current</span> <span class="o">=</span> <span class="n">y_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y_next</span> <span class="o">=</span> <span class="n">y_current</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">y_current</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">])</span>
+        <span class="n">y_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_next</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">t_values</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_values</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Funciones para el sistema de ecuaciones diferenciales</span>
+<span class="k">def</span> <span class="nf">func_i</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="n">v</span>
+
+<span class="k">def</span> <span class="nf">func_v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">i</span>
+
+<span class="c1"># Paso de tiempo para el Método de Euler</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># Condiciones iniciales y rango de tiempo</span>
+<span class="n">initial_i</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">initial_v</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">time_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Condiciones iniciales para i y v</span>
+<span class="n">initial_conditions</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_i</span><span class="p">,</span> <span class="n">initial_v</span><span class="p">]</span>
+
+<span class="c1"># Solución aproximada para i(t) y v(t) usando el Método de Euler para sistemas</span>
+<span class="n">t_values_euler</span><span class="p">,</span> <span class="p">[</span><span class="n">i_values_euler_system</span><span class="p">,</span> <span class="n">v_values_euler_system</span><span class="p">]</span> <span class="o">=</span> <span class="n">euler_method_system</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">func_i</span><span class="p">,</span> <span class="n">func_v</span><span class="p">],</span> <span class="n">initial_conditions</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">dt</span>
+<span class="p">)</span>
+
+<span class="c1"># Graficando soluciones analíticas y aproximadas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">e1</span><span class="p">(</span><span class="n">t_vals</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analítico i(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values_euler</span><span class="p">,</span> <span class="n">i_values_euler_system</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Aproximado i(t)&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Corriente (i(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Corriente en función del tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">e2</span><span class="p">(</span><span class="n">t_vals</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analítico v(t)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_values_euler</span><span class="p">,</span> <span class="n">v_values_euler_system</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Aproximado v(t)&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Voltaje (v(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Voltaje en función del tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b5f0b420d8b20a542cb8dedb0131eefac7b3d0fd522ad9dfbb75fbd2ade88cc2.png" src="../../_images/b5f0b420d8b20a542cb8dedb0131eefac7b3d0fd522ad9dfbb75fbd2ade88cc2.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="actividad">
+<h1>Actividad:<a class="headerlink" href="#actividad" title="Permalink to this heading">#</a></h1>
+<p>Ajustar el código para que, dado un sistema de ecuaciones diferenciales, pueda calcular la solución del mismo dadas unas condiciones iniciales y un paso con el método de euler.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Modulos/Clase_7"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../Unidad7.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Unidad 7: Ecns Diferenciales Ordinarias</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="MetodoRungeKutta_09_11_2023.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Método de Runge Kutta para solución de ecuaciones diferenciales</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Método de euler para ecuaciones diferenciales.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-de-euler-para-la-integracion">Algoritmo de Euler para la integración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#circuito-rlc-analisis-analitico">Circuito RLC: Análisis analítico.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad">Actividad:</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johan S. Piña D, Reinel Tabares, Simón Orozco Arias.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
