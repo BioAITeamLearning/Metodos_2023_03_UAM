@@ -43,6 +43,6 @@ chapters:
   sections:
     - file: "Modulos/Clase_7/MetodoEuler_09_11_2023"
     - file: "Modulos/Clase_7/MetodoRungeKutta_09_11_2023"
-
+    - file: "Modulos/Clase_7/streamlit"
 - file: Unidad8
 - file: Unidad9
