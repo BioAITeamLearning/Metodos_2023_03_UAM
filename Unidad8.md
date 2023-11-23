@@ -44,6 +44,36 @@ La programación lineal es una técnica matemática utilizada para encontrar el 
 
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrXcP6z77LAuWpyCEFfjd102XshQiVVjM1uTm1Of6rDn5tS9G9bg90yslI_q009LvdKvD6jZPVwB4u2ItIc1GpYaZacKes9pmhJpIEv-hhvymHXOtLhQupPeyYMQRiG2VgjCLMnEAmz60-o4KPeEW5LbA_DDSjsw24jn7twugTRv9VLwCGpCnzfeyR/s953/SIMPLEX.png"/>
 
+## Investigación de operaciones
+
+Conjunto de pasos para lograr la optimización de procesos.
+
+### Naturaleza de la I.O
+
+Toma de decisiones en situaciones de la vida real.
+
+**Procedimiento**:
+
+1. Estructura de los sistemas reales en un modelo matemático.
+2. Exploración de las soluciones y desarrollo de un métodos para resolverlas.
+3. Busqueda de soluciones óptimas o de una solución factible.
+
+### Pasos para la formulación de un modelo.
+
+```{tip}
+A tener en cuenta:
+
+1. Objetivo del problema a resolver
+2. Quien va a tomar la decisión.
+3. Qué aspectos están bajo control.
+4. Qué aspectos no están bajo control.
+```
+
+- **Variables de decisión:** Son las "n" medidas cuantitativas a formar. Se representan como $x_1, x_2, ..., x_n$. Su resultado resuelve el problema.
+- **Función objetivo:** Es la función que se desea maximizar o minimizar, se le llama función de costo. Se representa como $Z = f(x_1, x_2, ..., x_n)$. En resumen, es una función Z que depende de las variables de decisión
+- **Restricciones estructurales:** Son las limitaciones, condiciones, requerimientos del problema. Se representan como desigualdades o ecuaciones en función de las variables de decisión. $g_i(x_1, x_2, ..., x_n) \leq b_i$.
+- **Restricciones de rango o positividad:** $x_i,x_1,x_2,...,x_n \geq 0$.
+
 ## Aplicaciones Prácticas
 
 Estos métodos se utilizan en la planificación de recursos, logística, y toma de decisiones en escenarios de recursos limitados, mostrando su relevancia en el mundo real.
