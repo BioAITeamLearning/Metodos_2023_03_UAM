@@ -45,4 +45,7 @@ chapters:
     - file: "Modulos/Clase_7/MetodoRungeKutta_09_11_2023"
     - file: "Modulos/Clase_7/streamlit"
 - file: Unidad8
+  sections:
+    - file: "Modulos/Clase_8/MetodoGrafico_23_11_2023"
+    - file: "Modulos/Clase_8/MetodoSimplex_23_11_2023"
 - file: Unidad9
