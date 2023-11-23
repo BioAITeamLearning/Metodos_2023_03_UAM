@@ -1,0 +1,843 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Método Simplex &#8212; Métodos Numéricos 2023 - 03</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Modulos/Clase_8/MetodoSimplex_23_11_2023';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Unidad 9: Programación NO Lineal" href="../../Unidad9.html" />
+    <link rel="prev" title="Método Gráfico para Programación Lineal" href="MetodoGrafico_23_11_2023.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Métodos Numéricos y Optimización
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1: Introducción a Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%201%20-%20TiposDeDatos%20Condicionales%20Ciclos%20Colecciones%20Funciones_10_08_2023.html"><strong>Introducción</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%202%20-%20Arreglos_10_08_2023.html">Matrices y vectores</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%203%20-%20Pandas_10_08_2023.html">Introducción a pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%205%20-%20Manejo%20de%20ficheros_10_08_2023.html">Manejo de archivos</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Intro_Python/Tema%204%20-%20Analisis%20numerico%20y%20Calculo%20simbolico%20con%20Sympy_10_08_2023.html">Algebra computacional con <code class="docutils literal notranslate"><span class="pre">Sympy</span></code></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Evaluemos_Unidad1_10_08_2023.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_1/Parcial_Corte_1_MetodosNumericos_Optimizaci%C3%B3n_14_sep_2023.html">Primer parcial de métodos numéricos: Introducción al Python para análisis numérico.</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2: Cálculo de raices</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_2/ClaseMetodoCalculoRaices21_09_2023.html">Método de la Bisección</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/ClaseMetodoFalsaPosicion21_09_2023.html">Método de la Falsa Posición</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/metodosAbiertos.html">Métodos abiertos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/MetodosAbiertosNewton_28_09_2023.html">Método de newton-raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_3/Metodo_abierto_secante_28_09_2023.html">Método de la secante</a></li>
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad3.html">Unidad 3: Ajuste de Curvas e Interpolación</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_4/Ajuste_Curvas_12_10_2023.html">Método de regresión por Mínimos cuadrados.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_4/Interpolacion_lagrange_12_10_2023.html">Interpolación de lagrange</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad4.html">Unidad 4: Sistemas de Ecns Lineales</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad5.html">Unidad 5: Diferenciación e Integración</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/Metodo_Euler_19_10_2023.html">Método de euler para integración numérica</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaTrapezoidal_19_10_2023.html">Regla trapezoidal para integración numérica</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaTrapezoidalMultiple_19_10_2023.html">Regla trapezoidal multiple</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/ReglaSimpson1_3_19_10_2023.html">Regla de Simpson <span class="math notranslate nohighlight">\(1/3\)</span></a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_5/Parcial2_26_10_2023.html">Métodos numéricos y Optimización: Segundo exámen parcial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad6.html">Unidad 6: Optimización Irrestricta</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/OptimizacionAnalitica_2_11_2023.html">Forma analítica de hallar los óptimos: en Sympy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/SeccionDorada_2_11_2023.html">Métodos cerrados de optimización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/InterpolacionCuadratica_2_11_2023.html">Interpolación cuadrática</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/NewtonRaphsonOptimizacion_2_11_2023.html">Algoritmo de newton-Raphson para óptimización</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_6/MetodoGradiente_2_11_2023.html">Método del gradiente</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad7.html">Unidad 7: Ecns Diferenciales Ordinarias</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_7/MetodoEuler_09_11_2023.html">Método de euler para ecuaciones diferenciales.</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Clase_7/MetodoRungeKutta_09_11_2023.html">Método de Runge Kutta para solución de ecuaciones diferenciales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Clase_7/streamlit.html">Sesión de streamlit ⌨️👨‍💻🖥️🌐</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad8.html">Unidad 8: Programación lineal</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad9.html">Unidad 9: Programación NO Lineal</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/Modulos/Clase_8/MetodoSimplex_23_11_2023.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/issues/new?title=Issue%20on%20page%20%2FModulos/Clase_8/MetodoSimplex_23_11_2023.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Modulos/Clase_8/MetodoSimplex_23_11_2023.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Método Simplex</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Método Simplex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-basicos">Conceptos Básicos:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-las-restricciones">Análisis de las restricciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restriccion-leq">Restricción (<span class="math notranslate nohighlight">\(\leq\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restriccion">Restricción (<span class="math notranslate nohighlight">\(=\)</span>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-gran-m">Método de la gran M</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reesticcion-geq">Reesticción (<span class="math notranslate nohighlight">\(\geq\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizacion">Minimización</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedimiento-del-metodo-simplex">Procedimiento del método simplex</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion">Solución</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-vamos-a-implementar-el-tablero-1-simplex">Ahora vamos a implementar el tablero 1 simplex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-simplex-2">Tabla Simplex 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="metodo-simplex">
+<h1>Método Simplex<a class="headerlink" href="#metodo-simplex" title="Permalink to this heading">#</a></h1>
+<p>Es un método para resolver problemas de programación lineal de tamaño <span class="math notranslate nohighlight">\(m X n\)</span>. Donde m son el numero de restricciones y n el numero de variables.</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Simplex-description-en.svg/1200px-Simplex-description-en.svg.png" width=300/>
+<section id="conceptos-basicos">
+<h2>Conceptos Básicos:<a class="headerlink" href="#conceptos-basicos" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Variables de Decisión:</strong> Representan las incógnitas del problema.</p></li>
+<li><p><strong>Restricciones:</strong> Limitaciones o condiciones que deben cumplirse.</p></li>
+<li><p><strong>Función Objetivo:</strong> La función que se busca maximizar o minimizar.</p></li>
+<li><p><strong>Soluciones Factibles:</strong> Conjunto de todas las posibles soluciones que satisfacen las restricciones.</p></li>
+</ol>
+<p><strong>Variables artificiales</strong></p>
+<ul class="simple">
+<li><p><strong>Holgura(<span class="math notranslate nohighlight">\(H_i\)</span> o <span class="math notranslate nohighlight">\(S_i\)</span>):</strong> Sobrante, lo que no se utilizó, lo que queda de una producción, material ocioso, recurso no utilizado. <strong>Es la cantidad utilizada para volver una restricción de <span class="math notranslate nohighlight">\(\leq\)</span> en <span class="math notranslate nohighlight">\(=\)</span></strong></p></li>
+<li><p><strong>Artificiales(A)</strong>: Artificio que solo me ayuda a resolver el problema.</p></li>
+<li><p><strong>Superavit(s_i)</strong>: Cantidad que se genera por encima de un mínimo.</p></li>
+</ul>
+<p><strong>Restricciones</strong></p>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\leq\)</span></strong> se agrega una variable de holgura (+S)</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(=\)</span></strong> Se agrega una variable artificial (+A)</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\geq\)</span></strong> Se agrega una variable de superavit (-s+A)</p></li>
+</ul>
+<p><strong>Variables</strong></p>
+<ul class="simple">
+<li><p><strong>Básicas</strong>: <span class="math notranslate nohighlight">\(x_1, x_2,x_3,...,x_n\)</span></p></li>
+<li><p><strong>No Básicas</strong>: S,A, -S</p></li>
+</ul>
+<p>Este método consiste en resolver un problema de programación lineal mediante varias iteraciones o tableros. Mediante entrada y salida de variables desde y hacia una base hasta llegar a un criterio de optimalidad.</p>
+<p>En el mundo real, se utiliza para la asignación de recursos, planificación de la producción, logística de transporte, entre otros.</p>
+</section>
+<section id="analisis-de-las-restricciones">
+<h2>Análisis de las restricciones<a class="headerlink" href="#analisis-de-las-restricciones" title="Permalink to this heading">#</a></h2>
+<section id="restriccion-leq">
+<h3>Restricción (<span class="math notranslate nohighlight">\(\leq\)</span>)<a class="headerlink" href="#restriccion-leq" title="Permalink to this heading">#</a></h3>
+<p>Se agrega una variable de holgura (<span class="math notranslate nohighlight">\(+S_i\)</span>)con el objetivo de convertir una restricción de <span class="math notranslate nohighlight">\(\leq\)</span> en <span class="math notranslate nohighlight">\(=\)</span></p>
+</section>
+<section id="restriccion">
+<h3>Restricción (<span class="math notranslate nohighlight">\(=\)</span>)<a class="headerlink" href="#restriccion" title="Permalink to this heading">#</a></h3>
+<p>Es aprox <span class="math notranslate nohighlight">\(\leq \land \geq\)</span>. Se agrega una variable artificial <span class="math notranslate nohighlight">\((A_i)\)</span> y se aplica el método de la gran M</p>
+<section id="metodo-de-la-gran-m">
+<h4>Método de la gran M<a class="headerlink" href="#metodo-de-la-gran-m" title="Permalink to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Se adiciona A en la restricción</p></li>
+<li><p>Si PPL es MAX se resta “MA” en la función objetivo</p></li>
+<li><p>Si PPL es MIN se adiciona “MA” en la función objetiv</p></li>
+</ol>
+</section>
+</section>
+<section id="reesticcion-geq">
+<h3>Reesticción (<span class="math notranslate nohighlight">\(\geq\)</span>)<a class="headerlink" href="#reesticcion-geq" title="Permalink to this heading">#</a></h3>
+<p>Se agrega una variable de superavit (<span class="math notranslate nohighlight">\(-s_i+A_i\)</span>) con el objetivo de convertir una restricción de <span class="math notranslate nohighlight">\(\geq\)</span> en <span class="math notranslate nohighlight">\(=\)</span></p>
+</section>
+<section id="minimizacion">
+<h3>Minimización<a class="headerlink" href="#minimizacion" title="Permalink to this heading">#</a></h3>
+<p><strong>Convertir la función objetivo Min en Max</strong></p>
+</section>
+</section>
+<section id="procedimiento-del-metodo-simplex">
+<h2>Procedimiento del método simplex<a class="headerlink" href="#procedimiento-del-metodo-simplex" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Formular el PPL</p></li>
+<li><p>Estandarizar el problema, es decir establecer la matriz básica o canónica en donde las variables básicas son dependientes y las no basicas independientes.</p></li>
+<li><p>Aplicar los criterios.</p></li>
+</ol>
+<ul class="simple">
+<li><p>3.1. Criterio de entrada: Min <span class="math notranslate nohighlight">\(C_i\)</span></p></li>
+<li><p>3.2. Criterio de salida: Min <span class="math notranslate nohighlight">\(\bigg(\frac{b_i}{c_i}\bigg)\)</span> con <span class="math notranslate nohighlight">\(a_i&gt;0\)</span></p>
+<ul>
+<li><p>Recuerde que buscamos optimizar <span class="math notranslate nohighlight">\(Z = \pm C_iX_i\)</span></p></li>
+<li><p>Sujeto a:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(a_iX_i \leq = \geq b_i\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\geq 0\)</span></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.3. <strong>Pivote:</strong> Intercepto entre columna y fila.</p></li>
+<li><p>3.4. Hacer el tratamiento para la <strong>Variable de entrada</strong>: Es decir, dejar en 1 la posición del pivote y en o las demás posiciones de la columna.</p></li>
+<li><p>3.5. Hacer el tratamiento para la <strong>Variable de salida</strong>: Es decir, se divide el valor de cada celda entre el pivote.</p></li>
+<li><p>3.6. Calcular los valores de las demás celdas: <span class="math notranslate nohighlight">\(D_n = D_a - \frac{p_1 x p_2}{p}\)</span></p></li>
+</ul>
+</section>
+<section id="ejemplo">
+<h2>Ejemplo:<a class="headerlink" href="#ejemplo" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[Max   Z = 16 x_1 + 10 x_2\]</div>
+<p>Sujeto a:
+$<span class="math notranslate nohighlight">\(2x_1+2x_2\leq9\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[2x_1+x_2\leq6\]</div>
+<div class="math notranslate nohighlight">
+\[x_1,x_2 \geq 0\]</div>
+<section id="solucion">
+<h3>Solución<a class="headerlink" href="#solucion" title="Permalink to this heading">#</a></h3>
+<p>Primero analicemos las restricciones:</p>
+<p>Sujeto a:
+$<span class="math notranslate nohighlight">\(2x_1+2x_2 + S_1 = 9\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[2x_1+x_2 + S_2 = 6\]</div>
+<div class="math notranslate nohighlight">
+\[x_1,x_2 \geq 0\]</div>
+<div class="math notranslate nohighlight">
+\[S_1,S_2 \geq 0\]</div>
+<p>Ahora vamos a estandarizar las restricciones.
+$<span class="math notranslate nohighlight">\(2x_1+2x_2 + S_1 = 9\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(2x_1+x_2 + S_2 = 6\)</span><span class="math notranslate nohighlight">\(
+**\)</span><span class="math notranslate nohighlight">\(z-16x_1 -10x_2 = 0\)</span>$**</p>
+</section>
+<section id="ahora-vamos-a-implementar-el-tablero-1-simplex">
+<h3>Ahora vamos a implementar el tablero 1 simplex<a class="headerlink" href="#ahora-vamos-a-implementar-el-tablero-1-simplex" title="Permalink to this heading">#</a></h3>
+<p>Primero vamos a encontrar el criterio de entrada, en este caso de la fila donde está z vamos a buscar el valor más lejos de cero por la izquierda.</p>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/_static/images/simplex1.png?raw=true"/>
+<p>En este caso es la columna donde está el -16 en la última fila.</p>
+<p>Ahora debemos encontrar el criterio de salida, para ello vamos a dividir cada elemento de la columna b por su correspondiente en la columna de entrada y el menor valor de estas divisiones será la fila de salida.</p>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/_static/images/simplex2.png?raw=true"/>
+<p>Como es la fila S2 en la que está el menor valor de la división,</p>
+<div class="math notranslate nohighlight">
+\[
+Min \bigg(\frac{b_i}{c_i}\bigg)
+\]</div>
+<p>entonces esta será la fila que sale y podemos definir el pivote como la celda en la que se interceptan la columna de entrada y la fila salida.</p>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/_static/images/simplex3.png?raw=true"/>
+<p>Por lo tanto el pivote es 2</p>
+</section>
+<section id="tabla-simplex-2">
+<h3>Tabla Simplex 2<a class="headerlink" href="#tabla-simplex-2" title="Permalink to this heading">#</a></h3>
+<p>Tomamos la fila salida y le cambiamos el nombre por el de la columna entrada que indentificamos anteriormente y los valores de esta nueva fila serán los de la fila anterior dividio entre el pivote.</p>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/_static/images/simplex4.png?raw=true"/>
+<p>Ahora vamos a recalcular las demás filas usando la formula.</p>
+<p><span class="math notranslate nohighlight">\(F_{nueva} = F_{vieja} - CPFV*(F_{entrante})\)</span></p>
+<p>Donde <span class="math notranslate nohighlight">\(CPFV\)</span> es el valor de la fila vieja en el indice de la columna pivote.</p>
+<p>En la siguiente imagen note que es el del color verde.</p>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/_static/images/simplex5.png?raw=true"/>
+<p>entonces para S1 queda</p>
+<p>(9,2,2,1,0) - 2*(3,1,0.5,0,0.5) = (3,0,1,1,-1)</p>
+<p>por lo tanto la tabla simplex 2 queda:</p>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/_static/images/simplex6.png?raw=true"/>
+<p>A esta se le vuelve a calcular la columna de entrada y la fila como al principio y se repite el proceso hasta que x1 y x2 sean identidad.</p>
+<p>Por lo tanto el tablero 3 queda:</p>
+<img src="https://github.com/BioAITeamLearning/Metodos_2023_03_UAM/blob/main/_static/images/simplex7.png?raw=true"/>
+<p>En este punto los valores de S1 y S2 en la fila Z se denominan precios sombra.</p>
+<p>El resultado de este ejercicio es:</p>
+<p><strong>Solucion óptima única</strong></p>
+<div class="math notranslate nohighlight">
+\[x_1 = 3/2\]</div>
+<div class="math notranslate nohighlight">
+\[x_2 = 3\]</div>
+<div class="math notranslate nohighlight">
+\[z = 54\]</div>
+</section>
+</section>
+<section id="ejercicio">
+<h2>Ejercicio<a class="headerlink" href="#ejercicio" title="Permalink to this heading">#</a></h2>
+<p>Realice el calculo del siguiente problema mediante el método simplex y comparlo con el resultado obtenido mediante el método gráfico.</p>
+<div class="math notranslate nohighlight">
+\[Min   Z = 2 x_1 + 3 x_2\]</div>
+<p>Sujeto a:
+$<span class="math notranslate nohighlight">\(2x_1+x_2\geq4\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[-x_1+x_2\leq1\]</div>
+<div class="math notranslate nohighlight">
+\[x_1,x_2 \geq 0\]</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tarea">
+<h1>Tarea<a class="headerlink" href="#tarea" title="Permalink to this heading">#</a></h1>
+<p>Teniendo en cuenta lo visto en el método, implemente un algoritmo que resuelva problemas de programación lineal usando python para cualquier problema.</p>
+<p>Encuentre una función en Python que implemente el método Simplex para resolver problemas de optimización con restricciones.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Modulos/Clase_8"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="MetodoGrafico_23_11_2023.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Método Gráfico para Programación Lineal</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../Unidad9.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unidad 9: Programación NO Lineal</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Método Simplex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-basicos">Conceptos Básicos:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-las-restricciones">Análisis de las restricciones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restriccion-leq">Restricción (<span class="math notranslate nohighlight">\(\leq\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restriccion">Restricción (<span class="math notranslate nohighlight">\(=\)</span>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-gran-m">Método de la gran M</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reesticcion-geq">Reesticción (<span class="math notranslate nohighlight">\(\geq\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizacion">Minimización</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedimiento-del-metodo-simplex">Procedimiento del método simplex</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion">Solución</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-vamos-a-implementar-el-tablero-1-simplex">Ahora vamos a implementar el tablero 1 simplex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-simplex-2">Tabla Simplex 2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tarea">Tarea</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Johan S. Piña D, Reinel Tabares, Simón Orozco Arias.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
