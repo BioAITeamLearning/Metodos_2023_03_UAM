@@ -82,3 +82,37 @@ Estos métodos se utilizan en la planificación de recursos, logística, y toma 
 
 ---
 
+## Ejemplo:
+
+Una empresa se dedica a la prodcucciónn de pintura para interiores y exteriores. La utilidad por tonelada es de 500 para interiores y 300 para exteriores. Para la producción de las pinturas se utilizan 2 materias primas. La disponibilidad máxima de la materia prima "1" es 20 ton/dia y la materia prima "2" es 9 ton/dia. Los requerimientos diarios son:
+
+| MP | Interiores | Exteriores |
+|----|---|---|
+| MP1 | 3 | 7 |
+|----|---|---|
+| MP2 | 4 | 1 |
+
+
+Un estudio de mercado ha establecido que la demanda diaria de pintura para exteriores no puede ser mayor que la pintura para interiores en más de una tonelada. Además, el estudio señala que la demanda máxima de pintura para interiores se limita a 4 ton/dia. ¿Cuantas toneladas de cada pintura se debe producir diariamente para maximizar los ingresos?.
+
+### Solución:
+
+**Variables de decisión:** 
+
+* $x_1$ = toneladas de pintura para interiores a producir por día.
+* $x_2$ = toneladas de pintura para exteriores a producir por día.
+
+**Función objetivo:**
+
+Maximizar $Z = 500x_1 + 300x_2$
+
+**Restricciones estructurales:**
+
+* $3x_1 + 7x_2 \leq 20$
+* $4x_1 + x_2 \leq 9$
+* $x_2 \leq x_1 + 1$
+* $x_1 \leq 4$
+
+**Restricciones de rango o positividad:**
+
+* $x_1, x_2 \geq 0$

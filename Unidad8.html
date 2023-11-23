@@ -474,6 +474,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-practicas">Aplicaciones Prácticas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion">Solución:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -568,6 +572,54 @@ Restricciones de Desigualdad: Establecen que una función de las variables debe 
 <img src="https://www.researchgate.net/publication/353438324/figure/fig1/AS:11431281088925342@1665398820775/Figura-1-Aplicaciones-a-la-programacion-lineal-Fuente-Elaborado-por-los-autores-a.png"/>
 </section>
 <hr class="docutils" />
+<section id="ejemplo">
+<h2>Ejemplo:<a class="headerlink" href="#ejemplo" title="Permalink to this heading">#</a></h2>
+<p>Una empresa se dedica a la prodcucciónn de pintura para interiores y exteriores. La utilidad por tonelada es de 500 para interiores y 300 para exteriores. Para la producción de las pinturas se utilizan 2 materias primas. La disponibilidad máxima de la materia prima “1” es 20 ton/dia y la materia prima “2” es 9 ton/dia. Los requerimientos diarios son:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>MP</p></th>
+<th class="head"><p>Interiores</p></th>
+<th class="head"><p>Exteriores</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MP1</p></td>
+<td><p>3</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-odd"><td><p>—-</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>MP2</p></td>
+<td><p>4</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>Un estudio de mercado ha establecido que la demanda diaria de pintura para exteriores no puede ser mayor que la pintura para interiores en más de una tonelada. Además, el estudio señala que la demanda máxima de pintura para interiores se limita a 4 ton/dia. ¿Cuantas toneladas de cada pintura se debe producir diariamente para maximizar los ingresos?.</p>
+<section id="solucion">
+<h3>Solución:<a class="headerlink" href="#solucion" title="Permalink to this heading">#</a></h3>
+<p><strong>Variables de decisión:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_1\)</span> = toneladas de pintura para interiores a producir por día.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2\)</span> = toneladas de pintura para exteriores a producir por día.</p></li>
+</ul>
+<p><strong>Función objetivo:</strong></p>
+<p>Maximizar <span class="math notranslate nohighlight">\(Z = 500x_1 + 300x_2\)</span></p>
+<p><strong>Restricciones estructurales:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(3x_1 + 7x_2 \leq 20\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(4x_1 + x_2 \leq 9\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2 \leq x_1 + 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_1 \leq 4\)</span></p></li>
+</ul>
+<p><strong>Restricciones de rango o positividad:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_1, x_2 \geq 0\)</span></p></li>
+</ul>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -656,6 +708,10 @@ Restricciones de Desigualdad: Establecen que una función de las variables debe 
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-practicas">Aplicaciones Prácticas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solucion">Solución:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
