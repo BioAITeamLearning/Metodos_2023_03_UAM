@@ -89,7 +89,6 @@ Una empresa se dedica a la prodcucciónn de pintura para interiores y exteriores
 | MP | Interiores | Exteriores |
 |----|---|---|
 | MP1 | 3 | 7 |
-|----|---|---|
 | MP2 | 4 | 1 |
 
 
